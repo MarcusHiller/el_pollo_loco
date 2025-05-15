@@ -6,8 +6,7 @@ class MovableObject {
     width;
 
     constructor() {
-        this.x = 100;
-        this.y = 250;
+
     }
 
     loadImage(path) {
