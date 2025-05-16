@@ -5,7 +5,7 @@ class World {
         new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
         new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
         new BackgroundObject('img/5_background/layers/1_first_layer/1.png'),
-        
+
     ];
     character = new Character();
     enemies = [
@@ -15,8 +15,8 @@ class World {
         new Chicken(),
     ];
     clouds = [
-        new Cloud(),
-        new Cloud(),
+        new Cloud('img/5_background/layers/4_clouds/1.png', 15, 0.15),
+        new Cloud('img/5_background/layers/4_clouds/2.png', 20, 0.25),
     ]
     canvas;
     ctx;
@@ -33,6 +33,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
         this.addObjectsToMap(this.clouds);
+
 
         requestAnimationFrame(this.draw.bind(this));
     }

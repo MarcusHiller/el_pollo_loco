@@ -12,4 +12,6 @@ class BackgroundObject extends MovableObject {
         this.img = new Image();
         this.img.src = path;
     }
+
+    
 }

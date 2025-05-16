@@ -1,10 +1,17 @@
-class Cloud extends MovableObject{
+class Cloud extends MovableObject {
     
-    constructor() {
-        super().loadImage('img/5_background/layers/4_clouds/1.png');
+    
+    constructor(imagePath, y, speed) {
+        super().loadImage(imagePath);
         this.x = Math.random() * 800;
-        this.y =15;
-        this.height =220;
+        this.y = y;
+        this.height = 200;
         this.width = 450;
+        this.speed = speed;
+        this.animate();
+    }
+
+    animate() {
+        this.moveLeft()
     }
 }
