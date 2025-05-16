@@ -29,14 +29,6 @@ class Chicken extends MovableObject {
         }, 150);
     }
 
-    /* moveChicken() {
-        
-        setInterval(() => {
-            let s = this.speed + Math.random();
-            this.x -= s;
-        }, 1000 / 60);
-
-    } */
     eat() {
         console.log("eat");
 
