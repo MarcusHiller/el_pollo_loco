@@ -9,7 +9,7 @@ class MovableObject {
     speed;
     otherDirection = false;
 
-    
+
     constructor() {
 
     }
@@ -27,6 +27,17 @@ class MovableObject {
             this.imageCache[path] = img;
         });
     }
+
+    playAnimation(images) {
+        let index = this.currentImage % images.length;
+        let path = images[index];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
+
+
 
     moveRigth() {
         console.log("right");
