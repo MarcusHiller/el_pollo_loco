@@ -25,7 +25,7 @@ class Character extends MovableObject {
     height = 250;
     x = 10;
     y = 175;
-    speed = 4;
+    speed = 6;
     speedY = 0;
     acceleration = 1;
     world;
@@ -84,7 +84,7 @@ class Character extends MovableObject {
         console.log("Schaden");
     }
 
-    
+
     dead() {
         console.log("Gestorben");
 

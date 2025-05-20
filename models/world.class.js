@@ -28,7 +28,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        
+
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(this.draw.bind(this));
     }
@@ -37,7 +37,9 @@ class World {
         if (movableObject.otherDirection) {
             this.flipImg(movableObject);
         }
-        this.ctx.drawImage(movableObject.img, movableObject.x, movableObject.y, movableObject.width, movableObject.height);
+        movableObject.draw(this.ctx);
+        movableObject.drawFrame(this.ctx);
+        
         if (movableObject.otherDirection) {
             this.flipImgBack(movableObject);
         }

@@ -12,7 +12,7 @@ class MovableObject {
     speedY = 0;
     acceleration = 1;
 
-    constructor() {};
+    constructor() { };
 
     loadImage(path) {
         this.img = new Image();
@@ -26,6 +26,21 @@ class MovableObject {
             img.src = path;
             this.imageCache[path] = img;
         });
+    }
+
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Chicken) {
+            ctx.beginPath();
+            ctx.lineWidth = "4";
+            ctx.strokeStyle = "green";
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
 
@@ -60,6 +75,9 @@ class MovableObject {
     }
 
     moveJump() {
-        this.speedY = 18;  
+        this.speedY = 18;
     }
+
+
+
 }
