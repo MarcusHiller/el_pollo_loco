@@ -8,62 +8,83 @@ class Character extends MovableObject {
         '/img/2_character_pepe/2_walk/W-25.png',
         '/img/2_character_pepe/2_walk/W-26.png',
     ];
-    width = 150;
-    height = 350;
-    x = 20;
-    y = 10;
+    IMAGES_JUMPING = [
+        'img/2_character_pepe/3_jump/J-31.png',
+        'img/2_character_pepe/3_jump/J-32.png',
+        'img/2_character_pepe/3_jump/J-33.png',
+        'img/2_character_pepe/3_jump/J-34.png',
+        'img/2_character_pepe/3_jump/J-35.png',
+        'img/2_character_pepe/3_jump/J-36.png',
+        'img/2_character_pepe/3_jump/J-37.png',
+        'img/2_character_pepe/3_jump/J-38.png',
+        'img/2_character_pepe/3_jump/J-39.png',
+
+    ];
+    hero = 'pepe'
+    width = 100;
+    height = 250;
+    x = 10;
+    y = 175;
     speed = 4;
     speedY = 0;
     acceleration = 1;
     world;
 
     constructor() {
-        super().loadImage('/img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage('img/2_character_pepe/3_jump/J-31.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_JUMPING);
         this.animate();
         this.applyGravity();
     }
 
     animate() {
         setInterval(() => {
-            if (this.world.keyboard.right  && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
+            if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
+                this.moveRight();
                 this.otherDirection = false;
             }
 
             if (this.world.keyboard.left && this.x > 0) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
+            }
+
+            if (this.world.keyboard.space && !this.isAboveGround()) {
+                this.moveJump();
             }
             this.world.camera_x = -this.x + 20;
         }, 1000 / 60);
 
+
         setInterval(() => {
 
-            if (this.world.keyboard.right || this.world.keyboard.left) {
-                this.playAnimation(this.IMAGES_WALKING);
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMPING);
+            } else {
+                if (this.world.keyboard.right || this.world.keyboard.left) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
             }
         }, 70);
-
-
     }
-    junp() {
-        console.log("jump");
 
-    }
 
     idleShort() {
         console.log("sleep short");
     }
 
+
     idleLong() {
         console.log("sleep long");
     }
+
 
     idleHurt() {
         console.log("Schaden");
     }
 
+    
     dead() {
         console.log("Gestorben");
 
