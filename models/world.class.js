@@ -13,6 +13,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
@@ -39,14 +40,14 @@ class World {
         }
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
-        
+
         if (movableObject.otherDirection) {
             this.flipImgBack(movableObject);
         }
     }
 
-    addObjectsToMap(arrayObjects) {
-        arrayObjects.forEach(object => {
+    addObjectsToMap(movableObject) {
+        movableObject.forEach(object => {
             this.addToMap(object);
         });
     }
@@ -62,5 +63,23 @@ class World {
     flipImgBack(movableObject) {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
+    }
+
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach(enemy => {
+                if (this.character.isColliding(enemy)) {
+                    let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
+                    let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
+                    if (overlapX < overlapY || this.character.speedY >= 0) {
+                        console.log("Seitliche Kollision (links oder rechts)");
+                    
+                    } else {
+                        console.log("Vertikale Kollision (oben oder unten)");    
+                    }
+                }
+            })
+        }, 40);
     }
 }

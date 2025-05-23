@@ -44,6 +44,15 @@ class MovableObject {
     }
 
 
+    isColliding(movableObject) {
+        return this.x < movableObject.x + movableObject.width &&
+            this.x + this.width > movableObject.x &&
+            this.y < movableObject.y + movableObject.height &&
+            this.y + this.height > movableObject.y;
+    }
+
+
+
     playAnimation(images) {
         let index = this.currentImage % images.length;
         let path = images[index];
