@@ -32,7 +32,7 @@ window.addEventListener("keydown", (e) => {
             keyboard.space = true;
             break;
         case 68:
-            keyboard.throw = true;
+            keyboard.d = true;
             break;
         default:
             break;
@@ -58,7 +58,7 @@ window.addEventListener("keyup", (e) => {
             keyboard.space = false;
             break;
         case 68:
-            keyboard.throw = false;
+            keyboard.d = false;
             break;
         default:
             break;
