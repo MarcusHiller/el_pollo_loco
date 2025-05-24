@@ -29,6 +29,12 @@ class Character extends MovableObject {
     speedY = 0;
     acceleration = 1;
     world;
+    offset = {
+        top: 100,
+        left: 30,
+        right: 25,
+        bottom: 12
+    }
 
     constructor() {
         super().loadImage('img/2_character_pepe/3_jump/J-31.png');

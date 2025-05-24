@@ -40,6 +40,7 @@ class World {
         }
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
+        movableObject.drawFrameInside(this.ctx);
 
         if (movableObject.otherDirection) {
             this.flipImgBack(movableObject);
@@ -74,9 +75,10 @@ class World {
                     let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                     if (overlapX < overlapY || this.character.speedY >= 0) {
                         console.log("Seitliche Kollision (links oder rechts)");
-                    
+                        debugger;
                     } else {
-                        console.log("Vertikale Kollision (oben oder unten)");    
+                        console.log("Vertikale Kollision (oben oder unten)");
+                        debugger;
                     }
                 }
             })
