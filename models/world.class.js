@@ -74,8 +74,7 @@ class World {
                     let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
                     let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                     if (overlapX < overlapY || this.character.speedY >= 0) {
-                        console.log("Seitliche Kollision (links oder rechts)");
-                        debugger;
+                        this.character.idleHurt();
                     } else {
                         console.log("Vertikale Kollision (oben oder unten)");
                         debugger;

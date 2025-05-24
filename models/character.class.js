@@ -27,6 +27,7 @@ class Character extends MovableObject {
     y = 175;
     speed = 6;
     speedY = 0;
+    energy = 100;
     acceleration = 1;
     world;
     offset = {
@@ -87,7 +88,8 @@ class Character extends MovableObject {
 
 
     idleHurt() {
-        console.log("Schaden");
+        this.energy -= 2;
+        console.log("Energie: " + this.energy);
     }
 
 

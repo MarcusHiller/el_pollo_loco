@@ -11,6 +11,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
+    energy;
     offset = {
         top: 0,
         left: 0,
