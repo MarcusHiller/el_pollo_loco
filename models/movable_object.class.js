@@ -1,12 +1,6 @@
 class MovableObject extends DrawableObject{
 
-    x;
-    y;
-    img;
-    height;
-    width;
-    imageCache = {};
-    currentImage = 0;
+   
     speed;
     otherDirection = false;
     speedY = 0;
@@ -25,31 +19,7 @@ class MovableObject extends DrawableObject{
 
     
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = "4";
-            ctx.strokeStyle = "green";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-
-        }
-    }
-
-    drawFrameInside(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = "2";
-            ctx.strokeStyle = "red";
-            ctx.rect(
-                this.x + this.offset.left,
-                this.y + this.offset.top,
-                this.width - this.offset.left - this.offset.right,
-                this.height - this.offset.top - this.offset.bottom
-            );
-            ctx.stroke();
-        }
-    }
+    
 
 
     isColliding(movableObject) {

@@ -13,6 +13,7 @@ function init() {
 
 
 window.addEventListener("keydown", (e) => {
+    console.log(e);
     
     switch (e.keyCode) {
         case 38:
@@ -29,6 +30,9 @@ window.addEventListener("keydown", (e) => {
             break;
         case 32:
             keyboard.space = true;
+            break;
+        case 68:
+            keyboard.throw = true;
             break;
         default:
             break;
@@ -52,6 +56,9 @@ window.addEventListener("keyup", (e) => {
             break;
         case 32:
             keyboard.space = false;
+            break;
+        case 68:
+            keyboard.throw = false;
             break;
         default:
             break;

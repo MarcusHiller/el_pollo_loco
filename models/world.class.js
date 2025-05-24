@@ -6,6 +6,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new Statusbar();
+    ThrowableObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -16,6 +18,7 @@ class World {
         this.checkCollisions();
     }
 
+    
     setWorld() {
         this.character.world = this;
     }
@@ -23,12 +26,18 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
+        
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0);
+        
         this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.enemies); 
 
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(this.draw.bind(this));
@@ -61,6 +70,7 @@ class World {
         movableObject.x = movableObject.x * -1;
     }
 
+
     flipImgBack(movableObject) {
         movableObject.x = movableObject.x * -1;
         this.ctx.restore();
@@ -76,14 +86,13 @@ class World {
                     let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                     if (overlapX < overlapY || this.character.speedY >= 0) {
                         this.character.hurt();
+                        this.statusBar.setPercentage(this.character.energy);
                     } else if (overlapX > overlapY && !this.character.isAboveGround()) {
                         this.character.hurt();
+                        this.statusBar.setPercentage(this.character.energy);
                     }
                     else if (overlapX > overlapY || this.character.speedY < 0) {
-                        console.log("Vertikale Kollision (oben oder unten)");
                         enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-                        console.log("Enemy:", index);
-
                         setTimeout(() => {
                             console.log(this.level.enemies);
                             this.level.enemies.splice(index, 1);
