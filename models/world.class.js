@@ -69,15 +69,25 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            this.level.enemies.forEach(enemy => {
+            this.level.enemies.forEach((enemy, index) => {
                 if (this.character.isColliding(enemy)) {
+                    if (this.character.isHurt) return;
                     let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
                     let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                     if (overlapX < overlapY || this.character.speedY >= 0) {
-                        this.character.idleHurt();
-                    } else {
+                        this.character.hurt();
+                    } else if (overlapX > overlapY && !this.character.isAboveGround()) {
+                        this.character.hurt();
+                    }
+                    else if (overlapX > overlapY || this.character.speedY < 0) {
                         console.log("Vertikale Kollision (oben oder unten)");
-                        debugger;
+                        enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+                        console.log("Enemy:", index);
+
+                        setTimeout(() => {
+                            console.log(this.level.enemies);
+                            this.level.enemies.splice(index, 1);
+                        }, 500);
                     }
                 }
             })
