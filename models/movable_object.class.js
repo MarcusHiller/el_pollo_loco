@@ -76,4 +76,33 @@ class MovableObject extends DrawableObject {
         console.log("Gestorben");
     }
 
+
+    ishurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
+    }
+
+
+    setHurt() {
+        this.lastHit = new Date().getTime();
+    }
+
+
+    drawOffEnergy() {
+        if (this.energy > 0) {
+            this.energy -= 20;
+        }
+        if (this.energy <= 0) {
+            this.energy = 0;
+        }
+    }
+
+    injuryProcess() {
+        if (!this.ishurt()) {
+            this.setHurt();
+            this.drawOffEnergy();
+        }
+    }
+
 }

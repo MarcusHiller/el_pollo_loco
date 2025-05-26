@@ -13,7 +13,6 @@ function init() {
 
 
 window.addEventListener("keydown", (e) => {
-    console.log(e);
     
     switch (e.keyCode) {
         case 38:

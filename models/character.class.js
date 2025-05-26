@@ -42,9 +42,9 @@ class Character extends MovableObject {
     speed = 6;
     speedY = 0;
     energy = 100;
-    isHurt = false;
     acceleration = 1;
     world;
+    lastHit = 0;
     offset = {
         top: 100,
         left: 30,
@@ -78,7 +78,7 @@ class Character extends MovableObject {
                 this.moveJump();
             }
 
-            
+
             this.world.camera_x = -this.x + 20;
         }, 1000 / 60);
 
@@ -86,10 +86,13 @@ class Character extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-            } else if (this.isHurt) {
+
+            } else if (this.ishurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 console.log(this.energy);
-            } else if (this.isAboveGround()) {
+
+            }
+            else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
@@ -110,19 +113,33 @@ class Character extends MovableObject {
     }
 
 
-    hurt() {
-        if (this.isHurt) return;
-        this.isHurt = true;
-        this.energy -= 20;
-        if (this.energy < 0) {
-            this.energy = 0;
-        }
-        setTimeout(() => {
-            this.isHurt = false;
-            this.loadImage('img/2_character_pepe/3_jump/J-31.png');
-        }, 1000);
+    /* ishurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 1;
     }
 
+
+    setHurt() {
+        this.lastHit = new Date().getTime();
+    }
+
+
+    drawOffEnergy() {
+        if (this.energy > 0) {
+            this.energy -= 20;
+        }
+        if (this.energy <= 0) {
+            this.energy = 0;
+        }
+    }
+
+    injuryProcess() {
+        if (!this.ishurt()) {
+            this.setHurt();
+            this.drawOffEnergy();
+        }
+    } */
 
     isDead() {
         return this.energy == 0;
