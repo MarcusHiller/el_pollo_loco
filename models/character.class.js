@@ -12,6 +12,10 @@ class Character extends MovableObject {
     acceleration = 1;
     damagePoints = 20;
     damageTime = 1;
+    bottle = 10;
+    timeLastThrow;
+    throwDelay = 0.3;
+    canThrow = true;
     world;
     offset = {
         top: 100,
@@ -28,6 +32,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
+        this.setThrowTime();
     }
 
     animate() {
@@ -57,8 +62,6 @@ class Character extends MovableObject {
 
             } else if (this.ishurt()) {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
-                console.log(this.energy);
-
             }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES.IMAGES_JUMPING);
@@ -86,4 +89,14 @@ class Character extends MovableObject {
     }
 
 
+    setThrowTime() {
+        this.timeLastThrow = new Date().getTime();
+    }
+
+
+    isThrowDelayActive() {
+        let timepassed = new Date().getTime() - this.timeLastThrow;
+        timepassed = timepassed / 1000;
+        return timepassed < this.throwDelay;
+    }
 }

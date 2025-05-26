@@ -24,6 +24,7 @@ class World {
     setWorld() {
         this.character.world = this;
         this.level.enemies.forEach(enemy => enemy.world = this);
+        this.throwableObjects.forEach(bottle => bottle.world = this);
     }
 
 
@@ -102,10 +103,10 @@ class World {
                 } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
-                }else if (enemy.name == 'endboss') {
+                } else if (enemy.name == 'endboss') {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
-                }else if (overlapX > overlapY || this.character.speedY < 0) {
+                } else if (overlapX > overlapY || this.character.speedY < 0) {
                     enemy.hitEnemy(enemy);
                 }
             }
@@ -114,10 +115,17 @@ class World {
 
 
     checkThrowObjects() {
-        if (this.keyboard.d) {
-            let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
-            this.throwableObjects.push(bottle);
-        }
+        if (this.keyboard.d && this.character.canThrow) {
+            if (this.character.bottle > 0 && !this.character.isThrowDelayActive()) {
+                    let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
+                    this.throwableObjects.push(bottle);
+                    this.character.bottle --;
+                    this.character.setThrowTime();
+                    this.character.canThrow = false;
+            }
+        }else if (!this.keyboard.d) {
+            this.character.canThrow = true;
+        }   
     }
 
 
