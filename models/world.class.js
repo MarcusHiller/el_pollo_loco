@@ -17,11 +17,13 @@ class World {
         this.setWorld();
 
         this.run();
+        this.deleteDeadEnemies();
     }
 
 
     setWorld() {
         this.character.world = this;
+        this.level.enemies.forEach(enemy => enemy.world = this);
     }
 
 
@@ -83,8 +85,10 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.deleteDeadEnemies();
         }, 40);
     }
+
 
     checkCollisions() {
         this.level.enemies.forEach((enemy, index) => {
@@ -92,21 +96,17 @@ class World {
                 if (this.character.isHurt) return;
                 let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
                 let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
-                if (overlapX < overlapY || this.character.speedY >= 0) {
+                if ((overlapX < overlapY || this.character.speedY >= 0) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    //this.character.hurt();
                     this.statusBar.setPercentage(this.character.energy);
-                } else if (overlapX > overlapY && !this.character.isAboveGround()) {
+                } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    //this.character.hurt();
                     this.statusBar.setPercentage(this.character.energy);
-                }
-                else if (overlapX > overlapY || this.character.speedY < 0) {
-                    enemy.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-                    setTimeout(() => {
-                        console.log(this.level.enemies);
-                        this.level.enemies.splice(index, 1);
-                    }, 500);
+                }else if (enemy.name == 'endboss') {
+                    this.character.injuryProcess();
+                    this.statusBar.setPercentage(this.character.energy);
+                }else if (overlapX > overlapY || this.character.speedY < 0) {
+                    enemy.hitEnemy(enemy);
                 }
             }
         })
@@ -117,6 +117,17 @@ class World {
         if (this.keyboard.d) {
             let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
             this.throwableObjects.push(bottle);
+        }
+    }
+
+
+    deleteDeadEnemies() {
+        for (let i = this.level.enemies.length - 1; i >= 0; i--) {
+            if (this.level.enemies[i].energy === 0) {
+                if (!this.level.enemies[i].ishurt()) {
+                    this.level.enemies.splice(i, 1);
+                }
+            }
         }
     }
 }

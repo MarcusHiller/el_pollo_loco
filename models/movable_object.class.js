@@ -1,11 +1,14 @@
 class MovableObject extends DrawableObject {
 
-
     speed;
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
     energy;
+    damagePoints;
+    damageTime;
+    lastHit = 0;
+    world;
     offset = {
         top: 0,
         left: 0,
@@ -18,18 +21,12 @@ class MovableObject extends DrawableObject {
     };
 
 
-
-
-
-
     isColliding(movableObject) {
         return this.x + this.offset.left < movableObject.x + movableObject.width - movableObject.offset.right &&
             this.x + this.width - this.offset.right > movableObject.x + movableObject.offset.left &&
             this.y + this.offset.top < movableObject.y + movableObject.height - movableObject.offset.bottom &&
             this.y + this.height - this.offset.bottom > movableObject.y + movableObject.offset.top;
     }
-
-
 
 
     playAnimation(images) {
@@ -59,17 +56,21 @@ class MovableObject extends DrawableObject {
 
     }
 
+
     moveLeft() {
         this.x -= this.speed;
     }
+
 
     moveRight() {
         this.x += this.speed;
     }
 
+
     moveJump() {
         this.speedY = 18;
     }
+
 
     dead() {
 
@@ -80,7 +81,7 @@ class MovableObject extends DrawableObject {
     ishurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
-        return timepassed < 1;
+        return timepassed < this.damageTime;
     }
 
 
@@ -91,12 +92,13 @@ class MovableObject extends DrawableObject {
 
     drawOffEnergy() {
         if (this.energy > 0) {
-            this.energy -= 20;
+            this.energy -= this.damagePoints;
         }
         if (this.energy <= 0) {
             this.energy = 0;
         }
     }
+
 
     injuryProcess() {
         if (!this.ishurt()) {

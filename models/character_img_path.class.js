@@ -1,0 +1,14 @@
+class CharakterImg {
+
+    IMAGES_WALKING;
+    IMAGES_JUMPING;
+    IMAGES_HURT;
+    IMAGES_DEAD;
+    
+    constructor (IMAGES_WALKING, IMAGES_JUMPING, IMAGES_HURT, IMAGES_DEAD) {
+        this.IMAGES_WALKING = IMAGES_WALKING;
+        this.IMAGES_JUMPING = IMAGES_JUMPING;
+        this.IMAGES_HURT = IMAGES_HURT;
+        this.IMAGES_DEAD = IMAGES_DEAD;
+    }
+}

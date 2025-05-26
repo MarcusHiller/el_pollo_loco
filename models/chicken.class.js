@@ -3,6 +3,9 @@ class Chicken extends MovableObject {
     width = 75;
     height = 75;
     y = 355;
+    energy = 100;
+    damagePoints = 100;
+    damageTime = 1.2;
     offset = {
         top: 5,
         left: 5,
@@ -32,7 +35,12 @@ class Chicken extends MovableObject {
         
         
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);   
+            if (this.energy > 0) {
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.energy == 0) {
+                this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+            }
+               
         }, 150);
     }
 
@@ -41,4 +49,14 @@ class Chicken extends MovableObject {
         console.log("eat");
 
     }
+
+
+    hitEnemy(enemy) {
+        enemy.energy = enemy.energy - enemy.damagePoints;
+        if (enemy.energy <= 0) {
+            enemy.energy = 0;
+            this.setHurt();
+        }
+    }
+
 }

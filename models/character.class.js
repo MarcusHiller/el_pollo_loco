@@ -1,6 +1,6 @@
 class Character extends MovableObject {
 
-    IMAGES_WALKING = [
+    /* IMAGES_WALKING = [
         '/img/2_character_pepe/2_walk/W-21.png',
         '/img/2_character_pepe/2_walk/W-22.png',
         '/img/2_character_pepe/2_walk/W-23.png',
@@ -33,7 +33,8 @@ class Character extends MovableObject {
         'img/2_character_pepe/5_dead/D-55.png',
         'img/2_character_pepe/5_dead/D-56.png',
         'img/2_character_pepe/5_dead/D-57.png',
-    ];
+    ]; */
+    IMAGES = pepe;
     hero = 'pepe'
     width = 100;
     height = 250;
@@ -43,8 +44,10 @@ class Character extends MovableObject {
     speedY = 0;
     energy = 100;
     acceleration = 1;
+    damagePoints = 20;
+    damageTime = 1;
     world;
-    lastHit = 0;
+    
     offset = {
         top: 100,
         left: 30,
@@ -54,10 +57,14 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('img/2_character_pepe/3_jump/J-31.png');
-        this.loadImages(this.IMAGES_WALKING);
+        /* this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_DEAD); */
+        this.loadImages(this.IMAGES.IMAGES_WALKING);
+        this.loadImages(this.IMAGES.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES.IMAGES_HURT);
+        this.loadImages(this.IMAGES.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
     }
@@ -85,18 +92,18 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
+                this.playAnimation(this.IMAGES.IMAGES_DEAD);
 
             } else if (this.ishurt()) {
-                this.playAnimation(this.IMAGES_HURT);
+                this.playAnimation(this.IMAGES.IMAGES_HURT);
                 console.log(this.energy);
 
             }
             else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
+                this.playAnimation(this.IMAGES.IMAGES_JUMPING);
             } else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
-                    this.playAnimation(this.IMAGES_WALKING);
+                    this.playAnimation(this.IMAGES.IMAGES_WALKING);
                 }
             }
         }, 70);
@@ -112,34 +119,6 @@ class Character extends MovableObject {
         console.log("sleep long");
     }
 
-
-    /* ishurt() {
-        let timepassed = new Date().getTime() - this.lastHit;
-        timepassed = timepassed / 1000;
-        return timepassed < 1;
-    }
-
-
-    setHurt() {
-        this.lastHit = new Date().getTime();
-    }
-
-
-    drawOffEnergy() {
-        if (this.energy > 0) {
-            this.energy -= 20;
-        }
-        if (this.energy <= 0) {
-            this.energy = 0;
-        }
-    }
-
-    injuryProcess() {
-        if (!this.ishurt()) {
-            this.setHurt();
-            this.drawOffEnergy();
-        }
-    } */
 
     isDead() {
         return this.energy == 0;
