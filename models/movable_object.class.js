@@ -37,6 +37,33 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /* playAnimationOnce(images) {
+        for (let index = 0; index < images.length; index++) {
+            let path  = images[index];
+            this.img = this.imageCache[path];
+        }
+        return true;
+        let index = images.length;
+        let path = images[index];
+        this.img = this.imageCache[path];
+        this.currentImage++; 
+    } */
+
+    playAnimationOnce(images) {
+        this.currentImage = 0;
+        this.animationInterval = setInterval(() => {
+            if (this.currentImage < images.length) {
+                let path = images[this.currentImage];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            } else {
+                clearInterval(this.animationInterval);
+            }
+        }, 40);
+    }
+
+
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -49,11 +76,10 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return true;
+            return this.y < 355;
         } else {
             return this.y < 175;
         }
-
     }
 
 

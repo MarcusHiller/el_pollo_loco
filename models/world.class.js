@@ -87,6 +87,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.deleteDeadEnemies();
+            this.cleanUpBottles();
         }, 40);
     }
 
@@ -117,16 +118,22 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.d && this.character.canThrow) {
             if (this.character.bottle > 0 && !this.character.isThrowDelayActive()) {
-                    let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
-                    this.throwableObjects.push(bottle);
-                    this.character.bottle --;
-                    this.character.setThrowTime();
-                    this.character.canThrow = false;
+                let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
+                this.throwableObjects.push(bottle);
+                this.character.bottle--;
+                this.character.setThrowTime();
+                this.character.canThrow = false;
             }
-        }else if (!this.keyboard.d) {
+        } else if (!this.keyboard.d) {
             this.character.canThrow = true;
-        }   
+        }
     }
+
+
+    cleanUpBottles() {
+        this.throwableObjects = this.throwableObjects.filter(b => !b.markForRemoval);
+    }
+
 
 
     deleteDeadEnemies() {
