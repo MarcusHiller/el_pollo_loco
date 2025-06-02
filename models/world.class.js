@@ -41,8 +41,9 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObjects);
+        
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
         requestAnimationFrame(this.draw.bind(this));
@@ -88,6 +89,7 @@ class World {
             this.checkThrowObjects();
             this.deleteDeadEnemies();
             this.cleanUpBottles();
+            this.checkCollisionsThrowableObjects();
         }, 40);
     }
 
@@ -113,7 +115,18 @@ class World {
             }
         })
     };
+    
 
+    checkCollisionsThrowableObjects() {
+        this.level.enemies.forEach((enemy) => {
+            let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
+            console.log(collidngBottle);
+            
+            if (collidngBottle) {
+                collidngBottle.bottleBreaks();
+            }
+        });
+    }
 
     checkThrowObjects() {
         if (this.keyboard.d && this.character.canThrow) {

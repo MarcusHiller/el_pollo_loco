@@ -2,6 +2,8 @@ class ThrowableObject extends MovableObject {
 
     width = 60;
     height = 70;
+    bottleBroken = false;
+    markForRemoval = false;
     world;
     IMAGES_BOTTLE = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -56,19 +58,24 @@ class ThrowableObject extends MovableObject {
                 this.x += 18;
                 this.playAnimation(this.IMAGES_BOTTLE);
             } else if (!this.bottleBroken) {
-                this.bottleBroken = true;
-                this.playAnimationOnce(this.IMAGES_SPLASH);
-                clearInterval(this.throwInterval);
-                this.markerForDelete();
+                this.bottleBreaks();
             }
         }, 60);
+    }
+
+
+    bottleBreaks() {
+            clearInterval(this.throwInterval);
+            this.bottleBroken = true;
+            this.playAnimationOnce(this.IMAGES_SPLASH);
+            this.markerForDelete();
     }
 
 
     markerForDelete() {
         setTimeout(() => {
             this.markForRemoval = true;
-        }, 420);
+        }, 440);
     }
 
 }
