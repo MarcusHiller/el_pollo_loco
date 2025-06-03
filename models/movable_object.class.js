@@ -121,7 +121,7 @@ class MovableObject extends DrawableObject {
             this.energy -= this.damagePoints;
         }
         if (this.energy <= 0) {
-            this.energy = 0;
+            this.energy = 0; 
         }
     }
 

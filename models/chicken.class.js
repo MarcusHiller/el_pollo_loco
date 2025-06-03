@@ -55,6 +55,7 @@ class Chicken extends MovableObject {
         enemy.energy = enemy.energy - enemy.damagePoints;
         if (enemy.energy <= 0) {
             enemy.energy = 0;
+            this.speed = 0;
             this.setHurt();
         }
     }
