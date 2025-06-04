@@ -23,7 +23,7 @@ class Character extends MovableObject {
         left: 30,
         right: 25,
         bottom: 12
-    }
+    };
 
     constructor() {
         super().loadImage('img/2_character_pepe/3_jump/J-31.png');
@@ -55,33 +55,10 @@ class Character extends MovableObject {
                 this.moveJump();
             }
 
-
             this.world.camera_x = -this.x + 20;
         }, 1000 / 60);
 
 
-        /* setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES.IMAGES_DEAD);
-
-            } else if (this.ishurt()) {
-                this.playAnimation(this.IMAGES.IMAGES_HURT);
-                this.setTimeLastAction();
-            } else if (!this.idle()) {
-                this.loadImage('img/2_character_pepe/3_jump/J-31.png');
-            }
-            else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES.IMAGES_JUMPING);
-                this.setTimeLastAction();
-            } else {
-                if (this.world.keyboard.right || this.world.keyboard.left) {
-                    this.playAnimation(this.IMAGES.IMAGES_WALKING);
-                    this.setTimeLastAction();
-                } else {
-                    this.loadImage('img/2_character_pepe/3_jump/J-31.png'); 
-                }
-            }
-        }, 70); */
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES.IMAGES_DEAD);
