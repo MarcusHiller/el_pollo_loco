@@ -55,6 +55,10 @@ class Character extends MovableObject {
                 this.moveJump();
             }
 
+            if (this.world.keyboard.d && this.idle()) {
+                this.setTimeLastAction();
+            }
+
             this.world.camera_x = -this.x + 20;
         }, 1000 / 60);
 

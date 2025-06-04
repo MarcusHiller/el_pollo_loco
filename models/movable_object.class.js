@@ -37,18 +37,6 @@ class MovableObject extends DrawableObject {
     }
 
 
-    /* playAnimationOnce(images) {
-        for (let index = 0; index < images.length; index++) {
-            let path  = images[index];
-            this.img = this.imageCache[path];
-        }
-        return true;
-        let index = images.length;
-        let path = images[index];
-        this.img = this.imageCache[path];
-        this.currentImage++; 
-    } */
-
     playAnimationOnce(images) {
         this.currentImage = 0;
         this.animationInterval = setInterval(() => {
