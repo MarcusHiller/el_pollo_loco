@@ -105,7 +105,7 @@ class World {
                 } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
-                } else if (enemy.name == 'endboss') {
+                } else if (enemy.name === 'endboss') {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
                 } else if (overlapX > overlapY || this.character.speedY < 0) {
@@ -120,6 +120,12 @@ class World {
         this.level.enemies.forEach((enemy) => {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
             if (collidngBottle) {
+                console.log(enemy);
+                if (enemy.name === 'endboss') {
+                    enemy.injuryProcess();
+                   //this.statusBar.setPercentage(this.character.energy);
+                }
+                
                 collidngBottle.bottleBreaks();
             }
         });
