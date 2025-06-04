@@ -68,6 +68,8 @@ class Character extends MovableObject {
             } else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
                     this.playAnimation(this.IMAGES.IMAGES_WALKING);
+                } else {
+                    this.loadImage('img/2_character_pepe/3_jump/J-31.png'); 
                 }
             }
         }, 70);
