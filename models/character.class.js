@@ -16,6 +16,7 @@ class Character extends MovableObject {
     timeLastThrow;
     throwDelay = 0.3;
     canThrow = true;
+    lastAction;
     world;
     offset = {
         top: 100,
@@ -30,7 +31,10 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES.IMAGES_JUMPING);
         this.loadImages(this.IMAGES.IMAGES_HURT);
         this.loadImages(this.IMAGES.IMAGES_DEAD);
+        this.loadImages(this.IMAGES.IMAGES_IDLE_SHORT);
+        this.loadImages(this.IMAGES.IMAGES_IDLE_LONG);
         this.animate();
+        this.setTimeLastAction();
         this.applyGravity();
         this.setThrowTime();
     }
@@ -56,33 +60,76 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
 
-        setInterval(() => {
+        /* setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES.IMAGES_DEAD);
 
             } else if (this.ishurt()) {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
+                this.setTimeLastAction();
+            } else if (!this.idle()) {
+                this.loadImage('img/2_character_pepe/3_jump/J-31.png');
             }
             else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES.IMAGES_JUMPING);
+                this.setTimeLastAction();
             } else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
                     this.playAnimation(this.IMAGES.IMAGES_WALKING);
+                    this.setTimeLastAction();
                 } else {
                     this.loadImage('img/2_character_pepe/3_jump/J-31.png'); 
                 }
             }
+        }, 70); */
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES.IMAGES_DEAD);
+            } else if (this.ishurt()) {
+                this.playAnimation(this.IMAGES.IMAGES_HURT);
+                this.setTimeLastAction();
+            } else if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES.IMAGES_JUMPING);
+                this.setTimeLastAction();
+            } else if (this.world.keyboard.right || this.world.keyboard.left) {
+                this.playAnimation(this.IMAGES.IMAGES_WALKING);
+                this.setTimeLastAction();
+            } else if (!this.idle()) {
+                this.loadImage('img/2_character_pepe/3_jump/J-31.png');
+            }
         }, 70);
+
     }
 
 
     idleShort() {
-        console.log("sleep short");
+        let timepassed = new Date().getTime() - this.lastAction;
+        timepassed = timepassed / 1000;
+        return timepassed > 5 && timepassed <= 10;
     }
 
 
     idleLong() {
-        console.log("sleep long");
+        let timepassed = new Date().getTime() - this.lastAction;
+        timepassed = timepassed / 1000;
+        return timepassed > 10
+    }
+
+
+    idle() {
+        if (this.idleShort()) {
+            this.playAnimation(this.IMAGES.IMAGES_IDLE_SHORT);
+            return true;
+        } else if (this.idleLong()) {
+            this.playAnimation(this.IMAGES.IMAGES_IDLE_LONG);
+            return true;
+        }
+        return false;
+    }
+
+
+    setTimeLastAction() {
+        this.lastAction = new Date().getTime();
     }
 
 

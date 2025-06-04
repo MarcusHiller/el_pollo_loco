@@ -120,8 +120,6 @@ class World {
     checkCollisionsThrowableObjects() {
         this.level.enemies.forEach((enemy) => {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
-            console.log(collidngBottle);
-            
             if (collidngBottle) {
                 collidngBottle.bottleBreaks();
             }
