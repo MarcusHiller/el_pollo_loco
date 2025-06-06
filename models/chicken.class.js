@@ -1,47 +1,41 @@
 class Chicken extends MovableObject {
 
-    width = 75;
-    height = 75;
-    y = 355;
+    IMAGES = chicken;
     name = "normal_chicken"
-    energy = 100;
-    damagePoints = 100;
-    damageTime = 1.2;
     offset = {
         top: 5,
         left: 5,
         right: 5,
         bottom: 5
     };
-    IMAGES_WALKING = [
-        '/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
-        '/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
-        '/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
-    ];
-
     IMAGES_DEAD = 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
     
     constructor() {
-        super().loadImage('/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
+        this.width = 75;
+        this.height = 75;
         this.x = 250 + Math.random() * 500;
-        this.loadImages(this.IMAGES_WALKING);
+        this.y = 355;
         this.speed = 0.15 + Math.random() * 0.4;
+        this.energy = 100;
+        this.damagePoints = 100;
+        this.damageTime = 1.2;
+        this.loadImages(this.IMAGES.NORMAL_CHICKEN_WALKING);
         this.animate();
     }
+
 
     animate() {
         setInterval(() => {
             this.moveLeft(); 
         }, 1000 / 60);
         
-        
         setInterval(() => {
             if (this.energy > 0) {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimation(this.IMAGES.NORMAL_CHICKEN_WALKING);
             } else if (this.energy == 0) {
                 this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
             }
-               
         }, 150);
     }
 }
