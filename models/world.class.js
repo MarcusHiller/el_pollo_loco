@@ -6,7 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBars = [new Statusbar('HEALTH', 5, 5, statusbarImages)];
+    statusBars = [new Statusbar('HEALTH', 5, 5, statusbarImages), new Statusbar('ENDBOSS', 0, 5, statusbarImages)];
     throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) {
@@ -25,6 +25,7 @@ class World {
         this.character.world = this;
         this.level.enemies.forEach(enemy => enemy.world = this);
         this.throwableObjects.forEach(bottle => bottle.world = this);
+        this.statusBars.forEach(bar => bar.world = this);
     }
 
 
@@ -101,16 +102,10 @@ class World {
                 let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                 if ((overlapX < overlapY || this.character.speedY >= 0) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
-
                 } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
-
                 } else if (enemy.name === 'endboss' && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
-
                 } else if ((overlapX > overlapY || this.character.speedY < 0) && enemy.energy > 0) {
                     enemy.hitEnemy(enemy);
                 }
@@ -132,6 +127,7 @@ class World {
         });
     }
 
+
     checkThrowObjects() {
         if (this.keyboard.d && this.character.canThrow) {
             if (this.character.bottle > 0 && !this.character.isThrowDelayActive()) {
@@ -152,7 +148,6 @@ class World {
     }
 
 
-
     deleteDeadEnemies() {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {
             if (this.level.enemies[i].energy == 0) {
@@ -168,4 +163,20 @@ class World {
         return this.statusBars.find(bar => bar.type === type);
     }
 
+
+    drawEndbossBar() {
+        if (this.shouldShowEndbossBar()) {
+            this.ctx.translate(-this.camera_x, 0);
+            this.statusBarEndboss.x = canvas.width - this.statusBarEndboss.width - 10;
+            this.addToMap(this.statusBarEndboss);
+            this.ctx.translate(this.camera_x, 0);
+        }
+    }
+
+
+    shouldShowEndbossBar() {
+        let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
+        let distanceToBoss = endboss.x - this.character.x;
+        return distanceToBoss < 600;
+    }
 }

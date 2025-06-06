@@ -31,4 +31,13 @@ class Statusbar extends DrawableObject{
         if (percentage >= 20) return 1;
         return 0;
     }
+
+    draw(ctx) {
+        if (this.type === 'ENDBOSS') {
+            if (!this.world?.shouldShowEndbossBar?.()) return;
+            this.x = ctx.canvas.width - this.width - 10;
+            this.y = 5;
+        }
+        super.draw(ctx);
+    }
 }
