@@ -6,7 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBar = new Statusbar();
+    statusBars = [new Statusbar('HEALTH', 5, 5, statusbarImages)];
     throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) {
@@ -37,7 +37,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
 
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
+        this.addObjectsToMap(this.statusBars);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
@@ -101,20 +101,23 @@ class World {
                 let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
                 if ((overlapX < overlapY || this.character.speedY >= 0) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    this.statusBar.setPercentage(this.character.energy);
+                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
+
                 } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    this.statusBar.setPercentage(this.character.energy);
+                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
+
                 } else if (enemy.name === 'endboss' && enemy.energy > 0) {
                     this.character.injuryProcess();
-                    this.statusBar.setPercentage(this.character.energy);
+                    //this.getStatusbarByType('HEALTH')?.setPercentage(this.character.energy);
+
                 } else if ((overlapX > overlapY || this.character.speedY < 0) && enemy.energy > 0) {
                     enemy.hitEnemy(enemy);
                 }
             }
         })
     };
-    
+
 
     checkCollisionsThrowableObjects() {
         this.level.enemies.forEach((enemy) => {
@@ -159,4 +162,10 @@ class World {
             }
         }
     }
+
+
+    getStatusbarByType(type) {
+        return this.statusBars.find(bar => bar.type === type);
+    }
+
 }

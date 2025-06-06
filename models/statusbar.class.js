@@ -1,38 +1,34 @@
 class Statusbar extends DrawableObject{
 
-    IMAGES_STATUS = [
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png',
-        'img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png'
-    ];
     percentage = 100;
-    constructor() {
+    type;
+    imageSources;
+
+    constructor(type, x, y, imageSources) {
         super();
-        this.loadImages(this.IMAGES_STATUS);
-        this.x = 5;
-        this.y = 5;
+        this.type = type;
+        this.x = x;
+        this.y = y;
         this.width = 150;
         this.height = 50;
+        this.imageSources = imageSources['IMAGES_' + type];
+        this.loadImages(this.imageSources);
         this.setPercentage(100);
     }
+    
 
     setPercentage(percentage) {
         this.percentage = percentage;
-        if (this.percentage == 100) {
-            this.loadImage(this.IMAGES_STATUS[5]);
-        } else if (this.percentage >= 80) {
-            this.loadImage(this.IMAGES_STATUS[4]);
-        } else if (this.percentage >= 60) {
-            this.loadImage(this.IMAGES_STATUS[3]);
-        } else if (this.percentage >= 40) {
-            this.loadImage(this.IMAGES_STATUS[2]);
-        } else if (this.percentage >= 20) {
-            this.loadImage(this.IMAGES_STATUS[1]);
-        } else if (this.percentage == 0) {
-            this.loadImage(this.IMAGES_STATUS[0]);
-        }
+        let index = this.resolveImageIndex(percentage);
+        this.loadImage(this.imageSources[index]);
+    }
+
+    resolveImageIndex(percentage) {
+        if (percentage == 100) return 5;
+        if (percentage >= 80) return 4;
+        if (percentage >= 60) return 3;
+        if (percentage >= 40) return 2;
+        if (percentage >= 20) return 1;
+        return 0;
     }
 }

@@ -123,7 +123,17 @@ class MovableObject extends DrawableObject {
         if (!this.ishurt()) {
             this.setHurt();
             this.drawOffEnergy();
+            this.findCharacterObjekt();
         }
     }
 
+    findCharacterObjekt() {
+        if (this.name === 'pepe') {
+            let healthBar = world.getStatusbarByType('HEALTH');
+            healthBar?.setPercentage(this.energy);
+        } else if (this.name === 'endboss') {
+            let bossBar = world.getStatusbarByType('ENDBOSS');
+            bossBar?.setPercentage(this.energy);
+        }
+    }
 }

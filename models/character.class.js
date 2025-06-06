@@ -1,7 +1,7 @@
 class Character extends MovableObject {
 
     IMAGES = pepe;
-    hero = 'pepe'
+    name = 'pepe'
     width = 100;
     height = 250;
     x = 10;

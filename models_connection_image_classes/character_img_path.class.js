@@ -7,12 +7,12 @@ class CharakterImg {
     IMAGES_IDLE_SHORT;
     IMAGES_IDLE_LONG;
     
-    constructor (IMAGES_WALKING, IMAGES_JUMPING, IMAGES_HURT, IMAGES_DEAD, IMAGES_IDLE_SHORT, IMAGES_IDLE_LONG) {
-        this.IMAGES_WALKING = IMAGES_WALKING;
-        this.IMAGES_JUMPING = IMAGES_JUMPING;
-        this.IMAGES_HURT = IMAGES_HURT;
+    constructor (walking, jumping, hurt, IMAGES_DEAD, idleShort, idleLong) {
+        this.IMAGES_WALKING = walking;
+        this.IMAGES_JUMPING = jumping;
+        this.IMAGES_HURT = hurt;
         this.IMAGES_DEAD = IMAGES_DEAD;
-        this.IMAGES_IDLE_SHORT = IMAGES_IDLE_SHORT;
-        this.IMAGES_IDLE_LONG = IMAGES_IDLE_LONG;
+        this.IMAGES_IDLE_SHORT = idleShort;
+        this.IMAGES_IDLE_LONG = idleLong;
     }
 }

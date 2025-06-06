@@ -6,11 +6,11 @@ class EndbossImg {
     IMAGES_HURT;
     IMAGES_DEAD;
     
-    constructor (IMAGES_WALKING, IMAGES_ALERT, IMAGES_ATTACK, IMAGES_HURT, IMAGES_DEAD, ) {
-        this.IMAGES_WALKING = IMAGES_WALKING;
-        this.IMAGES_ALERT = IMAGES_ALERT;
-        this.IMAGES_ATTACK = IMAGES_ATTACK;
-        this.IMAGES_HURT = IMAGES_HURT;
-        this.IMAGES_DEAD = IMAGES_DEAD;
+    constructor (walking, alert, attack, hurt, daed,) {
+        this.IMAGES_WALKING = walking;
+        this.IMAGES_ALERT = alert;
+        this.IMAGES_ATTACK = attack;
+        this.IMAGES_HURT = hurt;
+        this.IMAGES_DEAD = daed;
     }
 }
