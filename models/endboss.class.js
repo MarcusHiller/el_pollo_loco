@@ -8,6 +8,7 @@ class Endboss extends MovableObject {
     energy = 100;
     damagePoints = 25;
     damageTime = 1.75;
+    deadAnimationPlayed = false;
     offset = {
         top: 180,
         left: 100,
@@ -30,9 +31,18 @@ class Endboss extends MovableObject {
     animate() {
         //this.moveLeft()
         setInterval(() => {
-            this.playAnimation(this.IMAGES.IMAGES_ALERT);   
-            console.log("Enemy POWER:",this.energy);
-            
+            if(this.ishurt()) {
+                this.playAnimation(this.IMAGES.IMAGES_HURT);
+            }  else if(this.energy <= 75 && this.energy > 0) {
+                this.playAnimation(this.IMAGES.IMAGES_ALERT);
+            } else if (this.isDead() && !this.deadAnimationPlayed) {
+                this.deadAnimationPlayed = true; 
+                this.playAnimationOnce(this.IMAGES.IMAGES_DEAD);
+                this.loadImage(this.IMAGES.IMAGES_DEAD[2]);  
+            }
+            console.log("Enemy POWER:", this.energy);
+
+
         }, 150);
     }
 }

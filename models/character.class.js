@@ -114,9 +114,7 @@ class Character extends MovableObject {
     }
 
 
-    isDead() {
-        return this.energy == 0;
-    }
+    
 
 
     setThrowTime() {

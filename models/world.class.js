@@ -105,10 +105,10 @@ class World {
                 } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
-                } else if (enemy.name === 'endboss') {
+                } else if (enemy.name === 'endboss' && enemy.energy > 0) {
                     this.character.injuryProcess();
                     this.statusBar.setPercentage(this.character.energy);
-                } else if (overlapX > overlapY || this.character.speedY < 0) {
+                } else if ((overlapX > overlapY || this.character.speedY < 0) && enemy.energy > 0) {
                     enemy.hitEnemy(enemy);
                 }
             }
@@ -121,11 +121,9 @@ class World {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
             if (collidngBottle) {
                 console.log(enemy);
-                if (enemy.name === 'endboss') {
+                if (enemy.name === 'endboss' && enemy.energy > 0) {
                     enemy.injuryProcess();
-                   //this.statusBar.setPercentage(this.character.energy);
                 }
-                
                 collidngBottle.bottleBreaks();
             }
         });
@@ -154,8 +152,8 @@ class World {
 
     deleteDeadEnemies() {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {
-            if (this.level.enemies[i].energy === 0) {
-                if (!this.level.enemies[i].ishurt()) {
+            if (this.level.enemies[i].energy == 0) {
+                if (!this.level.enemies[i].ishurt() && this.level.enemies[i].name === 'normal_chicken') {
                     this.level.enemies.splice(i, 1);
                 }
             }

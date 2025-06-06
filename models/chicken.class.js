@@ -3,6 +3,7 @@ class Chicken extends MovableObject {
     width = 75;
     height = 75;
     y = 355;
+    name = "normal_chicken"
     energy = 100;
     damagePoints = 100;
     damageTime = 1.2;

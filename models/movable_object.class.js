@@ -99,6 +99,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    isDead() {
+        return this.energy == 0;
+    }
+
+
     setHurt() {
         this.lastHit = new Date().getTime();
     }
