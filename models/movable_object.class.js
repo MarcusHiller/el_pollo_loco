@@ -86,12 +86,6 @@ class MovableObject extends DrawableObject {
     }
 
 
-    dead() {
-
-        console.log("Gestorben");
-    }
-
-
     ishurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
@@ -106,6 +100,16 @@ class MovableObject extends DrawableObject {
 
     setHurt() {
         this.lastHit = new Date().getTime();
+    }
+
+
+    hitEnemy(enemy) {
+        enemy.energy = enemy.energy - enemy.damagePoints;
+        if (enemy.energy <= 0) {
+            enemy.energy = 0;
+            this.speed = 0;
+            this.setHurt();
+        }
     }
 
 

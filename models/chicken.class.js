@@ -44,21 +44,4 @@ class Chicken extends MovableObject {
                
         }, 150);
     }
-
-
-    eat() {
-        console.log("eat");
-
-    }
-
-
-    hitEnemy(enemy) {
-        enemy.energy = enemy.energy - enemy.damagePoints;
-        if (enemy.energy <= 0) {
-            enemy.energy = 0;
-            this.speed = 0;
-            this.setHurt();
-        }
-    }
-
 }
