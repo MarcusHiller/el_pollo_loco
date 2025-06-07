@@ -101,6 +101,7 @@ class World {
             this.cleanUpBottlesCollectedBottles();
             this.checkCollisionCoin();
             this.cleanUpCollectedCoin();
+            this.updateBotlleStatusbar();
         }, 40);
     }
 
@@ -223,5 +224,12 @@ class World {
         let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         let distanceToBoss = endboss.x - this.character.x;
         return distanceToBoss < 600;
+    }
+
+
+    updateBotlleStatusbar() {
+        let amountBottles = this.character.bottle
+        let bottleBar = this.getStatusbarByType('BOTTLES');
+        bottleBar?.setPercentage(amountBottles * 10);
     }
 }
