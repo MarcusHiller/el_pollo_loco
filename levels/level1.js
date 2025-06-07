@@ -1,11 +1,14 @@
-const level1 = new Level (
+const level1 = new Level(
     [
         new Chicken(),
-        new SmallChicken(),
+        
+        new Chicken(),
+        
+        new Chicken(),
         new Chicken(),
         new SmallChicken(),
-        new Chicken(),
-        new Chicken(),
+        new SmallChicken(),
+        new SmallChicken(),
         new SmallChicken(),
         new Endboss()
     ],
@@ -49,7 +52,5 @@ const level1 = new Level (
         new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 80),
         new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 100),
         new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2000, 330),
-        new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 2000, 340),
-        new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 2000, 340),
     ]
 );
