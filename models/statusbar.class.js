@@ -35,7 +35,7 @@ class Statusbar extends DrawableObject{
 
     draw(ctx) {
         if (this.type === 'ENDBOSS') {
-            if (!this.world?.shouldShowEndbossBar?.()) return;
+            if (!this.world?.distanceCarackterAndBoss?.()) return;
             this.x = ctx.canvas.width - this.width - 10;
             this.y = 5;
         }

@@ -10,7 +10,7 @@ class World {
     new Statusbar('ENDBOSS', 0, 0, statusbarImages),
     new Statusbar('COINS', 5, 39, statusbarImages),
     new Statusbar('BOTTLES', 5, 78, statusbarImages)];
-    throwableObjects = [new ThrowableObject()];
+    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -143,7 +143,7 @@ class World {
     checkThrowObjects() {
         if (this.keyboard.d && this.character.canThrow) {
             if (this.character.bottle > 0 && !this.character.isThrowDelayActive()) {
-                let bottle = new ThrowableObject(this.character.x + this.character.width - this.character.offset.right, this.character.y + this.character.offset.top);
+                let bottle = new ThrowableObject(this.character.x + this.character.offset.right, this.character.y + this.character.offset.top, this.character.otherDirection);
                 this.throwableObjects.push(bottle);
                 this.character.bottle--;
                 this.character.setThrowTime();
@@ -211,7 +211,7 @@ class World {
 
 
     drawEndbossBar() {
-        if (this.shouldShowEndbossBar()) {
+        if (this.distanceCarackterAndBoss()) {
             this.ctx.translate(-this.camera_x, 0);
             this.statusBarEndboss.x = canvas.width - this.statusBarEndboss.width - 10;
             this.addToMap(this.statusBarEndboss);
@@ -220,7 +220,7 @@ class World {
     }
 
 
-    shouldShowEndbossBar() {
+    distanceCarackterAndBoss() {
         let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         let distanceToBoss = endboss.x - this.character.x;
         return distanceToBoss < 600;
