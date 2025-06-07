@@ -1,9 +1,7 @@
 const level1 = new Level(
     [
         new Chicken(),
-        
         new Chicken(),
-        
         new Chicken(),
         new Chicken(),
         new SmallChicken(),
@@ -44,13 +42,23 @@ const level1 = new Level(
     ],
     [
         new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1500, 340),
-        new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1500, 340),
         new Bottle('img/6_salsa_bottle/salsa_bottle.png', 1500, 110),
         new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1500, 340),
-        new Bottle('img/6_salsa_bottle/salsa_bottle.png', 1500, 70),
-        new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 1500, 330),
+        new Bottle('img/6_salsa_bottle/salsa_bottle.png', 1500, 70),   
         new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 80),
         new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 100),
         new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2000, 330),
+    ],
+    [
+        new Coin('img/8_coin/coin_1.png', 110, 120),
+        new Coin('img/8_coin/coin_1.png', 150, 100),
+        new Coin('img/8_coin/coin_1.png', 190, 80),
+        new Coin('img/8_coin/coin_1.png', 230, 60),
+        new Coin('img/8_coin/coin_1.png', 270, 80),
+        new Coin('img/8_coin/coin_1.png', 310, 100),
+        new Coin('img/8_coin/coin_1.png', 350, 120),
+        new Coin('img/8_coin/coin_1.png', 1000, 180),
+        new Coin('img/8_coin/coin_1.png', 1200, 180),
+        new Coin('img/8_coin/coin_1.png', 1400, 180),
     ]
 );

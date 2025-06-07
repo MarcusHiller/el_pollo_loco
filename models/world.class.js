@@ -15,7 +15,6 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-
         this.run();
         this.deleteDeadEnemies();
     }
@@ -37,6 +36,7 @@ class World {
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottle);
+        this.addObjectsToMap(this.level.coin);
 
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.statusBars);
@@ -96,7 +96,7 @@ class World {
 
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy, index) => {
+        this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isHurt) return;
                 let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
