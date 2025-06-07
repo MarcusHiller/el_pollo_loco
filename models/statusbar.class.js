@@ -13,7 +13,6 @@ class Statusbar extends DrawableObject{
         this.height = 50;
         this.imageSources = imageSources['IMAGES_' + type];
         this.loadImages(this.imageSources);
-        //this.setPercentage(100);
         this.setStartPercentForObjects();
     }
     
@@ -35,7 +34,7 @@ class Statusbar extends DrawableObject{
 
     draw(ctx) {
         if (this.type === 'ENDBOSS') {
-            if (!this.world?.distanceCarackterAndBoss?.()) return;
+            if (!this.world?.distanceCharacterAndBoss?.()) return;
             this.x = ctx.canvas.width - this.width - 10;
             this.y = 5;
         }

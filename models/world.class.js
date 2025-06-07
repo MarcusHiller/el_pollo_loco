@@ -211,7 +211,7 @@ class World {
 
 
     drawEndbossBar() {
-        if (this.distanceCarackterAndBoss()) {
+        if (this.distanceCharacterAndBoss()) {
             this.ctx.translate(-this.camera_x, 0);
             this.statusBarEndboss.x = canvas.width - this.statusBarEndboss.width - 10;
             this.addToMap(this.statusBarEndboss);
@@ -220,7 +220,7 @@ class World {
     }
 
 
-    distanceCarackterAndBoss() {
+    distanceCharacterAndBoss() {
         let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         let distanceToBoss = endboss.x - this.character.x;
         return distanceToBoss < 600;
