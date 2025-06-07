@@ -3,10 +3,10 @@ class SmallChicken extends MovableObject {
     IMAGES = chicken;
     name = "small_chicken"
     offset = {
-        top: 5,
-        left: 5,
-        right: 5,
-        bottom: 5
+        top: 15,
+        left: 15,
+        right: 15,
+        bottom: 15
     };
     IMAGES_DEAD = 'img/3_enemies_chicken/chicken_small/2_dead/dead.png';
     

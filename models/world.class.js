@@ -112,7 +112,7 @@ class World {
                     this.character.injuryProcess();
                 } else if (enemy.name === 'endboss' && enemy.energy > 0) {
                     this.character.injuryProcess();
-                } else if ((overlapX > overlapY || this.character.speedY < 0) && enemy.energy > 0) {
+                } else if (overlapX > overlapY && this.character.speedY < 0) {
                     enemy.hitEnemy(enemy);
                 }
             }
