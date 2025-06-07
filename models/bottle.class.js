@@ -1,6 +1,5 @@
 class Bottle extends DrawableObject {
 
-    collected = false;
     offset = {
             top: 5,
             left: 5,
@@ -13,5 +12,6 @@ class Bottle extends DrawableObject {
         this.y = y;
         this.height = 90;
         this.width = 90;
+        this.collected = false;
     }
 }

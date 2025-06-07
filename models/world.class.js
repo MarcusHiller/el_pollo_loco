@@ -94,6 +94,8 @@ class World {
             this.checkCollisionsThrowableObjects();
             this.checkCollisionBottle();
             this.cleanUpBottlesCollectedBottles();
+            this.checkCollisionCoin();
+            this.cleanUpCollectedCoin();
         }, 40);
     }
 
@@ -168,6 +170,21 @@ class World {
         this.level.bottle = this.level.bottle.filter(b => !b.collected);
     }
 
+
+    checkCollisionCoin() {
+        this.level.coin.forEach((coin) => {
+            if (this.character.isColliding(coin)) {
+                if (!coin.collected) {
+                    this.character.coin++;
+                    coin.collected = true;
+                }
+            }
+        })
+    }
+
+    cleanUpCollectedCoin() {
+        this.level.coin = this.level.coin.filter(c => !c.collected);
+    }
 
     deleteDeadEnemies() {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {
