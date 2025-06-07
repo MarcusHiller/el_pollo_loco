@@ -41,8 +41,6 @@ class Endboss extends MovableObject {
                 this.loadImage(this.IMAGES.IMAGES_DEAD[2]);  
             }
             console.log("Enemy POWER:", this.energy);
-
-
         }, 150);
     }
 }
