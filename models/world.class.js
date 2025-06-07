@@ -50,6 +50,7 @@ class World {
         requestAnimationFrame(this.draw.bind(this));
     }
 
+
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
             this.flipImg(movableObject);
@@ -89,8 +90,10 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.deleteDeadEnemies();
-            this.cleanUpBottles();
+            this.cleanUpBottlesThrownBottles();
             this.checkCollisionsThrowableObjects();
+            this.checkCollisionBottle();
+            this.cleanUpBottlesCollectedBottles();
         }, 40);
     }
 
@@ -144,15 +147,32 @@ class World {
     }
 
 
-    cleanUpBottles() {
+    cleanUpBottlesThrownBottles() {
         this.throwableObjects = this.throwableObjects.filter(b => !b.markForRemoval);
+    }
+
+
+    checkCollisionBottle() {
+        this.level.bottle.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                if (!bottle.collected) {
+                    this.character.bottle++;
+                    bottle.collected = true;
+                }
+            }
+        })
+    }
+
+
+    cleanUpBottlesCollectedBottles() {
+        this.level.bottle = this.level.bottle.filter(b => !b.collected);
     }
 
 
     deleteDeadEnemies() {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {
             if (this.level.enemies[i].energy == 0) {
-                if (!this.level.enemies[i].ishurt() && this.level.enemies[i].name === 'normal_chicken') {
+                if (!this.level.enemies[i].ishurt() && (this.level.enemies[i].name === 'normal_chicken' || this.level.enemies[i].name === 'small_chicken')) {
                     this.level.enemies.splice(i, 1);
                 }
             }
