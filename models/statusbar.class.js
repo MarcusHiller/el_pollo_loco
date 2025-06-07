@@ -13,7 +13,8 @@ class Statusbar extends DrawableObject{
         this.height = 50;
         this.imageSources = imageSources['IMAGES_' + type];
         this.loadImages(this.imageSources);
-        this.setPercentage(100);
+        //this.setPercentage(100);
+        this.setStartPercentForObjects();
     }
     
 
@@ -39,5 +40,21 @@ class Statusbar extends DrawableObject{
             this.y = 5;
         }
         super.draw(ctx);
+    }
+
+
+    setStartPercentForObjects() {
+        if (this.type === 'HEALTH') {
+            this.setPercentage(100);
+        }
+        if (this.type === 'ENDBOSS') {
+            this.setPercentage(100);
+        }
+        if (this.type === 'COINS') {
+            this.setPercentage(0);
+        }
+        if (this.type === 'BOTTLES') {
+            this.setPercentage(0);
+        }
     }
 }

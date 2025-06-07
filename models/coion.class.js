@@ -1,5 +1,6 @@
 class Coin extends DrawableObject {
     
+   
     offset = {
             top: 5,
             left: 5,
@@ -13,5 +14,6 @@ class Coin extends DrawableObject {
         this.height = 110;
         this.width = 110;
         this.collected = false;
+        this.object = 'coin';
     }
 }

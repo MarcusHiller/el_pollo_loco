@@ -6,7 +6,10 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBars = [new Statusbar('HEALTH', 5, 5, statusbarImages), new Statusbar('ENDBOSS', 0, 5, statusbarImages)];
+    statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
+    new Statusbar('ENDBOSS', 0, 0, statusbarImages),
+    new Statusbar('COINS', 5, 39, statusbarImages),
+    new Statusbar('BOTTLES', 5, 78, statusbarImages)];
     throwableObjects = [new ThrowableObject()];
 
     constructor(canvas, keyboard) {
@@ -25,6 +28,8 @@ class World {
         this.level.enemies.forEach(enemy => enemy.world = this);
         this.throwableObjects.forEach(bottle => bottle.world = this);
         this.statusBars.forEach(bar => bar.world = this);
+        this.level.coin.forEach(coin => coin.world = this);
+        this.level.bottle.forEach(bottle => bottle.world = this);
     }
 
 
@@ -160,6 +165,7 @@ class World {
                 if (!bottle.collected) {
                     this.character.bottle++;
                     bottle.collected = true;
+                    bottle.findCollectedObjects();
                 }
             }
         })
@@ -177,6 +183,7 @@ class World {
                 if (!coin.collected) {
                     this.character.coin++;
                     coin.collected = true;
+                    coin.findCollectedObjects();
                 }
             }
         })

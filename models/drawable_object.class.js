@@ -8,6 +8,7 @@ class DrawableObject {
     width;
     currentImage = 0;
     collected;
+    object;
 
     constructor() {
     }
@@ -54,6 +55,17 @@ class DrawableObject {
                 this.height - this.offset.top - this.offset.bottom
             );
             ctx.stroke();
+        }
+    }
+
+
+    findCollectedObjects() {
+        if (this.object === 'coin') {
+            let coinBar = world.getStatusbarByType('COINS');
+            coinBar?.setPercentage(this.world.character.coin * 5);
+        } else if (this.object === 'bottle') {
+            let bottleBar = world.getStatusbarByType('BOTTLES');
+            bottleBar?.setPercentage(this.world.character.bottle * 10);
         }
     }
 }

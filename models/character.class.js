@@ -128,4 +128,15 @@ class Character extends MovableObject {
         timepassed = timepassed / 1000;
         return timepassed < this.throwDelay;
     }
+
+
+    findCollectedObjects() {
+        if (this.object === 'coin') {
+            let coinBar = world.getStatusbarByType('COINS');
+            coinBar?.setPercentage(this.world.Character.coin * 10);
+        } else if (this.object === 'bottle') {
+            let bottleBar = world.getStatusbarByType('BOTTLES');
+            bottleBar?.setPercentage(this.world.Character.bottle * 10);
+        }
+    }
 }
