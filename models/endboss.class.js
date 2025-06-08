@@ -11,8 +11,8 @@ class Endboss extends MovableObject {
     deadAnimationPlayed = false;
     offset = {
         top: 180,
-        left: 100,
-        right: 70,
+        left: 110,
+        right: 65,
         bottom: 120
     }
 
@@ -40,9 +40,9 @@ class Endboss extends MovableObject {
                 this.moveLeft();
             } else if (this.isDead() && !this.deadAnimationPlayed) {
                 this.deadAnimationPlayed = true; 
-                this.playAnimationOnce(this.IMAGES.IMAGES_DEAD);
+                this.playAnimationOnce(this.IMAGES.IMAGES_DEAD, 50);
                 this.loadImage(this.IMAGES.IMAGES_DEAD[2]);  
             }
         }, 150);
     }
-}
+} 
