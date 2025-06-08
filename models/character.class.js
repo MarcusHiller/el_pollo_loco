@@ -91,18 +91,14 @@ class Character extends MovableObject {
                 this.setTimeLastAction();
             } else if (this.isAboveGround()) {
                 if (this.speedY >= 0 && !this.jump) {
-                    console.log("springt nach oben");
                     this.playAnimationOnce(this.IMAGES.IMAGES_JUMPINGGG, 30);
                     this.falls = false;
                     this.jump = true;
                 } else if (this.speedY < 0 && !this.falls) {
-                    console.log("springt nach unten");
                     this.playAnimationOnce(this.IMAGES.IMAGES_FALLS, 150);
                     this.jump = false;
                     this.falls = true;
                 }
-                /* this.playAnimation(this.IMAGES.IMAGES_JUMPING);
-                this.setTimeLastAction(); */
             } else if (this.world.keyboard.right || this.world.keyboard.left) {
                 this.playAnimation(this.IMAGES.IMAGES_WALKING);
                 this.setTimeLastAction();
