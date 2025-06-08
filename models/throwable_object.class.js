@@ -52,7 +52,7 @@ class ThrowableObject extends MovableObject {
     bottleBreaks() {
             clearInterval(this.throwInterval);
             this.bottleBroken = true;
-            this.playAnimationOnce(this.IMAGES_SPLASH);
+            this.playAnimationOnce(this.IMAGES_SPLASH, 40);
             this.markerForDelete();
     }
 

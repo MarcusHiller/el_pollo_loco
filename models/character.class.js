@@ -8,6 +8,8 @@ class Character extends MovableObject {
     y = 175;
     speed = 6;
     speedY = 0;
+    jump = false;
+    falls = false;
     energy = 100;
     acceleration = 1;
     damagePoints = 20;
@@ -64,7 +66,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
 
-        setInterval(() => {
+        /* setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES.IMAGES_DEAD);
             } else if (this.ishurt()) {
@@ -73,6 +75,34 @@ class Character extends MovableObject {
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES.IMAGES_JUMPING);
                 this.setTimeLastAction();
+            } else if (this.world.keyboard.right || this.world.keyboard.left) {
+                this.playAnimation(this.IMAGES.IMAGES_WALKING);
+                this.setTimeLastAction();
+            } else if (!this.idle()) {
+                this.loadImage('img/2_character_pepe/3_jump/J-31.png');
+            }
+        }, 70); */
+
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES.IMAGES_DEAD);
+            } else if (this.ishurt()) {
+                this.playAnimation(this.IMAGES.IMAGES_HURT);
+                this.setTimeLastAction();
+            } else if (this.isAboveGround()) {
+                if (this.speedY >= 0 && !this.jump) {
+                    console.log("springt nach oben");
+                    this.playAnimationOnce(this.IMAGES.IMAGES_JUMPINGGG, 30);
+                    this.falls = false;
+                    this.jump = true;
+                } else if (this.speedY < 0 && !this.falls) {
+                    console.log("springt nach unten");
+                    this.playAnimationOnce(this.IMAGES.IMAGES_FALLS, 150);
+                    this.jump = false;
+                    this.falls = true;
+                }
+                /* this.playAnimation(this.IMAGES.IMAGES_JUMPING);
+                this.setTimeLastAction(); */
             } else if (this.world.keyboard.right || this.world.keyboard.left) {
                 this.playAnimation(this.IMAGES.IMAGES_WALKING);
                 this.setTimeLastAction();
@@ -115,7 +145,7 @@ class Character extends MovableObject {
     }
 
 
-    
+
 
 
     setThrowTime() {
@@ -130,5 +160,5 @@ class Character extends MovableObject {
     }
 
 
-    
+
 }

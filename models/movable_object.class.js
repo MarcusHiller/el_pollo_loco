@@ -37,7 +37,7 @@ class MovableObject extends DrawableObject {
     }
 
 
-    playAnimationOnce(images) {
+    /* playAnimationOnce(images) {
         this.currentImage = 0;
         this.animationInterval = setInterval(() => {
             if (this.currentImage < images.length) {
@@ -48,6 +48,20 @@ class MovableObject extends DrawableObject {
                 clearInterval(this.animationInterval);
             }
         }, 40);
+    } */
+
+
+    playAnimationOnce(images, count) {
+        this.currentImage = 0;
+        this.animationInterval = setInterval(() => {
+            if (this.currentImage < images.length) {
+                let path = images[this.currentImage];
+                this.img = this.imageCache[path];
+                this.currentImage++;
+            } else {
+                clearInterval(this.animationInterval);
+            }
+        }, count);
     }
 
 
