@@ -266,11 +266,17 @@ class World {
 
 
     checkGameOver() {
+        let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         if (this.character.energy <= 0) {
             setTimeout(() => {
                 this.stopDrawing();
-                this.endGame(); // ruft Funktion von oben auf 
+                this.endGame(false);  
             }, 1000);
+        } else if (endboss.energy <= 0) {
+            setTimeout(() => {
+                this.stopDrawing();
+                this.endGame(true); 
+            }, 3100);
         }
     }
 }

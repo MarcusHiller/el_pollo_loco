@@ -3,20 +3,13 @@ let world;
 let keyboard = new Keyboard();
 let ctx;
 let gameState = 'start';
-let startButton = {
-    x: 260,
-    y: 220,
-    width: 200,
-    height: 50,
-    text: 'Spiel starten'
-}
+let showHelp = false;
+let screenManager = new ScreenManager();
+
 
 function init() {
     canvas = document.getElementById('canvas');
-    //world = new World (canvas, keyboard);
     ctx = canvas.getContext('2d');
-
-    //console.log("My Character is, MovableObject", world.character);
     drawMenuLoop();
 }
 
@@ -74,88 +67,65 @@ window.addEventListener("keyup", (e) => {
 })
 
 
-window.addEventListener('click', function (e) {
-    //console.log(e);
-    console.log('Canvas-Klick erkannt:', e.x, e.y, gameState);
-
-    let rect = canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-
-    if (
-        gameState !== 'playing' &&
-        x >= startButton.x &&
-        x <= startButton.x + startButton.width &&
-        y >= startButton.y &&
-        y <= startButton.y + startButton.height
-    ) {
-        startGame();
-    }
-});
-
-
-
 function drawMenuLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    if (gameState === 'start') {
-        drawStartScreen();
-    } else if (gameState === 'end') {
-        drawEndScreen();
-    }
-
+    screenManager.draw(ctx, gameState, showHelp);
     requestAnimationFrame(drawMenuLoop);
 }
 
-function drawStartScreen() {
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#fff';
-    ctx.font = '36px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Willkommen zum Spiel!', canvas.width / 2, 150);
-
-    drawButton(startButton);
-}
-
-function drawEndScreen() {
-    console.log('Endscreen wird gezeichnet');
-
-    ctx.fillStyle = '#400';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = '#fff';
-    ctx.font = '36px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Spiel beendet!', canvas.width / 2, 150);
-
-    startButton.text = 'Neustarten';
-    drawButton(startButton);
-}
-
-function drawButton(btn) {
-    ctx.fillStyle = '#555';
+function drawButton(ctx, btn) {
+    ctx.fillStyle = '#333';
     ctx.fillRect(btn.x, btn.y, btn.width, btn.height);
-
     ctx.fillStyle = '#fff';
     ctx.font = '20px Arial';
-    ctx.fillText(btn.text, btn.x + btn.width / 2, btn.y + 32);
+    ctx.textAlign = 'center';
+    ctx.fillText(btn.text, btn.x + btn.width / 2, btn.y + 28);
 }
 
 
 function startGame() {
-    console.log('startGame() aufgerufen. Alter gameState:', gameState);
     gameState = 'playing';
-    console.log('startGame() aufgerufen. Alter gameState:', gameState);
+    showHelp = false;
     world = new World(canvas, keyboard);
 
-    // Wichtig: World bekommt `endGame()`-Methode
-    world.endGame = function () {
+    world.endGame = function (result) {
         this.clearRunIntervall();
-        console.log('endGame() wurde aufgerufen');
-        gameState = 'end';
+        gameState = result ? 'end-won' : 'end-lose';
     };
 
-    world.draw(); // ruft dein World-Zeichnen auf
+    world.draw();
+}
+
+
+window.addEventListener('click', function (e) {
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    let buttons = screenManager.getButtons(gameState, showHelp);
+
+    for (let btn of buttons) {
+        if (isInside(x, y, btn)) {
+            handleButtonClick(btn.text);
+            break;
+        }
+    }
+});
+
+
+function handleButtonClick(text) {
+    if (gameState === 'start') {
+        if (text === 'Spiel starten') startGame();
+        else if (text === 'Hilfe') showHelp = true;
+        else if (text === 'Zurück') showHelp = false;
+    } else if (gameState === 'end-won' || gameState === 'end-lose') {
+        if (text === 'Neustarten') startGame();
+        else if (text === 'Beenden') gameState = 'start';
+    }
+}
+
+
+function isInside(x, y, btn) {
+    return x >= btn.x && x <= btn.x + btn.width && y >= btn.y && y <= btn.y + btn.height;
 }
