@@ -14,7 +14,7 @@ class Character extends MovableObject {
     acceleration = 1;
     damagePoints = 20;
     damageTime = 1;
-    bottle = 10;
+    bottle = 0;
     coin = 0;
     timeLastThrow;
     throwDelay = 0.3;

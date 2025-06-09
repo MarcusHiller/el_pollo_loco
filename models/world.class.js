@@ -1,21 +1,35 @@
 class World {
 
-    character = new Character();
-    level = level1;
-    canvas;
-    ctx;
-    keyboard;
-    camera_x = 0;
-    statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
+    //character = new Character();
+    //character;
+    //level = level1;
+    //level;
+    //canvas;
+    //ctx;
+    animationFrameID;
+    //keyboard;
+    //camera_x = 0;
+    //camera_x;
+    //statusBars;
+    /*statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
     new Statusbar('ENDBOSS', 0, 0, statusbarImages),
     new Statusbar('COINS', 5, 39, statusbarImages),
-    new Statusbar('BOTTLES', 5, 78, statusbarImages)];
-    throwableObjects = [];
+    new Statusbar('BOTTLES', 5, 78, statusbarImages)];*/
+    //throwableObjects = [];
+    //throwableObjects;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.character = new Character();
+        this.level = createLevel1();
+        this.statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
+        new Statusbar('ENDBOSS', 0, 0, statusbarImages),
+        new Statusbar('COINS', 5, 39, statusbarImages),
+        new Statusbar('BOTTLES', 5, 78, statusbarImages)];
+        this.throwableObjects = [];
+        this.camera_x = 0;
         this.draw();
         this.setWorld();
         this.run();
@@ -34,6 +48,9 @@ class World {
 
 
     draw() {
+        if (typeof gameState !== 'undefined' && gameState === 'end') {
+            return;
+        }
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -52,7 +69,19 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
-        requestAnimationFrame(this.draw.bind(this));
+        this.animationFrameID = requestAnimationFrame(this.draw.bind(this));
+    }
+
+
+    stopDrawing() {
+        if (this.animationFrameID) {
+            cancelAnimationFrame(this.animationFrameID);
+        }
+    }
+
+
+    clearRunIntervall() {
+        clearInterval(this.gameInterval);
     }
 
 
@@ -91,7 +120,8 @@ class World {
 
 
     run() {
-        setInterval(() => {
+        this.gameInterval = setInterval(() => {
+            if (gameState === 'end') return;
             this.checkCollisions();
             this.checkThrowObjects();
             this.deleteDeadEnemies();
@@ -102,6 +132,7 @@ class World {
             this.checkCollisionCoin();
             this.cleanUpCollectedCoin();
             this.updateBotlleStatusbar();
+            this.checkGameOver();
         }, 40);
     }
 
@@ -231,5 +262,15 @@ class World {
         let amountBottles = this.character.bottle
         let bottleBar = this.getStatusbarByType('BOTTLES');
         bottleBar?.setPercentage(amountBottles * 10);
+    }
+
+
+    checkGameOver() {
+        if (this.character.energy <= 0) {
+            setTimeout(() => {
+                this.stopDrawing();
+                this.endGame(); // ruft Funktion von oben auf 
+            }, 1000);
+        }
     }
 }
