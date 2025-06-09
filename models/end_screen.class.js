@@ -11,13 +11,13 @@ class EndScreen {
         });
 
         this.buttons = [
-            { x: 260, y: 220, width: 200, height: 50, text: 'Neustarten' },
-            { x: 260, y: 300, width: 200, height: 40, text: 'Beenden' }
+            new Button ({ x: 260, y: 220, width: 200, height: 50, text: 'Neustarten' }),
+            new Button ({ x: 260, y: 300, width: 200, height: 40, text: 'Beenden' })
         ];
     }
 
     draw(ctx) {
         this.layers.forEach(layer => layer.draw(ctx));
-        this.buttons.forEach(btn => drawButton(ctx, btn));
+        this.buttons.forEach(btn => btn.draw(ctx));
     }
 }

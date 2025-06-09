@@ -74,16 +74,6 @@ function drawMenuLoop() {
 }
 
 
-function drawButton(ctx, btn) {
-    ctx.fillStyle = '#333';
-    ctx.fillRect(btn.x, btn.y, btn.width, btn.height);
-    ctx.fillStyle = '#fff';
-    ctx.font = '20px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText(btn.text, btn.x + btn.width / 2, btn.y + 28);
-}
-
-
 function startGame() {
     gameState = 'playing';
     showHelp = false;
