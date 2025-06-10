@@ -25,10 +25,15 @@ class World {
         this.character = new Character();
         this.level = createLevel1();
         this.statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
-        new Statusbar('ENDBOSS', 0, 0, statusbarImages),
-        new Statusbar('COINS', 5, 39, statusbarImages),
-        new Statusbar('BOTTLES', 5, 78, statusbarImages)];
+            new Statusbar('ENDBOSS', 0, 0, statusbarImages),
+            new Statusbar('COINS', 5, 39, statusbarImages),
+            new Statusbar('BOTTLES', 5, 78, statusbarImages)];
         this.throwableObjects = [];
+        this.buttons = [
+            new Button ({ x: 280, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/pause-solid-hell-gray.svg'}),
+            new Button ({ x: 345, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/volume-xmark-solid-hell-gray.svg'}),
+            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
+        ];
         this.camera_x = 0;
         this.draw();
         this.setWorld();
@@ -62,6 +67,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.statusBars);
+        this.addObjectsToMap(this.buttons);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
