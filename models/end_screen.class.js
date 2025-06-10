@@ -11,8 +11,8 @@ class EndScreen {
         });
 
         this.buttons = [
-            new Button ({ x: 260, y: 220, width: 200, height: 50, text: 'Neustarten' }),
-            new Button ({ x: 260, y: 300, width: 200, height: 40, text: 'Beenden' })
+            new Button ({ x: 260, y: 220, width: 200, height: 50, text: 'Restart' }),
+            new Button ({ x: 260, y: 300, width: 200, height: 40, text: 'End' })
         ];
     }
 

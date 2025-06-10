@@ -106,12 +106,12 @@ window.addEventListener('click', function (e) {
 
 function handleButtonClick(text) {
     if (gameState === 'start') {
-        if (text === 'Spiel starten') startGame();
-        else if (text === 'Hilfe') showHelp = true;
-        else if (text === 'Zurück') showHelp = false;
+        if (text === 'Play') startGame();
+        else if (text === 'Info') showHelp = true;
+        else if (text === 'Back') showHelp = false;
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (text === 'Neustarten') startGame();
-        else if (text === 'Beenden') gameState = 'start';
+        if (text === 'Restart') startGame();
+        else if (text === 'End') gameState = 'start';
     }
 }
 

@@ -7,10 +7,11 @@ class Button extends DrawableObject {
         this.height = height;
         this.text = text;
         this.onClick = onClick;
+        this.isPictureAvailable(imagePath);
     }
 
 
-    isPictureAvailable() {
+    isPictureAvailable(imagePath) {
         if (imagePath) {
             this.loadImage(imagePath);
         }
