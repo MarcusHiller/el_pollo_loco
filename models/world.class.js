@@ -8,16 +8,8 @@ class World {
         this.keyboard = keyboard;
         this.character = new Character();
         this.level = createLevel1();
-        this.statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
-            new Statusbar('ENDBOSS', 0, 0, statusbarImages),
-            new Statusbar('COINS', 5, 39, statusbarImages),
-            new Statusbar('BOTTLES', 5, 78, statusbarImages)];
+        this.fixedObjects = stationaryObjects();
         this.throwableObjects = [];
-        this.buttons = [
-            new Button ({ x: 280, y: 10, width: 30, height: 30, text: 'Break', imagePath :'img/icons/pause-solid-hell-gray.svg'}),
-            new Button ({ x: 345, y: 10, width: 30, height: 30, text: 'Volume', imagePath :'img/icons/volume-xmark-solid-hell-gray.svg'}),
-            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'End', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
-        ];
         this.camera_x = 0;
         this.draw();
         this.setWorld();
@@ -30,7 +22,8 @@ class World {
         this.character.world = this;
         this.level.enemies.forEach(enemy => enemy.world = this);
         this.throwableObjects.forEach(bottle => bottle.world = this);
-        this.statusBars.forEach(bar => bar.world = this);
+        this.fixedObjects.statusBar.forEach(bar => bar.world = this);
+        this.fixedObjects.button.forEach(bar => bar.world = this);
         this.level.coin.forEach(coin => coin.world = this);
         this.level.bottle.forEach(bottle => bottle.world = this);
     }
@@ -50,8 +43,8 @@ class World {
         this.addObjectsToMap(this.level.coin);
 
         this.ctx.translate(-this.camera_x, 0);
-        this.addObjectsToMap(this.statusBars);
-        this.addObjectsToMap(this.buttons);
+        this.addObjectsToMap(this.fixedObjects.statusBar);
+        this.addObjectsToMap(this.fixedObjects.button);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.enemies);
@@ -230,7 +223,7 @@ class World {
 
 
     getStatusbarByType(type) {
-        return this.statusBars.find(bar => bar.type === type);
+        return this.fixedObjects.statusBar.find(bar => bar.type === type);
     }
 
 
@@ -275,6 +268,6 @@ class World {
 
 
     getButtons() {
-        return this.buttons || [];
+        return this.fixedObjects.button || [];
     }
 }
