@@ -92,9 +92,7 @@ window.addEventListener('click', function (e) {
     let rect = canvas.getBoundingClientRect();
     let x = e.clientX - rect.left;
     let y = e.clientY - rect.top;
-
     let buttons = screenManager.getButtons(gameState, showHelp);
-
     for (let btn of buttons) {
         if (isInside(x, y, btn)) {
             handleButtonClick(btn.text);
@@ -119,3 +117,20 @@ function handleButtonClick(text) {
 function isInside(x, y, btn) {
     return x >= btn.x && x <= btn.x + btn.width && y >= btn.y && y <= btn.y + btn.height;
 }
+
+
+window.addEventListener('mousemove', function (e) {
+    let rect = canvas.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    let buttons = screenManager.getButtons(gameState, showHelp);
+    let hovering = false;
+    for (let btn of buttons) {
+        if (isInside(x, y, btn)) {
+            hovering = true;
+            break;
+        }
+    }
+    canvas.style.cursor = hovering ? 'pointer' : 'default';
+});
+

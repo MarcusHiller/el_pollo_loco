@@ -1,22 +1,6 @@
 class World {
 
-    //character = new Character();
-    //character;
-    //level = level1;
-    //level;
-    //canvas;
-    //ctx;
     animationFrameID;
-    //keyboard;
-    //camera_x = 0;
-    //camera_x;
-    //statusBars;
-    /*statusBars = [new Statusbar('HEALTH', 5, 0, statusbarImages),
-    new Statusbar('ENDBOSS', 0, 0, statusbarImages),
-    new Statusbar('COINS', 5, 39, statusbarImages),
-    new Statusbar('BOTTLES', 5, 78, statusbarImages)];*/
-    //throwableObjects = [];
-    //throwableObjects;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -31,8 +15,8 @@ class World {
         this.throwableObjects = [];
         this.buttons = [
             new Button ({ x: 280, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/pause-solid-hell-gray.svg'}),
-            new Button ({ x: 345, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/volume-xmark-solid-hell-gray.svg'}),
-            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
+            new Button ({ x: 345, y: 10, width: 30, height: 30, text: 'Volume', imagePath :'img/icons/volume-xmark-solid-hell-gray.svg'}),
+            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'Back', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
         ];
         this.camera_x = 0;
         this.draw();
@@ -103,6 +87,7 @@ class World {
             this.flipImgBack(movableObject);
         }
     }
+
 
     addObjectsToMap(movableObject) {
         movableObject.forEach(object => {
@@ -227,9 +212,11 @@ class World {
         })
     }
 
+
     cleanUpCollectedCoin() {
         this.level.coin = this.level.coin.filter(c => !c.collected);
     }
+
 
     deleteDeadEnemies() {
         for (let i = this.level.enemies.length - 1; i >= 0; i--) {

@@ -1,5 +1,5 @@
 class Button extends DrawableObject {
-    constructor({x, y, width, height, text = '', imagePath = '', onClick = null}) {
+    constructor({ x, y, width, height, text = '', imagePath = '', onClick = null }) {
         super();
         this.x = x;
         this.y = y;
@@ -27,7 +27,7 @@ class Button extends DrawableObject {
             ctx.fillStyle = '#fff'
             ctx.font = '20px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText(this.text, this.x + this.width / 2, this.y +28);
+            ctx.fillText(this.text, this.x + this.width / 2, this.y + 28);
         }
     }
 
