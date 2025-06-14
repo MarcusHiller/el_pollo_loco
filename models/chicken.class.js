@@ -21,21 +21,6 @@ class Chicken extends MovableObject {
         this.damagePoints = 100;
         this.damageTime = 1.2;
         this.loadImages(this.IMAGES.NORMAL_CHICKEN_WALKING);
-        this.animate();
-    }
-
-
-    animate() {
-        this.chickenIntervallX = setInterval(() => {
-            this.moveLeft(); 
-        }, 1000 / 60);
-        
-        this.chickenWalk = setInterval(() => {
-            if (this.energy > 0) {
-                this.playAnimation(this.IMAGES.NORMAL_CHICKEN_WALKING);
-            } else if (this.energy == 0) {
-                this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-            }
-        }, 150);
+        this.animateChicken(this.IMAGES.NORMAL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
     }
 }

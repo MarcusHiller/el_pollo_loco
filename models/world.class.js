@@ -308,15 +308,16 @@ class World {
     stopCharacterIntervall() {
         clearInterval(this.character.keyMovements);
         clearInterval(this.character.characterAnimation);
+        this.clearRunIntervall();
     }
 
 
     stopEnemieIntervall() {
-        this.level.enemies.filter((enemy) => {
-            if (enemy.name == "normal_chicken" || enemy.name == "small_chicken") {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
                 clearInterval(enemy.chickenIntervallX);
                 clearInterval(enemy.chickenWalk);
-            } else if (enemy.name == "endboss") {
+            } else if (enemy instanceof Endboss) {
                 clearInterval(enemy.endbossAnimate);
             }
         });
@@ -334,11 +335,20 @@ class World {
         this.character.animateKeyOptions();
         this.character.characterInteraction();
         this.character.setTimeLastAction();
+        this.run();
     }
 
     startEnemieIntervall() {
         this.level.enemies.forEach(enemy => {
-            enemy.animate();
+            if (enemy instanceof Chicken) {
+                enemy.animateChicken(enemy.IMAGES.NORMAL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+            }
+            if (enemy instanceof SmallChicken) {
+                enemy.animateChicken(enemy.IMAGES.SMALL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_small/2_dead/dead.png');
+            }
+            if (enemy instanceof Endboss) {
+                enemy.animate();
+            }
         });
     }
 

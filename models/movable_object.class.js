@@ -140,4 +140,18 @@ class MovableObject extends DrawableObject {
             bossBar?.setPercentage(this.energy);
         }
     }
+
+
+    animateChicken(walkImages, deadImage) {
+        this.chickenIntervallX = setInterval(() => {
+            this.moveLeft(); 
+        }, 1000 / 60);
+        this.chickenWalk = setInterval(() => {
+            if (this.energy > 0) {
+                this.playAnimation(walkImages);
+            } else if (this.energy == 0) {
+                this.loadImage(deadImage);
+            }
+        }, 150);
+    }
 }
