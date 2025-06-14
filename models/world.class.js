@@ -1,6 +1,7 @@
 class World {
 
     animationFrameID;
+    isBreak;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -145,7 +146,6 @@ class World {
         this.level.enemies.forEach((enemy) => {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
             if (collidngBottle) {
-                console.log(enemy);
                 if (enemy.name === 'endboss' && enemy.energy > 0) {
                     enemy.injuryProcess();
                 }
@@ -256,12 +256,12 @@ class World {
         if (this.character.energy <= 0) {
             setTimeout(() => {
                 this.stopDrawing();
-                this.endGame(false);  
+                this.endGame(false);
             }, 1000);
         } else if (endboss.energy <= 0) {
             setTimeout(() => {
                 this.stopDrawing();
-                this.endGame(true); 
+                this.endGame(true);
             }, 3100);
         }
     }
@@ -270,4 +270,46 @@ class World {
     getButtons() {
         return this.fixedObjects.button || [];
     }
+
+
+    togglePause() {
+        if (!this.isBreak) {
+            //clearRunIntervall();
+            clearInterval(this.character.keyMovements);
+            clearInterval(this.character.characterAnimation);
+            this.level.enemies.forEach(enemy => {
+                clearInterval(enemy.chickenIntervallX);
+                clearInterval(enemy.chickenWalk);
+            }); 
+            // usw.
+            this.isBreak = true;
+            this.updatePauseButtonImage('play');
+        } else {
+            this.run(); 
+            this.isBreak = false;
+            this.updatePauseButtonImage('pause');
+        }
+    }
+
+
+    toggleSound() {
+        this.soundMuted = !this.soundMuted;
+        this.backgroundMusic.muted = this.soundMuted;
+        this.updateVolumeButtonImage(this.soundMuted ? 'mute' : 'volume');
+    }
+
+
+    updatePauseButtonImage(state) {
+        const btn = this.fixedObjects.button.find(b => b.text === 'Break' || b.text === 'Play');
+        btn.imagePath = state === 'play' ? 'img/icons/play-solid-hell-gray.svg' : 'img/icons/pause-solid-hell-gray.svg';
+        btn.loadImage(btn.imagePath);
+    }
+
+    updateVolumeButtonImage(state) {
+        const btn = this.fixedObjects.button.find(b => b.text === 'Volume');
+        btn.imagePath = state === 'mute' ? 'img/icons/volume-xmark-solid.svg' : 'img/icons/volume-high-solid.svg';
+        btn.loadImage(btn.imagePath);
+    }
+
+
 }

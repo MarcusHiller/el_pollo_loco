@@ -36,14 +36,15 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES.IMAGES_DEAD);
         this.loadImages(this.IMAGES.IMAGES_IDLE_SHORT);
         this.loadImages(this.IMAGES.IMAGES_IDLE_LONG);
-        this.animate();
+        this.animateKeyOptions();
+        this.characterInteraction();
         this.setTimeLastAction();
         this.applyGravity();
         this.setThrowTime();
     }
 
-    animate() {
-        setInterval(() => {
+    animateKeyOptions() {
+        this.keyMovements = setInterval(() => {
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -64,26 +65,11 @@ class Character extends MovableObject {
 
             this.world.camera_x = -this.x + 20;
         }, 1000 / 60);
+    }
 
 
-        /* setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES.IMAGES_DEAD);
-            } else if (this.ishurt()) {
-                this.playAnimation(this.IMAGES.IMAGES_HURT);
-                this.setTimeLastAction();
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES.IMAGES_JUMPING);
-                this.setTimeLastAction();
-            } else if (this.world.keyboard.right || this.world.keyboard.left) {
-                this.playAnimation(this.IMAGES.IMAGES_WALKING);
-                this.setTimeLastAction();
-            } else if (!this.idle()) {
-                this.loadImage('img/2_character_pepe/3_jump/J-31.png');
-            }
-        }, 70); */
-
-        setInterval(() => {
+    characterInteraction() {
+        this.characterAnimation = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES.IMAGES_DEAD);
             } else if (this.ishurt()) {
@@ -98,6 +84,7 @@ class Character extends MovableObject {
                     this.playAnimationOnce(this.IMAGES.IMAGES_FALLS, 150);
                     this.jump = false;
                     this.falls = true;
+                    this.setTimeLastAction();
                 }
             } else if (this.world.keyboard.right || this.world.keyboard.left) {
                 this.playAnimation(this.IMAGES.IMAGES_WALKING);
@@ -106,7 +93,6 @@ class Character extends MovableObject {
                 this.loadImage('img/2_character_pepe/3_jump/J-31.png');
             }
         }, 70);
-
     }
 
 
