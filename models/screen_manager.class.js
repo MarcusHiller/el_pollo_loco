@@ -30,7 +30,7 @@ class ScreenManager {
 
     getButtons(gameState, showHelp) {
         if (gameState === 'start') {
-            return showHelp ? this.startScreen.buttons.slice(2) : this.startScreen.buttons.slice(0, 2);
+            return showHelp ? this.startScreen.buttons.slice(this.startScreen.buttons.length -1) : this.startScreen.buttons.slice(0, this.startScreen.buttons.length -1);
         } else if (gameState === 'end-won') {
             return this.wonScreen.buttons;
         } else if (gameState === 'end-lose') {

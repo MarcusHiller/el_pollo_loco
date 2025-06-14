@@ -22,6 +22,9 @@ class Button extends DrawableObject {
     draw(ctx) {
         if (this.img) {
             super.draw(ctx);
+            ctx.strokeStyle = 'red';
+ctx.strokeRect(this.x, this.y, this.width, this.height);
+
         } else {
             ctx.fillStyle = '#333'
             ctx.fillRect(this.x, this.y, this.width, this.height);
