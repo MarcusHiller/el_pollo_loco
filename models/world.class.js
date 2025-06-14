@@ -14,9 +14,9 @@ class World {
             new Statusbar('BOTTLES', 5, 78, statusbarImages)];
         this.throwableObjects = [];
         this.buttons = [
-            new Button ({ x: 280, y: 10, width: 30, height: 30, text: 'Play', imagePath :'img/icons/pause-solid-hell-gray.svg'}),
+            new Button ({ x: 280, y: 10, width: 30, height: 30, text: 'Break', imagePath :'img/icons/pause-solid-hell-gray.svg'}),
             new Button ({ x: 345, y: 10, width: 30, height: 30, text: 'Volume', imagePath :'img/icons/volume-xmark-solid-hell-gray.svg'}),
-            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'Back', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
+            new Button ({ x: 410, y: 10, width: 30, height: 30, text: 'End', imagePath :'img/icons/arrow-right-to-bracket-solid-hell-gray.svg'}),
         ];
         this.camera_x = 0;
         this.draw();
@@ -271,5 +271,10 @@ class World {
                 this.endGame(true); 
             }, 3100);
         }
+    }
+
+
+    getButtons() {
+        return this.buttons || [];
     }
 }

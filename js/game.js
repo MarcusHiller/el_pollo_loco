@@ -89,10 +89,8 @@ function startGame() {
 
 
 window.addEventListener('click', function (e) {
-    let rect = canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-    let buttons = screenManager.getButtons(gameState, showHelp);
+    let {x, y} = enterButton(e);
+    let buttons = getActiveButtons();
     for (let btn of buttons) {
         if (isInside(x, y, btn)) {
             handleButtonClick(btn.text);
@@ -120,10 +118,8 @@ function isInside(x, y, btn) {
 
 
 window.addEventListener('mousemove', function (e) {
-    let rect = canvas.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-    let buttons = screenManager.getButtons(gameState, showHelp);
+    let {x, y} = enterButton(e);
+    let buttons = getActiveButtons();
     let hovering = false;
     for (let btn of buttons) {
         if (isInside(x, y, btn)) {
@@ -134,3 +130,21 @@ window.addEventListener('mousemove', function (e) {
     canvas.style.cursor = hovering ? 'pointer' : 'default';
 });
 
+
+function enterButton(e) {
+    let rect = canvas.getBoundingClientRect();
+    let scaleX = canvas.width / rect.width;
+    let scaleY = canvas.height / rect.height;
+    let x = (e.clientX - rect.left) * scaleX;
+    let y = (e.clientY - rect.top) * scaleY;
+    return {x, y};
+}
+
+
+function getActiveButtons() {
+    let buttons = screenManager.getButtons(gameState, showHelp) || [];
+    if (gameState === 'playing' && typeof world !== 'undefined') {
+        buttons = buttons.concat(world.getButtons());
+    }
+    return buttons;
+}
