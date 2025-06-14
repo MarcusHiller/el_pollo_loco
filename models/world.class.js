@@ -273,24 +273,80 @@ class World {
 
 
     togglePause() {
-        if (!this.isBreak) {
-            //clearRunIntervall();
-            clearInterval(this.character.keyMovements);
-            clearInterval(this.character.characterAnimation);
-            this.level.enemies.forEach(enemy => {
-                clearInterval(enemy.chickenIntervallX);
-                clearInterval(enemy.chickenWalk);
-            }); 
-            // usw.
-            this.isBreak = true;
-            this.updatePauseButtonImage('play');
-        } else {
-            this.run(); 
-            this.isBreak = false;
-            this.updatePauseButtonImage('pause');
-        }
+        this.isBreak ? this.gamePlay() : this.gameStop();
     }
 
+
+    gameStop() {
+        this.stopCharacterIntervall();
+        this.stopEnemieIntervall();
+        this.stopCloudsIntervall();
+        cancelAnimationFrame(this.animationFrameID);
+        this.setStatusBreak();
+    }
+
+
+    gamePlay() {
+        this.startCharacterIntervall();
+        this.startEnemieIntervall();
+        this.startCloudsIntervall();
+        this.draw();
+        this.setStatusPlay();
+    }
+
+    setStatusBreak() {
+        this.isBreak = true;
+        this.updatePauseButtonImage('play');
+    }
+
+
+    setStatusPlay() {
+        this.isBreak = false;
+        this.updatePauseButtonImage('pause');
+    }
+
+    stopCharacterIntervall() {
+        clearInterval(this.character.keyMovements);
+        clearInterval(this.character.characterAnimation);
+    }
+
+
+    stopEnemieIntervall() {
+        this.level.enemies.filter((enemy) => {
+            if (enemy.name == "normal_chicken" || enemy.name == "small_chicken") {
+                clearInterval(enemy.chickenIntervallX);
+                clearInterval(enemy.chickenWalk);
+            } else if (enemy.name == "endboss") {
+                clearInterval(enemy.endbossAnimate);
+            }
+        });
+    }
+
+
+    stopCloudsIntervall() {
+        this.level.clouds.forEach(cloud => {
+            clearInterval(cloud.cloudAnimate);
+        });
+    }
+
+
+    startCharacterIntervall() {
+        this.character.animateKeyOptions();
+        this.character.characterInteraction();
+        this.character.setTimeLastAction();
+    }
+
+    startEnemieIntervall() {
+        this.level.enemies.forEach(enemy => {
+            enemy.animate();
+        });
+    }
+
+    startCloudsIntervall() {
+        this.level.clouds.forEach(cloud => {
+            clearInterval(cloud.animate());
+        });
+    }
 
     toggleSound() {
         this.soundMuted = !this.soundMuted;

@@ -1,7 +1,7 @@
 class Chicken extends MovableObject {
 
     IMAGES = chicken;
-    name = "normal_chicken"
+    name = 'normal_chicken'
     offset = {
         top: 5,
         left: 5,
