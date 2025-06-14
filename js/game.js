@@ -112,6 +112,7 @@ function handleButtonClick(action) {
         else if (action === 'End') {
             gameState = 'start';
             drawMenuLoop();
+            world.gameStop();
         } 
 
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
