@@ -8,9 +8,9 @@ class StartScreen {
         this.background.loadImage('img/9_intro_outro_screens/start/startscreen_1.png');
 
         this.buttons = [
-            new Button ({ x: 310, y: 190, width: 100, height: 100, text: 'Play', imagePath :'img/icons/play-solid-hell-gray.svg'}),
-            new Button ({ x: 650, y: 20, width: 45, height: 45, text: 'Info', imagePath :'img/icons/gear-solid-hell-gray.svg'}),
-            new Button ({ x: 335, y: 400, width: 50, height: 65, text: 'Back', imagePath :'img/icons/xmark-solid-hell-gray.svg'})
+            new Button ({ x: 310, y: 190, width: 100, height: 100, text: 'Play', action: 'Play', imagePath :'img/icons/play-solid-hell-gray.svg'}),
+            new Button ({ x: 650, y: 20, width: 45, height: 45, text: 'Info', action: 'Info', imagePath :'img/icons/gear-solid-hell-gray.svg'}),
+            new Button ({ x: 335, y: 400, width: 50, height: 65, text: 'Back', action: 'Back', imagePath :'img/icons/xmark-solid-hell-gray.svg'})
         ];
     }
 

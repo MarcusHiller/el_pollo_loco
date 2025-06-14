@@ -1,11 +1,12 @@
 class Button extends DrawableObject {
-    constructor({ x, y, width, height, text = '', imagePath = '', onClick = null }) {
+    constructor({ x, y, width, height, text = '', action = '', imagePath = '', onClick = null }) {
         super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.text = text;
+        this.action = action;
         this.onClick = onClick;
         this.isPictureAvailable(imagePath);
     }

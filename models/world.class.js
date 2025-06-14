@@ -272,7 +272,7 @@ class World {
     }
 
 
-    togglePause() {
+    toggleBreak() {
         this.isBreak ? this.gamePlay() : this.gameStop();
     }
 
@@ -366,13 +366,13 @@ class World {
 
 
     updatePauseButtonImage(state) {
-        const btn = this.fixedObjects.button.find(b => b.text === 'Break' || b.text === 'Play');
+        const btn = this.fixedObjects.button.find(b => b.action === 'Break' || b.action === 'Play');
         btn.imagePath = state === 'play' ? 'img/icons/play-solid-hell-gray.svg' : 'img/icons/pause-solid-hell-gray.svg';
         btn.loadImage(btn.imagePath);
     }
 
     updateVolumeButtonImage(state) {
-        const btn = this.fixedObjects.button.find(b => b.text === 'Volume');
+        const btn = this.fixedObjects.button.find(b => b.action === 'Volume');
         btn.imagePath = state === 'mute' ? 'img/icons/volume-xmark-solid.svg' : 'img/icons/volume-high-solid.svg';
         btn.loadImage(btn.imagePath);
     }

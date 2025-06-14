@@ -93,38 +93,30 @@ window.addEventListener('click', function (e) {
     let buttons = getActiveButtons();
     for (let btn of buttons) {
         if (isInside(x, y, btn)) {
-            handleButtonClick(btn.text);
+            handleButtonClick(btn.action);
             break;
         }
     }
 });
 
 
-/* function handleButtonClick(text) {
+function handleButtonClick(action) {
     if (gameState === 'start') {
-        if (text === 'Play') startGame();
-        else if (text === 'Info') showHelp = true;
-        else if (text === 'Back') showHelp = false;
-    } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (text === 'Restart') startGame();
-        else if (text === 'End') gameState = 'start';
-    }
-} */
-
-function handleButtonClick(text) {
-    if (gameState === 'start') {
-        if (text === 'Play') startGame();
-        else if (text === 'Info') showHelp = true;
-        else if (text === 'Back') showHelp = false;
+        if (action === 'Play') startGame();
+        else if (action === 'Info') showHelp = true;
+        else if (action === 'Back') showHelp = false;
 
     } else if (gameState === 'playing') {
-        if (text === 'Break' || text === 'Play') world.togglePause();
-        else if (text === 'Volume') world.toggleSound();
-        else if (text === 'Back') gameState = 'start';
+        if (action === 'Break' || action === 'Play') world.toggleBreak();
+        else if (action === 'Volume') world.toggleSound();
+        else if (action === 'End') {
+            gameState = 'start';
+            drawMenuLoop();
+        } 
 
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (text === 'Restart') startGame();
-        else if (text === 'End') gameState = 'start';
+        if (action === 'Restart') startGame();
+        else if (action === 'End') gameState = 'start';
     }
 }
 
