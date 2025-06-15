@@ -5,6 +5,7 @@ let ctx;
 let gameState = 'start';
 let showHelp = false;
 let screenManager = new ScreenManager();
+let uiController = new UIController();
 
 
 function init() {
@@ -77,7 +78,7 @@ function drawMenuLoop() {
 function startGame() {
     gameState = 'playing';
     showHelp = false;
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, uiController);
 
     world.endGame = function (result) {
         this.clearRunIntervall();
@@ -101,16 +102,17 @@ window.addEventListener('click', function (e) {
 
 
 function handleButtonClick(action) {
+    let currentButtons = screenManager.getButtons(gameState, showHelp) || [];
     if (gameState === 'start') {
         if (action === 'Play') startGame();
         else if (action === 'Info') showHelp = true;
         else if (action === 'Back') showHelp = false;
-        else if (action === 'Screen') world.toggleScreen();
+        else if (action === 'Screen') uiController.toggleScreen(currentButtons);
 
     } else if (gameState === 'playing') {
         if (action === 'Break' || action === 'Play') world.toggleBreak();
         else if (action === 'Volume') world.toggleSound();
-        else if (action === 'Screen') world.toggleScreen();
+        else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
         else if (action === 'End') {
             gameState = 'start';
             drawMenuLoop();
@@ -120,7 +122,7 @@ function handleButtonClick(action) {
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
         if (action === 'Restart') startGame();
         else if (action === 'End') gameState = 'start';
-        else if (action === 'Screen') world.toggleScreen();
+        else if (action === 'Screen')uiController.toggleScreen(world.fixedObjects.button);
     }
 }
 

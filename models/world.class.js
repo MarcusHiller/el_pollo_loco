@@ -3,10 +3,11 @@ class World {
     animationFrameID;
     isBreak;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, uiController) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.uiController = uiController;
         this.character = new Character();
         this.level = createLevel1();
         this.fixedObjects = stationaryObjects();
@@ -294,6 +295,7 @@ class World {
         this.setStatusPlay();
     }
 
+    
     setStatusBreak() {
         this.isBreak = true;
         this.updatePauseButtonImage('play');
@@ -304,6 +306,7 @@ class World {
         this.isBreak = false;
         this.updatePauseButtonImage('pause');
     }
+
 
     stopCharacterIntervall() {
         clearInterval(this.character.keyMovements);
@@ -338,6 +341,7 @@ class World {
         this.run();
     }
 
+
     startEnemieIntervall() {
         this.level.enemies.forEach(enemy => {
             if (enemy instanceof Chicken) {
@@ -352,22 +356,16 @@ class World {
         });
     }
 
+
     startCloudsIntervall() {
         this.level.clouds.forEach(cloud => {
             clearInterval(cloud.animate());
         });
     }
 
+
     toggleSound() {
-        this.soundMuted = !this.soundMuted;
-        this.backgroundMusic.muted = this.soundMuted;
-        this.updateVolumeButtonImage(this.soundMuted ? 'mute' : 'volume');
-    }
-
-
-    toggleScreen() {
-        this.fullScreen = !this.fullScreen;
-        this.updateScreenButtonImage(this.fullScreen ? 'full' : 'compress')
+        this.uiController.toggleSound(this.fixedObjects.button, this.backgroundMusic);
     }
 
 
@@ -376,18 +374,4 @@ class World {
         btn.imagePath = state === 'play' ? 'img/icons/play-solid-hell-gray.svg' : 'img/icons/pause-solid-hell-gray.svg';
         btn.loadImage(btn.imagePath);
     }
-
-    updateVolumeButtonImage(state) {
-        let btn = this.fixedObjects.button.find(b => b.action === 'Volume');
-        btn.imagePath = state === 'mute' ? 'img/icons/volume-xmark-solid.svg' : 'img/icons/volume-high-solid.svg';
-        btn.loadImage(btn.imagePath);
-    }
-
-
-    updateScreenButtonImage(state) {
-        let btn = this.fixedObjects.button.find(b => b.action === "Screen");
-        btn.imagePath = state === 'full' ? 'img/icons/expand-solid-hell-gray.svg' : 'img/icons/compress-solid-hell-gray.svg';
-    }
-
-
 }
