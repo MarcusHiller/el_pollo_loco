@@ -105,10 +105,12 @@ function handleButtonClick(action) {
         if (action === 'Play') startGame();
         else if (action === 'Info') showHelp = true;
         else if (action === 'Back') showHelp = false;
+        else if (action === 'Screen') world.toggleScreen();
 
     } else if (gameState === 'playing') {
         if (action === 'Break' || action === 'Play') world.toggleBreak();
         else if (action === 'Volume') world.toggleSound();
+        else if (action === 'Screen') world.toggleScreen();
         else if (action === 'End') {
             gameState = 'start';
             drawMenuLoop();
@@ -118,6 +120,7 @@ function handleButtonClick(action) {
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
         if (action === 'Restart') startGame();
         else if (action === 'End') gameState = 'start';
+        else if (action === 'Screen') world.toggleScreen();
     }
 }
 
