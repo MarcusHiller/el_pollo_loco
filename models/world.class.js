@@ -35,6 +35,8 @@ class World {
         if (typeof gameState !== 'undefined' && gameState === 'end') {
             return;
         }
+        this.ctx.save();
+        this.ctx.scale(canvas.width / 720, canvas.height / 480);
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -55,6 +57,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         this.animationFrameID = requestAnimationFrame(this.draw.bind(this));
+        this.ctx.restore();
     }
 
 
@@ -295,7 +298,7 @@ class World {
         this.setStatusPlay();
     }
 
-    
+
     setStatusBreak() {
         this.isBreak = true;
         this.updatePauseButtonImage('play');

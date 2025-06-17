@@ -6,6 +6,11 @@ class UIController {
 
     }
 
+    resizeCanvasToFullscreen(canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
     toggleScreen(buttons) {
         this.fullScreen = !this.fullScreen;
         let icon = this.fullScreen ? 'img/icons/compress-solid-hell-gray.svg' : 'img/icons/expand-solid-hell-gray.svg';
@@ -14,10 +19,18 @@ class UIController {
             btn.imagePath = icon;
             btn.loadImage(icon);
         }
+        let fullscreen = document.getElementById('canvas');
         if (document.fullscreenElement) {
             document.exitFullscreen();
+            /* setTimeout(() => {
+                fullscreen.width = 720;
+                fullscreen.height = 480;
+            }, 100); */
         } else {
-            document.documentElement.requestFullscreen();
+            fullscreen.requestFullscreen().then(() => {
+                //fullscreen.width = window.screen.width;
+                //fullscreen.height = window.screen.height;
+            });
         }
     }
 
