@@ -69,12 +69,9 @@ window.addEventListener("keyup", (e) => {
 
 
 function drawMenuLoop() {
-    //ctx.save();
-    //ctx.scale(canvas.width / 720, canvas.height / 480);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     screenManager.draw(ctx, gameState, showHelp);
     requestAnimationFrame(drawMenuLoop);
-    //ctx.restore();
 }
 
 
@@ -111,7 +108,10 @@ function handleButtonClick(action) {
         else if (action === 'Info') showHelp = true;
         else if (action === 'Back') showHelp = false;
         else if (action === 'Screen') uiController.toggleScreen(currentButtons);
-
+    } else if (gameState === 'end-won' || gameState === 'end-lose') {
+        if (action === 'Restart') startGame();
+        else if (action === 'End') gameState = 'start';
+        else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
     } else if (gameState === 'playing') {
         if (action === 'Break' || action === 'Play') world.toggleBreak();
         else if (action === 'Volume') world.toggleSound();
@@ -121,14 +121,8 @@ function handleButtonClick(action) {
             drawMenuLoop();
             world.gameStop();
         }
-
-    } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (action === 'Restart') startGame();
-        else if (action === 'End') gameState = 'start';
-        else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
-    }
+    } 
 }
-
 
 
 
@@ -151,97 +145,67 @@ window.addEventListener('mousemove', function (e) {
 });
 
 
-/* function enterButton(e) {
-    let rect = canvas.getBoundingClientRect();
-    let scaleX = canvas.width / rect.width;
-    let scaleY = canvas.height / rect.height;
-    let x = (e.clientX - rect.left) * scaleX;
-    let y = (e.clientY - rect.top) * scaleY;
-    return {x, y};
-} */
-
-
-/* function enterButton(e) {
-    //const rect = canvas.getBoundingClientRect();
-    //console.log(rect);
-    //console.log(e);
-    if (window.screen.width > window.screen.height) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = 720 / window.screen.width;   // virtuelle Breite
-        const scaleY = 480 / canvas.height;  // virtuelle Höhe
-
-        const x = (e.clientX - rect.left) * (canvas.width / rect.width) * scaleX;
-        console.log("result:A1 " + x, (e.clientX - rect.left), (canvas.width / rect.width), scaleX);
-
-        const y = (e.clientY - rect.top) * (canvas.height / rect.height) * scaleY;
-        console.log("result:A2 " + y, (e.clientY - rect.top), (canvas.height / rect.height), scaleY);
-        console.log("X:" + x, "Y:" + y);
-        return { x, y };
-    } else if (window.screen.width < window.screen.height) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = 720 / canvas.width;   // virtuelle Breite
-        const scaleY = 480 / window.screen.height;  // virtuelle Höhe
-
-        const x = (e.clientX - rect.left) * (canvas.width / rect.width) * scaleX;
-        console.log("result:B1 " + x, (e.clientX - rect.left), (canvas.width / rect.width), scaleX);
-
-        const y = (e.clientY - rect.top) * (canvas.height / rect.height) * scaleY;
-        console.log("result:B2 " + y, (e.clientY - rect.top), (canvas.height / rect.height), scaleY);
-        console.log("X:" + x, "Y:" + y);
-        return { x, y };
-    } 
-
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = 720 / canvas.width;   // virtuelle Breite
-    const scaleY = 480 / canvas.height;  // virtuelle Höhe
-    console.log(canvas.height);
-    
-
-    const x = (e.clientX - rect.left) * (canvas.width / rect.width) * scaleX;
-    console.log("result:" + x, (e.clientX - rect.left), (canvas.width / rect.width), scaleX);
-
-    const y = (e.clientY - rect.top) * (canvas.height / rect.height) * scaleY;
-    console.log("result:" + y, (e.clientY - rect.top), (canvas.height / rect.height), scaleY);
-    console.log("X:" + x, "Y:" + y);
-    return { x, y };
-
-    
-
-} */
-
 function enterButton(e) {
     const rect = canvas.getBoundingClientRect();
-    const canvasVirtualWidth = 720;
-    const canvasVirtualHeight = 480;
-    const aspectRatioCanvas = canvasVirtualWidth / canvasVirtualHeight;
-    const aspectRatioScreen = rect.width / rect.height;
-
-    let renderWidth, renderHeight, offsetX, offsetY;
-
-    if (aspectRatioScreen > aspectRatioCanvas) {
-        // Bildschirm ist breiter als Canvas: schwarze Balken links/rechts
-        renderHeight = rect.height;
-        renderWidth = renderHeight * aspectRatioCanvas;
-        offsetX = (rect.width - renderWidth) / 2;
-        offsetY = 0;
+    if (isSmallScreen()) {
+        return getCoordsSmallScreen(e, rect);
     } else {
-        // Bildschirm ist höher als Canvas: schwarze Balken oben/unten
-        renderWidth = rect.width;
-        renderHeight = renderWidth / aspectRatioCanvas;
-        offsetX = 0;
-        offsetY = (rect.height - renderHeight) / 2;
+        return getCoordsExtendedScreen(e, rect);
     }
-
-    const clickX = (e.clientX - rect.left - offsetX) / renderWidth;
-    const clickY = (e.clientY - rect.top - offsetY) / renderHeight;
-
-    const virtualX = clickX * canvasVirtualWidth;
-    const virtualY = clickY * canvasVirtualHeight;
-
-    return { x: virtualX, y: virtualY };
 }
 
 
+function isSmallScreen() {
+    return window.innerWidth < 720 && window.innerHeight < 480;
+}
+
+
+function getCoordsSmallScreen(e, rect) {
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (e.clientX - rect.left) * scaleX;
+    const y = (e.clientY - rect.top) * scaleY;
+    return { x, y };
+}
+
+
+function getCoordsExtendedScreen(e, rect) {
+    const { renderWidth, renderHeight, offsetX, offsetY } = getLetterboxOffsets(rect);
+    const clickX = (e.clientX - rect.left - offsetX) / renderWidth;
+    const clickY = (e.clientY - rect.top - offsetY) / renderHeight;
+    return {
+        x: clickX * 720,
+        y: clickY * 480
+    };
+}
+
+
+function getLetterboxOffsets(rect) {
+    const virtualWidth = 720;
+    const virtualHeight = 480;
+    const aspectCanvas = virtualWidth / virtualHeight;
+    const aspectScreen = rect.width / rect.height;
+
+    return aspectScreen > aspectCanvas
+        ? getSideBalken(rect, aspectCanvas)
+        : getTopBottomBalken(rect, aspectCanvas);
+}
+
+
+function getSideBalken(rect, aspectCanvas) {
+    const renderHeight = rect.height;
+    const renderWidth = renderHeight * aspectCanvas;
+    const offsetX = (rect.width - renderWidth) / 2;
+    return { renderWidth, renderHeight, offsetX, offsetY: 0 };
+}
+
+
+function getTopBottomBalken(rect, aspectCanvas) {
+    const renderWidth = rect.width;
+    const renderHeight = renderWidth / aspectCanvas;
+    const offsetY = (rect.height - renderHeight) / 2;
+    return { renderWidth, renderHeight, offsetX: 0, offsetY };
+}
 
 
 function getActiveButtons() {
