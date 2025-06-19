@@ -78,6 +78,7 @@ function drawMenuLoop() {
 
 
 function startGame() {
+    world?.gameStop?.();
     gameState = 'playing';
     showHelp = false;
     world = new World(canvas, keyboard, uiController);
@@ -117,6 +118,7 @@ function startGame() {
 
 
 window.addEventListener('click', function (e) {
+    console.log('click registered', e);
     let { x, y } = enterButton(e);
     let buttons = getActiveButtons();
     for (let btn of buttons) {
@@ -136,8 +138,15 @@ function handleButtonClick(action) {
         else if (action === 'Back') showHelp = false;
         else if (action === 'Screen') uiController.toggleScreen(currentButtons);
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (action === 'Restart') startGame();
-        else if (action === 'End') gameState = 'start';
+        if (action === 'Restart'){
+            world.gameStop();
+            startGame();
+        } 
+        else if (action === 'End') {
+            gameState = 'start';
+            drawMenuLoop(); 
+            world.gameStop();
+        } 
         else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
     } else if (gameState === 'playing') {
         if (action === 'Break' || action === 'Play') world.toggleBreak();
@@ -148,7 +157,6 @@ function handleButtonClick(action) {
             drawMenuLoop();
             world.gameStop();
         }
-        //else simulateKeyPress(action, true);
     }
 }
 
@@ -159,18 +167,6 @@ function handleButtonAction(action, isPressed) {
     else if (action === 'Jump') keyboard.space = isPressed;
     else if (action === 'throw') keyboard.d = isPressed;
 }
-
-
-
-
-/* function simulateKeyPress(action, isDown) {
-    if (action === 'Left') keyboard.left = isDown;
-    else if (action === 'Right') keyboard.right = isDown;
-    else if (action === 'Jump') keyboard.up = isDown;
-    else if (action === 'throw') keyboard.d = isDown;
-} */
-
-
 
 
 function isInside(x, y, btn) {

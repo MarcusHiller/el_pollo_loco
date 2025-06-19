@@ -73,6 +73,13 @@ class World {
     }
 
 
+    /* cleanupWorld() {
+        this.clearRunIntervall();
+        cancelAnimationFrame(this.animationFrameID);
+        this.endGame = () => {}; // verhindert spätere Manipulation
+    } */
+
+
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
             this.flipImg(movableObject);
@@ -282,11 +289,17 @@ class World {
 
 
     gameStop() {
+        this.clearRunIntervall();
+
+
         this.stopCharacterIntervall();
         this.stopEnemieIntervall();
         this.stopCloudsIntervall();
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
+
+
+        this.endGame = () => {};
     }
 
 
