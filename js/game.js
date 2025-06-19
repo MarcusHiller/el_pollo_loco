@@ -6,6 +6,8 @@ let gameState = 'start';
 let showHelp = false;
 let screenManager = new ScreenManager();
 let uiController = new UIController();
+let activeTouchActions = new Set();
+
 
 
 function init() {
@@ -89,6 +91,31 @@ function startGame() {
 }
 
 
+['touchstart'].forEach(eventType => {
+    window.addEventListener(eventType, function (e) {
+        let { x, y } = enterButton(e.touches[0]);
+        let buttons = getActiveButtons();
+        for (let btn of buttons) {
+            if (isInside(x, y, btn)) {
+                activeTouchActions.add(btn.action); // merken
+                handleButtonAction(btn.action, true); // true = aktivieren
+                break;
+            }
+        }
+    });
+});
+
+
+['touchend'].forEach(eventType => {
+    window.addEventListener(eventType, function () {
+        activeTouchActions.forEach(action => {
+            handleButtonAction(action, false); // false = deaktivieren
+        });
+        activeTouchActions.clear(); // Set leeren
+    });
+});
+
+
 window.addEventListener('click', function (e) {
     let { x, y } = enterButton(e);
     let buttons = getActiveButtons();
@@ -121,8 +148,28 @@ function handleButtonClick(action) {
             drawMenuLoop();
             world.gameStop();
         }
-    } 
+        //else simulateKeyPress(action, true);
+    }
 }
+
+
+function handleButtonAction(action, isPressed) {
+    if (action === 'Left') keyboard.left = isPressed;
+    else if (action === 'Right') keyboard.right = isPressed;
+    else if (action === 'Jump') keyboard.space = isPressed;
+    else if (action === 'throw') keyboard.d = isPressed;
+}
+
+
+
+
+/* function simulateKeyPress(action, isDown) {
+    if (action === 'Left') keyboard.left = isDown;
+    else if (action === 'Right') keyboard.right = isDown;
+    else if (action === 'Jump') keyboard.up = isDown;
+    else if (action === 'throw') keyboard.d = isDown;
+} */
+
 
 
 
