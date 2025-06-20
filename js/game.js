@@ -93,8 +93,9 @@ function startGame() {
 }
 
 
-['touchstart'].forEach(eventType => {
+/* ['touchstart'].forEach(eventType => {
     window.addEventListener(eventType, function (e) {
+        e.preventDefault();
         let { x, y } = enterButton(e.touches[0]);
         let buttons = getActiveButtons();
         for (let btn of buttons) {
@@ -104,18 +105,46 @@ function startGame() {
                 break;
             }
         }
+    }, { passive: false });
+}); */
+
+
+if (isTouchDevice()) {
+    window.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        const { x, y } = enterButton(e.touches[0]);
+        const buttons = getActiveButtons();
+        for (let btn of buttons) {
+            if (isInside(x, y, btn)) {
+                activeTouchActions.add(btn.action);
+                handleButtonAction(btn.action, true);
+                break;
+            }
+        }
+    }, { passive: false });
+
+    window.addEventListener('touchend', function () {
+        activeTouchActions.forEach(action => {
+            handleButtonAction(action, false);
+        });
+        activeTouchActions.clear();
     });
-});
+}
+
+function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
 
 
-['touchend'].forEach(eventType => {
+
+/* ['touchend'].forEach(eventType => {
     window.addEventListener(eventType, function () {
         activeTouchActions.forEach(action => {
             handleButtonAction(action, false); // false = deaktivieren
         });
         activeTouchActions.clear(); // Set leeren
     });
-});
+}); */
 
 
 window.addEventListener('click', function (e) {
