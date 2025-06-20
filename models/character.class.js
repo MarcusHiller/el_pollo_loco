@@ -140,7 +140,4 @@ class Character extends MovableObject {
         timepassed = timepassed / 1000;
         return timepassed < this.throwDelay;
     }
-
-
-
 }

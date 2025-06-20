@@ -267,6 +267,6 @@ function checkOriantation() {
 }
 
 
-/* window.addEventListener('load', checkOriantation);
+window.addEventListener('load', checkOriantation);
 window.addEventListener('resize', checkOriantation);
-window.addEventListener('orientationchange', checkOriantation); */
+window.addEventListener('orientationchange', checkOriantation);
