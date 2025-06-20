@@ -84,6 +84,7 @@ function startGame() {
     world = new World(canvas, keyboard, uiController);
 
     world.endGame = function (result) {
+        world?.gameStop?.();
         this.clearRunIntervall();
         gameState = result ? 'end-won' : 'end-lose';
     };
@@ -118,7 +119,6 @@ function startGame() {
 
 
 window.addEventListener('click', function (e) {
-    console.log('click registered', e);
     let { x, y } = enterButton(e);
     let buttons = getActiveButtons();
     for (let btn of buttons) {
