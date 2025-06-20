@@ -259,3 +259,14 @@ function getActiveButtons() {
     return buttons;
 }
 
+
+function checkOriantation() {
+    let isPortrait = window.innerHeight > window.innerWidth;
+    let warning = document.getElementById('orientation-warning');
+    warning.style.display = isPortrait? 'flex' : 'none';
+}
+
+
+/* window.addEventListener('load', checkOriantation);
+window.addEventListener('resize', checkOriantation);
+window.addEventListener('orientationchange', checkOriantation); */
