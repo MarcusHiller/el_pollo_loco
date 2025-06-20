@@ -11,6 +11,7 @@ class Character extends MovableObject {
     jump = false;
     falls = false;
     energy = 100;
+    pepeDead = false;
     acceleration = 1;
     damagePoints = 20;
     damageTime = 1;
@@ -71,7 +72,9 @@ class Character extends MovableObject {
     characterInteraction() {
         this.characterAnimation = setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES.IMAGES_DEAD);
+                clearInterval(this.characterAnimation);
+                this.pepeDead = true;
+                this.playAnimationOnce(this.IMAGES.IMAGES_DEAD, 130);
             } else if (this.ishurt()) {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
                 this.setTimeLastAction();
@@ -125,9 +128,6 @@ class Character extends MovableObject {
     setTimeLastAction() {
         this.lastAction = new Date().getTime();
     }
-
-
-
 
 
     setThrowTime() {
