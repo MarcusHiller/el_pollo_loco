@@ -7,12 +7,12 @@ class Endboss extends MovableObject {
     name = 'endboss';
     energy = 100;
     damagePoints = 25;
-    damageTime = 1.75;
+    damageTime = 1;
     deadAnimationPlayed = false;
     offset = {
-        top: 180,
-        left: 110,
-        right: 65,
+        top: 200,
+        left: 150,
+        right: 85,
         bottom: 120
     }
 
@@ -24,7 +24,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES.IMAGES_HURT);
         this.loadImages(this.IMAGES.IMAGES_DEAD);
         this.x = 2400;
-        this.speed = 13;
+        this.speed = 15;
         this.animate();
     }
 
