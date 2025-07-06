@@ -298,7 +298,6 @@ class World {
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
         this.uiController.stopBackgroundMusic();
-
         this.endGame = () => {};
     }
 

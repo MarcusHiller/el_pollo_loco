@@ -31,8 +31,8 @@ class UIController {
 
 
     toggleSound(buttons) {
-        this.soundMuted = !this.soundMuted;
-        let icon = this.soundMuted ? 'img/icons/volume-xmark-solid-hell-gray.svg' : 'img/icons/volume-high-solid-hell-gray.svg';
+        //this.soundMuted = !this.soundMuted;
+        let icon = this.bgMusic.muted ? 'img/icons/volume-high-solid-hell-gray.svg' : 'img/icons/volume-xmark-solid-hell-gray.svg';
         let btn = buttons.find(b => b.action === 'Volume');
         if (btn) {
             btn.imagePath = icon;
@@ -42,9 +42,10 @@ class UIController {
     }
 
     playBackgroundMusic() {
-        if (!this.soundMuted) {
+        /* if (!this.soundMuted) {
             this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
-        }
+        } */
+        this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
     }
 
 
