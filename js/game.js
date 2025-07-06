@@ -82,11 +82,13 @@ function startGame() {
     gameState = 'playing';
     showHelp = false;
     world = new World(canvas, keyboard, uiController);
+    uiController.playBackgroundMusic();
 
     world.endGame = function (result) {
         world?.gameStop?.();
         this.clearRunIntervall();
         gameState = result ? 'end-won' : 'end-lose';
+        uiController.stopBackgroundMusic();
     };
 
     world.draw();

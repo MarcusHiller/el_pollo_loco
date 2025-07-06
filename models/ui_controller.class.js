@@ -1,8 +1,13 @@
 class UIController {
     
     fullScreen = false;
-    soundMuted = false;
-    constructor() {}
+
+    constructor() {
+        this.bgMusic = new Audio('sounds/accordion-54979.mp3');
+        this.bgMusic.loop = true;
+        this.bgMusic.volume = 0.4;
+        this.bgMusic.muted = false;
+    }
 
     resizeCanvasToFullscreen(canvas) {
         canvas.width = window.innerWidth;
@@ -25,14 +30,37 @@ class UIController {
     }
 
 
-    toggleSound(buttons, bgMusic) {
+    toggleSound(buttons) {
         this.soundMuted = !this.soundMuted;
-        let icon = this.soundMuted ? 'img/icons/volume-xmark-solid.svg' : 'img/icons/volume-high-solid.svg';
+        let icon = this.soundMuted ? 'img/icons/volume-xmark-solid-hell-gray.svg' : 'img/icons/volume-high-solid-hell-gray.svg';
         let btn = buttons.find(b => b.action === 'Volume');
         if (btn) {
             btn.imagePath = icon;
             btn.loadImage(icon);
         }
-        if(bgMusic) bgMusic.muted = this.soundMuted; 
+        this.bgMusic.muted = !this.bgMusic.muted; 
+    }
+
+    playBackgroundMusic() {
+        if (!this.soundMuted) {
+            this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
+        }
+    }
+
+
+    stopBackgroundMusic() {
+        this.bgMusic.pause();
+        this.bgMusic.currentTime = 0;
+    }
+
+
+    /* toggleMute() {
+        this.soundMuted = !this.soundMuted;
+        this.bgMusic.soundMuted = this.soundMuted;
+    } */
+
+    
+    isMuted() {
+        return this.soundMuted;
     }
 }

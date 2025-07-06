@@ -9,7 +9,7 @@ class SoundManager {
 
     playBackgroundMusic() {
         if (!this.muted) {
-            this.bgMusic.play().catch(e => console.warn('Autoplay blockiert:', e));
+            this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
         }
     }
 

@@ -381,7 +381,7 @@ class World {
 
 
     toggleSound() {
-        this.uiController.toggleSound(this.fixedObjects.button, this.backgroundMusic);
+        this.uiController.toggleSound(this.fixedObjects.button);
     }
 
 
