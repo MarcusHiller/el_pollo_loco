@@ -95,58 +95,63 @@ function startGame() {
 }
 
 
-/* ['touchstart'].forEach(eventType => {
-    window.addEventListener(eventType, function (e) {
-        e.preventDefault();
-        let { x, y } = enterButton(e.touches[0]);
-        let buttons = getActiveButtons();
-        for (let btn of buttons) {
-            if (isInside(x, y, btn)) {
-                activeTouchActions.add(btn.action); // merken
-                handleButtonAction(btn.action, true); // true = aktivieren
-                break;
-            }
-        }
-    }, { passive: false });
-}); */
-
-
-if (isTouchDevice()) {
-    window.addEventListener('touchstart', function (e) {
-        e.preventDefault();
-        const { x, y } = enterButton(e.touches[0]);
-        const buttons = getActiveButtons();
-        for (let btn of buttons) {
-            if (isInside(x, y, btn)) {
+function handleInput(x, y, isClick = false) {
+    const buttons = getActiveButtons();
+    for (let btn of buttons) {
+        if (isInside(x, y, btn)) {
+            if (isClick) {
+                handleButtonClick(btn.action);
+            } else {
                 activeTouchActions.add(btn.action);
                 handleButtonAction(btn.action, true);
-                break;
             }
+            break;
         }
-    }, { passive: false });
-
-    window.addEventListener('touchend', function () {
-        activeTouchActions.forEach(action => {
-            handleButtonAction(action, false);
-        });
-        activeTouchActions.clear();
-    });
+    }
 }
 
-function isTouchDevice() {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
+// Maus-Klick (für Desktop oder DevTools)
+window.addEventListener('click', function (e) {
+    const { x, y } = enterButton(e);
+    handleInput(x, y, true);
+});
 
+// Touchstart (für Mobilgeräte)
+window.addEventListener('touchstart', function (e) {
+    if (!e.touches || !e.touches.length) return;
+    const { x, y } = enterButton(e.touches[0]);
+    handleInput(x, y);
+}, { passive: true }); // wichtig: kein preventDefault, damit click evt. trotzdem ausgelöst werden kann
 
-
-/* ['touchend'].forEach(eventType => {
-    window.addEventListener(eventType, function () {
-        activeTouchActions.forEach(action => {
-            handleButtonAction(action, false); // false = deaktivieren
-        });
-        activeTouchActions.clear(); // Set leeren
+// Touchend: Button-Logik deaktivieren
+window.addEventListener('touchend', function () {
+    activeTouchActions.forEach(action => {
+        handleButtonAction(action, false);
     });
-}); */
+    activeTouchActions.clear();
+});
+
+
+
+/* window.addEventListener('touchstart', function (e) {
+    e.preventDefault();
+    const { x, y } = enterButton(e.touches[0]);
+    const buttons = getActiveButtons();
+    for (let btn of buttons) {
+        if (isInside(x, y, btn)) {
+            activeTouchActions.add(btn.action);
+            handleButtonAction(btn.action, true);
+            break;
+        }
+    }
+}, { passive: false });
+
+window.addEventListener('touchend', function () {
+    activeTouchActions.forEach(action => {
+        handleButtonAction(action, false);
+    });
+    activeTouchActions.clear();
+});
 
 
 window.addEventListener('click', function (e) {
@@ -158,7 +163,7 @@ window.addEventListener('click', function (e) {
             break;
         }
     }
-});
+}); */
 
 
 function handleButtonClick(action) {
@@ -169,15 +174,15 @@ function handleButtonClick(action) {
         else if (action === 'Back') showHelp = false;
         else if (action === 'Screen') uiController.toggleScreen(currentButtons);
     } else if (gameState === 'end-won' || gameState === 'end-lose') {
-        if (action === 'Restart'){
+        if (action === 'Restart') {
             world.gameStop();
             startGame();
-        } 
+        }
         else if (action === 'End') {
             gameState = 'start';
-            drawMenuLoop(); 
+            drawMenuLoop();
             world.gameStop();
-        } 
+        }
         else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
     } else if (gameState === 'playing') {
         if (action === 'Break' || action === 'Play') world.toggleBreak();
@@ -294,7 +299,7 @@ function getActiveButtons() {
 function checkOriantation() {
     let isPortrait = window.innerHeight > window.innerWidth;
     let warning = document.getElementById('orientation-warning');
-    warning.style.display = isPortrait? 'flex' : 'none';
+    warning.style.display = isPortrait ? 'flex' : 'none';
 }
 
 
