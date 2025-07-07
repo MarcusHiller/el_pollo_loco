@@ -298,7 +298,7 @@ class World {
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
         this.uiController.stopBackgroundMusic();
-        this.endGame = () => {};
+        //this.endGame = () => {};
     }
 
 
@@ -308,6 +308,7 @@ class World {
         this.startCloudsIntervall();
         this.draw();
         this.setStatusPlay();
+        uiController.playBackgroundMusic();
     }
 
 

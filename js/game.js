@@ -88,7 +88,6 @@ function startGame() {
         world?.gameStop?.();
         this.clearRunIntervall();
         gameState = result ? 'end-won' : 'end-lose';
-        uiController.stopBackgroundMusic();
     };
 
     world.draw();
@@ -185,7 +184,10 @@ function handleButtonClick(action) {
         }
         else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
     } else if (gameState === 'playing') {
-        if (action === 'Break' || action === 'Play') world.toggleBreak();
+        if (action === 'Break' || action === 'Play') {
+            world.toggleBreak();
+            
+        } 
         else if (action === 'Volume') world.toggleSound();
         else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
         else if (action === 'End') {

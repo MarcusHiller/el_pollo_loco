@@ -29,23 +29,27 @@ class UIController {
         document.fullscreenElement ? document.exitFullscreen() : fullscreen.requestFullscreen();
     }
 
-
     toggleSound(buttons) {
-        //this.soundMuted = !this.soundMuted;
+        this.toggleSoundIcon(buttons);
+        this.toggleMute();
+    }
+
+
+    toggleSoundIcon(buttons) {
         let icon = this.bgMusic.muted ? 'img/icons/volume-high-solid-hell-gray.svg' : 'img/icons/volume-xmark-solid-hell-gray.svg';
         let btn = buttons.find(b => b.action === 'Volume');
         if (btn) {
             btn.imagePath = icon;
             btn.loadImage(icon);
         }
-        this.bgMusic.muted = !this.bgMusic.muted; 
+        //this.bgMusic.muted = !this.bgMusic.muted; 
     }
 
     playBackgroundMusic() {
-        /* if (!this.soundMuted) {
+        if (!this.soundMuted) {
             this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
-        } */
-        this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
+        }
+        //this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
     }
 
 
@@ -55,10 +59,9 @@ class UIController {
     }
 
 
-    /* toggleMute() {
-        this.soundMuted = !this.soundMuted;
-        this.bgMusic.soundMuted = this.soundMuted;
-    } */
+    toggleMute() {
+        this.bgMusic.muted = !this.bgMusic.muted; 
+    }
 
     
     isMuted() {
