@@ -159,6 +159,11 @@ class World {
             if (collidngBottle) {
                 if (enemy.name === 'endboss' && enemy.energy > 0) {
                     enemy.injuryProcess();
+                } else if (enemy => enemy instanceof SmallChicken) {
+                    enemy.hitEnemy(enemy);
+                }
+                else if (enemy => enemy instanceof Chicken) {
+                    enemy.hitEnemy(enemy);
                 }
                 collidngBottle.bottleBreaks();
             }
