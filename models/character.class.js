@@ -18,7 +18,7 @@ class Character extends MovableObject {
     bottle = 0;
     coin = 0;
     timeLastThrow;
-    throwDelay = 0.3;
+    throwDelay = 0.8;
     canThrow = true;
     lastAction;
     world;
