@@ -38,26 +38,31 @@ class World {
         this.ctx.save();
         this.ctx.scale(canvas.width / 720, canvas.height / 480);
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.addLevelObjectsToMap();
+        this.addObjectsToMap(this.fixedObjects.statusBar);
+        this.addObjectsToMap(this.fixedObjects.button);
+        this.addGameplayObjectsToMap();
+        this.animationFrameID = requestAnimationFrame(this.draw.bind(this));
+        this.ctx.restore();
+    }
 
+
+    addLevelObjectsToMap() {
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.background);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.level.coin);
-
         this.ctx.translate(-this.camera_x, 0);
-        this.addObjectsToMap(this.fixedObjects.statusBar);
-        this.addObjectsToMap(this.fixedObjects.button);
-        this.ctx.translate(this.camera_x, 0);
+    }
 
+
+    addGameplayObjectsToMap() {
+        this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-        this.animationFrameID = requestAnimationFrame(this.draw.bind(this));
-        this.ctx.restore();
     }
 
 
@@ -73,13 +78,6 @@ class World {
     }
 
 
-    /* cleanupWorld() {
-        this.clearRunIntervall();
-        cancelAnimationFrame(this.animationFrameID);
-        this.endGame = () => {}; // verhindert spätere Manipulation
-    } */
-
-
     addToMap(movableObject) {
         if (movableObject.otherDirection) {
             this.flipImg(movableObject);
@@ -87,7 +85,6 @@ class World {
         movableObject.draw(this.ctx);
         movableObject.drawFrame(this.ctx);
         movableObject.drawFrameInside(this.ctx);
-
         if (movableObject.otherDirection) {
             this.flipImgBack(movableObject);
         }
@@ -136,38 +133,48 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isHurt) return;
-                let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
-                let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
-                if ((overlapX < overlapY || this.character.speedY >= 0) && enemy.energy > 0) {
-                    this.character.injuryProcess();
-                } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
-                    this.character.injuryProcess();
-                } else if (enemy.name === 'endboss' && enemy.energy > 0) {
-                    this.character.injuryProcess();
-                } else if (overlapX > overlapY && this.character.speedY < 0) {
-                    enemy.hitEnemy(enemy);
-                }
+                this.handleEnemyCollison(enemy);
             }
         })
     };
+
+
+    handleEnemyCollison(enemy) {
+        if (this.character.isHurt) return;
+        let overlapX = Math.min(this.character.x + this.character.width, enemy.x + enemy.width) - Math.max(this.character.x, enemy.x);
+        let overlapY = Math.min(this.character.y + this.character.height, enemy.y + enemy.height) - Math.max(this.character.y, enemy.y);
+        if ((overlapX < overlapY || this.character.speedY >= 0) && enemy.energy > 0) {
+            this.character.injuryProcess();
+        } else if ((overlapX > overlapY && !this.character.isAboveGround()) && enemy.energy > 0) {
+            this.character.injuryProcess();
+        } else if (enemy.name === 'endboss' && enemy.energy > 0) {
+            this.character.injuryProcess();
+        } else if (overlapX > overlapY && this.character.speedY < 0) {
+            enemy.hitEnemy(enemy);
+        }
+    }
 
 
     checkCollisionsThrowableObjects() {
         this.level.enemies.forEach((enemy) => {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
             if (collidngBottle) {
-                if (enemy.name === 'endboss' && enemy.energy > 0) {
-                    enemy.injuryProcess();
-                } else if (enemy => enemy instanceof SmallChicken) {
-                    enemy.hitEnemy(enemy);
-                }
-                else if (enemy => enemy instanceof Chicken) {
-                    enemy.hitEnemy(enemy);
-                }
-                collidngBottle.bottleBreaks();
+                this.handleBottleCollisions(enemy, collidngBottle);
             }
         });
+    }
+
+
+    handleBottleCollisions(enemy, collidngBottle) {
+        if (enemy.name === 'endboss' && enemy.energy > 0) {
+            enemy.injuryProcess();
+        } else if (enemy => enemy instanceof SmallChicken) {
+            enemy.hitEnemy(enemy);
+        }
+        else if (enemy => enemy instanceof Chicken) {
+            enemy.hitEnemy(enemy);
+        }
+        collidngBottle.bottleBreaks();
     }
 
 
@@ -295,15 +302,13 @@ class World {
 
     gameStop() {
         this.clearRunIntervall();
-
-
         this.stopCharacterIntervall();
         this.stopEnemieIntervall();
         this.stopCloudsIntervall();
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
         this.uiController.stopBackgroundMusic();
-        //this.endGame = () => {};
+        this.endGame = () => {};
     }
 
 
