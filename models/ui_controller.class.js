@@ -2,12 +2,14 @@ class UIController {
     
     fullScreen = false;
 
+
     constructor() {
         this.bgMusic = new Audio('sounds/accordion-54979.mp3');
         this.bgMusic.loop = true;
         this.bgMusic.volume = 0.4;
         this.bgMusic.muted = false;
     }
+
 
     resizeCanvasToFullscreen(canvas) {
         canvas.width = window.innerWidth;
@@ -29,6 +31,7 @@ class UIController {
         document.fullscreenElement ? document.exitFullscreen() : fullscreen.requestFullscreen();
     }
 
+
     toggleSound(buttons) {
         this.toggleSoundIcon(buttons);
         this.toggleMute();
@@ -42,17 +45,16 @@ class UIController {
             btn.imagePath = icon;
             btn.loadImage(icon);
         }
-        //this.bgMusic.muted = !this.bgMusic.muted; 
     }
+
 
     playBackgroundMusic() {
         if (!this.soundMuted) {
             this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
         }
-        //this.bgMusic.play().catch(e => console.warn('autoplay blocked:', e));
     }
 
-
+    
     stopBackgroundMusic() {
         this.bgMusic.pause();
         this.bgMusic.currentTime = 0;
