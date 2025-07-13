@@ -1,4 +1,5 @@
 class ScreenManager {
+
     constructor() {
         this.startScreen = new StartScreen();
         this.wonScreen = new EndScreen([
@@ -8,7 +9,6 @@ class ScreenManager {
             'img/5_background/layers/1_first_layer/2.png',
             'img/You won, you lost/You won A.png'
         ]);
-
         this.lostScreen = new EndScreen([
             'img/5_background/layers/air.png',
             'img/5_background/layers/3_third_layer/2.png',
@@ -17,6 +17,7 @@ class ScreenManager {
             'img/You won, you lost/Game Over.png'
         ]);
     }
+
 
     draw(ctx, gameState, showHelp) {
         if (gameState === 'start') {
@@ -27,6 +28,7 @@ class ScreenManager {
             this.lostScreen.draw(ctx);
         }
     }
+
 
     getButtons(gameState, showHelp) {
         if (gameState === 'start') {
@@ -39,4 +41,3 @@ class ScreenManager {
         return [];
     }
 }
-
