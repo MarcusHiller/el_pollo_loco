@@ -1,4 +1,5 @@
 class Button extends DrawableObject {
+
     constructor({ x, y, width, height, text = '', action = '', imagePath = '', onClick = null }) {
         super();
         this.x = x;
@@ -21,18 +22,27 @@ class Button extends DrawableObject {
 
     draw(ctx) {
         if (this.img) {
-            super.draw(ctx);
-            ctx.strokeStyle = 'red';
-ctx.strokeRect(this.x, this.y, this.width, this.height);
-
+            this.imgButton();
         } else {
-            ctx.fillStyle = '#333'
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.fillStyle = '#fff'
-            ctx.font = '20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(this.text, this.x + this.width / 2, this.y + 28);
+            replacementButton();
         }
+    }
+
+
+    imgButton() {
+        super.draw(ctx);
+        ctx.strokeStyle = 'red';
+        ctx.strokeRect(this.x, this.y, this.width, this.height);
+    }
+
+
+    replacementButton() {
+        ctx.fillStyle = '#333'
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = '#fff'
+        ctx.font = '20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(this.text, this.x + this.width / 2, this.y + 28);
     }
 
 
