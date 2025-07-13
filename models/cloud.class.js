@@ -1,6 +1,5 @@
 class Cloud extends MovableObject {
     
-    
     constructor(imagePath, y, speed, offset) {
         super().loadImage(imagePath);
         this.x = offset + (Math.random() * 1500);
