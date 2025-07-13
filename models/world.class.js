@@ -115,18 +115,28 @@ class World {
     run() {
         this.gameInterval = setInterval(() => {
             if (gameState === 'end') return;
-            this.checkCollisions();
-            this.checkThrowObjects();
-            this.deleteDeadEnemies();
-            this.cleanUpBottlesThrownBottles();
-            this.checkCollisionsThrowableObjects();
-            this.checkCollisionBottle();
-            this.cleanUpBottlesCollectedBottles();
-            this.checkCollisionCoin();
-            this.cleanUpCollectedCoin();
-            this.updateBotlleStatusbar();
-            this.checkGameOver();
+            this.checkInteraktions();
+            this.cleanInteraktions();
         }, 40);
+    }
+
+
+    checkInteraktions() {
+        this.checkCollisions();
+        this.checkThrowObjects();
+        this.checkCollisionsThrowableObjects();
+        this.checkCollisionBottle();
+        this.checkCollisionCoin();
+        this.checkGameOver();
+    }
+
+
+    cleanInteraktions() {
+        this.deleteDeadEnemies();
+        this.cleanUpBottlesThrownBottles();
+        this.cleanUpBottlesCollectedBottles();
+        this.cleanUpCollectedCoin();
+        this.updateBotlleStatusbar();
     }
 
 
@@ -308,7 +318,7 @@ class World {
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
         this.uiController.stopBackgroundMusic();
-        this.endGame = () => {};
+        this.endGame = () => { };
     }
 
 
