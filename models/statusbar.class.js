@@ -4,6 +4,7 @@ class Statusbar extends DrawableObject{
     type;
     imageSources;
 
+
     constructor(type, x, y, imageSources) {
         super();
         this.type = type;
@@ -23,6 +24,7 @@ class Statusbar extends DrawableObject{
         this.loadImage(this.imageSources[index]);
     }
 
+
     resolveImageIndex(percentage) {
         if (percentage == 100) return 5;
         if (percentage >= 80) return 4;
@@ -32,6 +34,7 @@ class Statusbar extends DrawableObject{
         return 0;
     }
 
+    
     draw(ctx) {
         if (this.type === 'ENDBOSS') {
             if (!this.world?.distanceCharacterAndBoss?.()) return;
