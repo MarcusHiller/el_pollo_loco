@@ -16,6 +16,7 @@ class MovableObject extends DrawableObject {
         bottom: 0
     };
 
+
     constructor() {
         super();
     };
@@ -49,7 +50,6 @@ class MovableObject extends DrawableObject {
             }
         }, count);
     }
-
 
 
     applyGravity() {
@@ -131,6 +131,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    
     findCharacterObjekt() {
         if (this.name === 'pepe') {
             let healthBar = world.getStatusbarByType('HEALTH');
