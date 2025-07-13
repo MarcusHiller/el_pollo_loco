@@ -1,4 +1,5 @@
 class EndScreen {
+    
     constructor(imagePaths) {
         this.layers = imagePaths.map(path => {
             let obj = new DrawableObject();
@@ -16,6 +17,7 @@ class EndScreen {
             new Button({ x: 675, y: 10, width: 35, height: 35, text: 'Full', action: 'Screen', imagePath: 'img/icons/expand-solid-hell-gray.svg' }),
         ];
     }
+
 
     draw(ctx) {
         this.layers.forEach(layer => layer.draw(ctx));
