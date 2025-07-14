@@ -63,10 +63,10 @@ class DrawableObject {
 
 
     findCollectedObjects() {
-        if (this.object === 'coin') {
+        if (this instanceof Coin) {
             let coinBar = world.getStatusbarByType('COINS');
             coinBar?.setPercentage(this.world.character.coin * 5);
-        } else if (this.object === 'bottle') {
+        } else if (this instanceof Bottle) {
             let bottleBar = world.getStatusbarByType('BOTTLES');
             bottleBar?.setPercentage(this.world.character.bottle * 10);
         }
