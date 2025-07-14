@@ -123,7 +123,7 @@ class World {
 
 
     checkInteraktions() {
-        this.checkCollisions();
+        this.interactions.checkCollisions();
         this.checkThrowObjects();
         this.checkCollisionsThrowableObjects();
         this.checkCollisionBottle();
@@ -141,7 +141,7 @@ class World {
     }
 
 
-    checkCollisions() {
+    /* checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.handleEnemyCollison(enemy);
@@ -163,7 +163,7 @@ class World {
         } else if (overlapX > overlapY && this.character.speedY < 0) {
             enemy.hitEnemy(enemy);
         }
-    }
+    } */
 
 
     checkCollisionsThrowableObjects() {
