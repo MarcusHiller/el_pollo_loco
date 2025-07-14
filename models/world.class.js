@@ -125,7 +125,7 @@ class World {
     checkInteraktions() {
         this.interactions.checkCollisions();
         this.interactions.checkThrowObjects();
-        this.checkCollisionsThrowableObjects();
+        this.interactions.checkCollisionsThrowableObjects();
         this.checkCollisionBottle();
         this.checkCollisionCoin();
         this.checkGameOver();
@@ -166,7 +166,7 @@ class World {
     } */
 
 
-    checkCollisionsThrowableObjects() {
+    /* checkCollisionsThrowableObjects() {
         this.level.enemies.forEach((enemy) => {
             let collidngBottle = this.throwableObjects.find(bottle => bottle.isColliding(enemy));
             if (collidngBottle) {
@@ -186,7 +186,7 @@ class World {
             enemy.hitEnemy(enemy);
         }
         collidngBottle.bottleBreaks();
-    }
+    } */
 
 
     /* checkThrowObjects() {

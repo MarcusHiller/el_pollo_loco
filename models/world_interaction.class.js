@@ -58,4 +58,27 @@ class WorldInteraction {
             direction: this.world.character.otherDirection
         }
     }
+
+
+    checkCollisionsThrowableObjects() {
+        this.world.level.enemies.forEach((enemy) => {
+            let collidngBottle = this.world.throwableObjects.find(bottle => bottle.isColliding(enemy));
+            if (collidngBottle) {
+                this.handleBottleCollisions(enemy, collidngBottle);
+            }
+        });
+    }
+
+
+    handleBottleCollisions(enemy, collidngBottle) {
+        if (enemy.name === 'endboss' && enemy.energy > 0) {
+            enemy.injuryProcess();
+        } else if (enemy => enemy instanceof SmallChicken) {
+            enemy.hitEnemy(enemy);
+        }
+        else if (enemy => enemy instanceof Chicken) {
+            enemy.hitEnemy(enemy);
+        }
+        collidngBottle.bottleBreaks();
+    }
 }
