@@ -86,7 +86,7 @@ class MovableObject extends DrawableObject {
     }
 
 
-    ishurt() {
+    isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < this.damageTime;
@@ -124,7 +124,7 @@ class MovableObject extends DrawableObject {
 
 
     injuryProcess() {
-        if (!this.ishurt()) {
+        if (!this.isHurt()) {
             this.setHurt();
             this.drawOffEnergy();
             this.findCharacterObjekt();

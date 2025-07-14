@@ -33,9 +33,9 @@ class Endboss extends MovableObject {
         this.endbossAnimate = setInterval(() => {
             if (!this.world.distanceCharacterAndBoss()) {
                 this.playAnimation(this.IMAGES.IMAGES_ALERT);
-            } else if (!this.ishurt() && this.isDead() && !this.deadAnimationPlayed) {
+            } else if (!this.isHurt() && this.isDead() && !this.deadAnimationPlayed) {
                 this.endbossDie();
-            } else if (this.ishurt()) {
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
             } else if (this.energy <= 75 && this.energy > 50) {
                 this.playAnimation(this.IMAGES.IMAGES_ATTACK);

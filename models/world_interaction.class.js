@@ -35,7 +35,7 @@ class WorldInteraction {
      * @param {Enemy} enemy - The enemy object the character collided with.
      */
     handleEnemyCollison(enemy) {
-        if (this.world.character.isHurt) return;
+        if (this.world.character.isHurt()) return;
         let overlapX = Math.min(this.world.character.x + this.world.character.width, enemy.x + enemy.width) - Math.max(this.world.character.x, enemy.x);
         let overlapY = Math.min(this.world.character.y + this.world.character.height, enemy.y + enemy.height) - Math.max(this.world.character.y, enemy.y);
         if ((overlapX < overlapY || this.world.character.speedY >= 0) && enemy.energy > 0) {
