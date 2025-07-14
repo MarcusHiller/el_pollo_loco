@@ -94,4 +94,17 @@ class WorldInteraction {
             }
         })
     }
+
+
+    checkCollisionCoin() {
+        this.world.level.coin.forEach((coin) => {
+            if (this.world.character.isColliding(coin)) {
+                if (!coin.collected) {
+                    this.world.character.coin++;
+                    coin.collected = true;
+                    coin.findCollectedObjects();
+                }
+            }
+        })
+    }
 }
