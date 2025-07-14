@@ -30,5 +30,32 @@ class WorldInteraction {
     }
 
 
-    
+    checkThrowObjects() {
+        if (this.world.keyboard.d && this.world.character.canThrow) {
+            if (this.world.character.bottle > 0 && !this.world.character.isThrowDelayActive()) {
+                this.objectIsThrown();
+            }
+        } else if (!this.world.keyboard.d) {
+            this.world.character.canThrow = true;
+        }
+    }
+
+
+    objectIsThrown() {
+        let { x, y, direction } = this.calculateThrowVector();
+        let bottle = new ThrowableObject(x, y, direction);
+        this.world.throwableObjects.push(bottle);
+        this.world.character.bottle--;
+        this.world.character.setThrowTime();
+        this.world.character.canThrow = false;
+    }
+
+
+    calculateThrowVector() {
+        return {
+            x: this.world.character.x + this.world.character.offset.right,
+            y: this.world.character.y + this.world.character.offset.top,
+            direction: this.world.character.otherDirection
+        }
+    }
 }

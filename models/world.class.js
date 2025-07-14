@@ -124,7 +124,7 @@ class World {
 
     checkInteraktions() {
         this.interactions.checkCollisions();
-        this.checkThrowObjects();
+        this.interactions.checkThrowObjects();
         this.checkCollisionsThrowableObjects();
         this.checkCollisionBottle();
         this.checkCollisionCoin();
@@ -189,7 +189,7 @@ class World {
     }
 
 
-    checkThrowObjects() {
+    /* checkThrowObjects() {
         if (this.keyboard.d && this.character.canThrow) {
             if (this.character.bottle > 0 && !this.character.isThrowDelayActive()) {
                 let bottle = new ThrowableObject(this.character.x + this.character.offset.right, this.character.y + this.character.offset.top, this.character.otherDirection);
@@ -201,7 +201,7 @@ class World {
         } else if (!this.keyboard.d) {
             this.character.canThrow = true;
         }
-    }
+    } */
 
 
     cleanUpBottlesThrownBottles() {
