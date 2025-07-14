@@ -126,7 +126,7 @@ class World {
         this.interactions.checkCollisions();
         this.interactions.checkThrowObjects();
         this.interactions.checkCollisionsThrowableObjects();
-        this.checkCollisionBottle();
+        this.interactions.checkCollisionBottle();
         this.checkCollisionCoin();
         this.checkGameOver();
     }
@@ -209,7 +209,7 @@ class World {
     }
 
 
-    checkCollisionBottle() {
+    /* checkCollisionBottle() {
         this.level.bottle.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
                 if (!bottle.collected) {
@@ -219,7 +219,7 @@ class World {
                 }
             }
         })
-    }
+    } */
 
 
     cleanUpBottlesCollectedBottles() {

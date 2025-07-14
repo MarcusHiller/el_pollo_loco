@@ -81,4 +81,17 @@ class WorldInteraction {
         }
         collidngBottle.bottleBreaks();
     }
+
+
+    checkCollisionBottle() {
+        this.world.level.bottle.forEach((bottle) => {
+            if (this.world.character.isColliding(bottle)) {
+                if (!bottle.collected) {
+                    this.world.character.bottle++;
+                    bottle.collected = true;
+                    bottle.findCollectedObjects();
+                }
+            }
+        })
+    }
 }
