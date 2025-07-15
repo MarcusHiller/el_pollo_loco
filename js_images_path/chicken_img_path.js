@@ -1,3 +1,8 @@
+/**
+ * Holds asset arrays for normal and small chickens.
+ * 
+ * @type {ChickenImg}
+ */
 const chickenAssets = new ChickenImg (
     [
         '/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
