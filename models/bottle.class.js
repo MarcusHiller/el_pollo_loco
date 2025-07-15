@@ -26,7 +26,8 @@ class Bottle extends DrawableObject {
      * @param {boolean} collected - Boolean statement as to whether the bottle was collected.
      */
     constructor(imagePath, x, y) {
-        super().loadImage(imagePath);
+        super();
+        this.loadImage(imagePath);
         this.x = 300 + Math.random() * x;
         this.y = y;
         this.height = 90;
