@@ -1,3 +1,14 @@
+/**
+ * Stores the image assets for the Endboss character, categorized by animation type.
+ * 
+ * @constant
+ * @type {EndbossImg}
+ * @property {string[]} IMAGES_WALKING - Walking animation frames.
+ * @property {string[]} IMAGES_ALERT - Alert animation frames (warning/pre-attack).
+ * @property {string[]} IMAGES_ATTACK - Attack animation frames.
+ * @property {string[]} IMAGES_HURT - Hurt animation frames.
+ * @property {string[]} IMAGES_DEAD - Death animation frames.
+ */
 const endbossAssets = new EndbossImg (
     [
         'img/4_enemie_boss_chicken/1_walk/G1.png',

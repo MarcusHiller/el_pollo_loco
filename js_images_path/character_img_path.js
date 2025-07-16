@@ -1,3 +1,16 @@
+/**
+ * Stores the image assets for the main character "Pepe", sorted by behavior.
+ * 
+ * @constant
+ * @type {CharakterImg}
+ * @property {string[]} IMAGES_WALKING - Walking animation frames.
+ * @property {string[]} IMAGES_HURT - Hurt animation frames.
+ * @property {string[]} IMAGES_DEAD - Death animation frames.
+ * @property {string[]} IMAGES_IDLE_SHORT - Short idle animation frames.
+ * @property {string[]} IMAGES_IDLE_LONG - Long idle animation frames.
+ * @property {string[]} IMAGES_JUMPING - Jump up animation frames.
+ * @property {string[]} IMAGES_FALLS - Fall down animation frames.
+ */
 const pepeAssets = new CharakterImg (
     [
         '/img/2_character_pepe/2_walk/W-21.png',
@@ -59,17 +72,3 @@ const pepeAssets = new CharakterImg (
         'img/2_character_pepe/3_jump/J-39.png',
     ]
 );
-
-
-
-/* [
-        'img/2_character_pepe/3_jump/J-31.png',
-        'img/2_character_pepe/3_jump/J-32.png',
-        'img/2_character_pepe/3_jump/J-33.png',
-        'img/2_character_pepe/3_jump/J-34.png',
-        'img/2_character_pepe/3_jump/J-35.png',
-        'img/2_character_pepe/3_jump/J-36.png',
-        'img/2_character_pepe/3_jump/J-37.png',
-        'img/2_character_pepe/3_jump/J-38.png',
-        'img/2_character_pepe/3_jump/J-39.png',
-    ], */

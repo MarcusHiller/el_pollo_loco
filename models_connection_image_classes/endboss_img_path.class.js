@@ -52,11 +52,11 @@ class EndbossImg {
      * @param {string[]} hurt - Image paths for hurt animation.
      * @param {string[]} daed - Image paths for dead animation.
      */
-    constructor (walking, alert, attack, hurt, daed,) {
+    constructor (walking, alert, attack, hurt, dead,) {
         this.IMAGES_WALKING = walking;
         this.IMAGES_ALERT = alert;
         this.IMAGES_ATTACK = attack;
         this.IMAGES_HURT = hurt;
-        this.IMAGES_DEAD = daed;
+        this.IMAGES_DEAD = dead;
     }
 }
