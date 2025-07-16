@@ -1,3 +1,15 @@
+/**
+ * Contains arrays of image paths used to represent different status bar states.
+ * 
+ * - Health bar images (green)
+ * - Endboss health bar images (orange)
+ * - Coin status bar images (blue)
+ * - Bottle status bar images (blue)
+ * 
+ * Each array represents levels from 0% to 100% in steps of 20%.
+ * 
+ * @type {StatusbarImages}
+ */
 const statusbarImages = new StatusbarImages(
     [
         'img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png',

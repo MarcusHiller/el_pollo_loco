@@ -1,5 +1,11 @@
+/**
+ * Manages the start screen with background image and interactive buttons.
+ */
 class StartScreen {
     
+    /**
+     * Creates the StartScreen instance with background and UI buttons.
+     */
     constructor() {
         this.background = new DrawableObject();
         this.background.x = 0;
@@ -15,6 +21,12 @@ class StartScreen {
         ];
     }
 
+
+    /**
+     * Draws the start screen elements onto the canvas.
+     * @param {CanvasRenderingContext2D} ctx - The canvas drawing context.
+     * @param {boolean} showHelp - Flag to determine if help box should be shown.
+     */
     draw(ctx, showHelp) {
         this.background.draw(ctx);
         this.buttons.slice(0, this.buttons.length - 1).forEach(btn => btn.draw(ctx, btn));
@@ -24,6 +36,9 @@ class StartScreen {
     }
 
 
+    /**
+     * Draws the help box overlay with control instructions.
+     */
     helpBox() {
         ctx.fillStyle = 'rgba(242, 159, 81, 0.95)';
         ctx.fillRect(110, 90, 500, 300);
@@ -39,6 +54,10 @@ class StartScreen {
     }
 
 
+    /**
+     * Returns a string with keyboard controls shown in the help box.
+     * @returns {string} Instructions as multiline string.
+     */
     infoBox() {
         return `left-key  - move left
                 right-key - move right
