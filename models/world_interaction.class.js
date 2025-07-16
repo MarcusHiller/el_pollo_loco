@@ -152,4 +152,104 @@ class WorldInteraction {
             }
         });
     }
+
+
+    /**
+    * Checks if the game is over either because the character or the endboss has no energy left.
+    * If the character has no energy, the game ends as a loss.
+    * If the endboss has no energy, the game ends as a win.
+    */
+    checkGameOver() {
+        let endboss = this.world.level.enemies.find(enemy => enemy instanceof Endboss);
+        if (this.world.character.energy <= 0) {
+            setTimeout(() => {
+                this.world.stopDrawing();
+                this.world.endGame(false);
+            }, 1000);
+        } else if (endboss.energy <= 0) {
+            setTimeout(() => {
+                this.world.stopDrawing();
+                this.world.endGame(true);
+            }, 3100);
+        }
+    }
+
+
+    /**
+    * Stops all intervals related to character movement and animation.
+    * Also clears the main game loop interval.
+    */
+    stopCharacterIntervall() {
+        clearInterval(this.world.character.keyMovements);
+        clearInterval(this.world.character.characterAnimation);
+        this.world.clearRunIntervall();
+    }
+
+
+    /**
+    * Stops all intervals related to enemy movement and animation.
+    * Differentiates between Chickens, SmallChickens and Endboss.
+    */
+    stopEnemieIntervall() {
+        this.world.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
+                clearInterval(enemy.chickenIntervallX);
+                clearInterval(enemy.chickenWalk);
+            } else if (enemy instanceof Endboss) {
+                clearInterval(enemy.endbossAnimate);
+            }
+        });
+    }
+
+
+    /**
+    * Stops all animation intervals for clouds in the level.
+    */
+    stopCloudsIntervall() {
+        this.world.level.clouds.forEach(cloud => {
+            clearInterval(cloud.cloudAnimate);
+        });
+    }
+
+
+    /**
+    * Starts character animations, interactions, and sets the timestamp for the last action.
+    * Also starts the main game loop via `world.run()`.
+    */
+    startCharacterIntervall() {
+        this.world.character.animateKeyOptions();
+        this.world.character.characterInteraction();
+        this.world.character.setTimeLastAction();
+        this.world.run();
+    }
+
+
+    /**
+    * Starts enemy animation intervals based on their type:
+    * Chickens, SmallChickens, and the Endboss have different animation behaviors.
+    */
+    startEnemieIntervall() {
+        this.world.level.enemies.forEach(enemy => {
+            if (enemy instanceof Chicken) {
+                enemy.animateChicken(enemy.IMAGES.NORMAL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+            }
+            if (enemy instanceof SmallChicken) {
+                enemy.animateChicken(enemy.IMAGES.SMALL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_small/2_dead/dead.png');
+            }
+            if (enemy instanceof Endboss) {
+                enemy.animate();
+            }
+        });
+    }
+
+
+    /**
+    * Starts animation intervals for all clouds in the level.
+    * Clears any previous interval before starting a new one.
+    */
+    startCloudsIntervall() {
+        this.world.level.clouds.forEach(cloud => {
+            clearInterval(cloud.animate());
+        });
+    }
 }

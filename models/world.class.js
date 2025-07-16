@@ -128,7 +128,7 @@ class World {
         this.interactions.checkCollisionsThrowableObjects();
         this.interactions.checkCollisionBottle();
         this.interactions.checkCollisionCoin();
-        this.checkGameOver();
+        this.interactions.checkGameOver();
     }
 
 
@@ -196,7 +196,7 @@ class World {
     }
 
 
-    checkGameOver() {
+    /* checkGameOver() {
         let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         if (this.character.energy <= 0) {
             setTimeout(() => {
@@ -209,7 +209,7 @@ class World {
                 this.endGame(true);
             }, 3100);
         }
-    }
+    } */
 
 
     getButtons() {
@@ -224,9 +224,9 @@ class World {
 
     gameStop() {
         this.clearRunIntervall();
-        this.stopCharacterIntervall();
-        this.stopEnemieIntervall();
-        this.stopCloudsIntervall();
+        this.interactions.stopCharacterIntervall();
+        this.interactions.stopEnemieIntervall();
+        this.interactions.stopCloudsIntervall();
         cancelAnimationFrame(this.animationFrameID);
         this.setStatusBreak();
         this.uiController.stopBackgroundMusic();
@@ -235,9 +235,9 @@ class World {
 
 
     gamePlay() {
-        this.startCharacterIntervall();
-        this.startEnemieIntervall();
-        this.startCloudsIntervall();
+        this.interactions.startCharacterIntervall();
+        this.interactions.startEnemieIntervall();
+        this.interactions.startCloudsIntervall();
         this.draw();
         this.setStatusPlay();
         uiController.playBackgroundMusic();
@@ -253,62 +253,6 @@ class World {
     setStatusPlay() {
         this.isBreak = false;
         this.updatePauseButtonImage('pause');
-    }
-
-
-    stopCharacterIntervall() {
-        clearInterval(this.character.keyMovements);
-        clearInterval(this.character.characterAnimation);
-        this.clearRunIntervall();
-    }
-
-
-    stopEnemieIntervall() {
-        this.level.enemies.forEach((enemy) => {
-            if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
-                clearInterval(enemy.chickenIntervallX);
-                clearInterval(enemy.chickenWalk);
-            } else if (enemy instanceof Endboss) {
-                clearInterval(enemy.endbossAnimate);
-            }
-        });
-    }
-
-
-    stopCloudsIntervall() {
-        this.level.clouds.forEach(cloud => {
-            clearInterval(cloud.cloudAnimate);
-        });
-    }
-
-
-    startCharacterIntervall() {
-        this.character.animateKeyOptions();
-        this.character.characterInteraction();
-        this.character.setTimeLastAction();
-        this.run();
-    }
-
-
-    startEnemieIntervall() {
-        this.level.enemies.forEach(enemy => {
-            if (enemy instanceof Chicken) {
-                enemy.animateChicken(enemy.IMAGES.NORMAL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
-            }
-            if (enemy instanceof SmallChicken) {
-                enemy.animateChicken(enemy.IMAGES.SMALL_CHICKEN_WALKING, 'img/3_enemies_chicken/chicken_small/2_dead/dead.png');
-            }
-            if (enemy instanceof Endboss) {
-                enemy.animate();
-            }
-        });
-    }
-
-
-    startCloudsIntervall() {
-        this.level.clouds.forEach(cloud => {
-            clearInterval(cloud.animate());
-        });
     }
 
 
