@@ -1,3 +1,7 @@
+/**
+ * Creates all fixed objects of the UI (status bars and control buttons).
+ * @returns {FixedObjects} A FixedObjects container with UI components.
+ */
 function stationaryObjects() {
     return new FixedObjects(
         [
