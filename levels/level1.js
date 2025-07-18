@@ -1,3 +1,15 @@
+/**
+ * Creates and returns the level configuration for level 1.
+ *
+ * @function
+ * @returns {Level} A new Level instance populated with enemies, clouds, backgrounds, bottles, and coins.
+ * @param {Enemy[]} enemies - All enemies in the level.
+ * @param {Cloud[]} clouds - Cloud objects for parallax background.
+ * @param {BackgroundObject[]} backgroundObjects - Background layers of the level.
+ * @param {Bottle[]} bottles - Collectable bottles in the level.
+ * @param {Coin[]} coins - Collectable coins in the level.
+ * 
+ */
 function createLevel1() {
 
     return new Level(
