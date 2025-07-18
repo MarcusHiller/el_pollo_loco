@@ -2,14 +2,20 @@ function createLevel1() {
 
     return new Level(
         [
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new Chicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
-            new SmallChicken(),
+            new Chicken(250),
+            new Chicken(250),
+            new Chicken(900),
+            new Chicken(1200),
+            new Chicken(1800),
+            new Chicken(2200),
+            new Chicken(2500),
+            new SmallChicken(250),
+            new SmallChicken(250),
+            new SmallChicken(800),
+            new SmallChicken(1500),
+            new SmallChicken(1800),
+            new SmallChicken(2200),
+            new SmallChicken(2500),
             new Endboss()
         ],
         [
@@ -68,6 +74,9 @@ function createLevel1() {
             new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 80),
             new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2000, 100),
             new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2000, 330),
+            new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2200, 80),
+            new Bottle('img/6_salsa_bottle/salsa_bottle.png', 2200, 100),
+            new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2200, 330),
         ],
         [
             new Coin('img/8_coin/coin_1.png', 110, 120),
@@ -80,6 +89,9 @@ function createLevel1() {
             new Coin('img/8_coin/coin_1.png', 1000, 180),
             new Coin('img/8_coin/coin_1.png', 1200, 180),
             new Coin('img/8_coin/coin_1.png', 1400, 180),
+            new Coin('img/8_coin/coin_1.png', 1600, 140),
+            new Coin('img/8_coin/coin_1.png', 1900, 120),
+            new Coin('img/8_coin/coin_1.png', 2000, 150),
         ]
     );
 }

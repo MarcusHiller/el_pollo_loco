@@ -38,12 +38,12 @@ class SmallChicken extends MovableObject {
      * @param {number} damageTime - Time until object is deleted.
      * 
      */
-    constructor() {
+    constructor(offset) {
         super();
         this.loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.width = 65;
         this.height = 65; 
-        this.x = 250 + (Math.random() * 1500);
+        this.x = offset + (Math.random() * 1500);
         this.y = 355;
         this.speed = 0.15 + Math.random() * 0.4;
         this.energy = 100;
