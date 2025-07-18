@@ -58,8 +58,6 @@ class Button extends DrawableObject {
      */
     imgButton() {
         super.draw(ctx);
-        ctx.strokeStyle = 'red';
-        ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
 
 
