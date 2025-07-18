@@ -16,7 +16,7 @@ class StartScreen {
         this.buttons = [
             new Button({ x: 310, y: 190, width: 100, height: 100, text: 'Play', action: 'Play', imagePath: 'img/icons/play-solid-hell-gray.svg' }),
             new Button({ x: 665, y: 20, width: 35, height: 35, text: 'Info', action: 'Info', imagePath: 'img/icons/info-solid-hell-gray.svg' }),
-            new Button({ x: 615, y: 20, width: 35, height: 35, text: 'Full', action: 'Screen', imagePath: 'img/icons/expand-solid-hell-gray.svg' }),
+            new Button({ x: 615, y: 20, width: 35, height: 37, text: 'Full', action: 'Screen', imagePath: 'img/icons/expand-solid-hell-gray.svg' }),
             new Button({ x: 335, y: 400, width: 50, height: 65, text: 'Back', action: 'Back', imagePath: 'img/icons/xmark-solid-hell-gray.svg' }),
         ];
     }
