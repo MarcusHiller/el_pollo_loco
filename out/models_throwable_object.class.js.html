@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/throwable_object.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/throwable_object.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents a throwable object (e.g. a salsa bottle) in the game.
+ * Inherits movement and gravity from MovableObject.
+ */
+class ThrowableObject extends MovableObject {
+
+    /** @type {number} Width of the bottle in pixels. */
+    width = 60;
+
+
+    /** @type {number} Height of the bottle in pixels. */
+    height = 70;
+
+
+    /** @type {boolean} Indicates whether the bottle has already broken. */
+    bottleBroken = false;
+
+
+    /** @type {boolean} Marks this object for removal after animation. */
+    markForRemoval = false;
+
+
+    /** @type {World} Reference to the game world (set externally). */
+    world;
+
+
+    /** @type {string[]} Image paths used for the rotation animation while flying. */
+    IMAGES_BOTTLE = [
+        'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
+    ];
+
+
+    /** @type {string[]} Image paths used for the splash animation when breaking. */
+    IMAGES_SPLASH = [
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+    ];
+
+
+    /**
+     * Creates a new throwable object and starts the throw animation.
+     * 
+     * @param {number} x - Initial x position.
+     * @param {number} y - Initial y position.
+     * @param {boolean} direction - Direction of throw. `true` for left, `false` for right.
+     */
+    constructor(x, y, direction) {
+        super();
+        this.x = x;
+        this.y = y;
+        this.loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
+        this.loadImages(this.IMAGES_BOTTLE);
+        this.loadImages(this.IMAGES_SPLASH);
+        this.throw();
+        this.otherDirection = direction;
+    }
+
+
+    /**
+     * Starts the throw movement and animation. Handles movement and collision.
+     */
+    throw() {
+        this.speedY = 18;
+        this.applyGravity();
+        this.throwInterval = setInterval(() => {
+            if (this.isAboveGround() &amp;&amp; !this.otherDirection) {
+                this.x += 18;
+                this.playAnimation(this.IMAGES_BOTTLE);
+            } else if (this.isAboveGround() &amp;&amp; this.otherDirection) {
+                this.x -= 18;
+                this.playAnimation(this.IMAGES_BOTTLE);
+            } else if (!this.bottleBroken) {
+                this.bottleBreaks();
+            }
+        }, 60);
+    }
+
+
+    /**
+     * Handles the bottle break logic and starts splash animation.
+     */
+    bottleBreaks() {
+            clearInterval(this.throwInterval);
+            this.bottleBroken = true;
+            this.playAnimationOnce(this.IMAGES_SPLASH, 40);
+            this.markerForDelete();
+    }
+
+
+    /**
+     * Marks the object for removal after a short delay to allow splash animation to finish.
+     */
+    markerForDelete() {
+        setTimeout(() => {
+            this.markForRemoval = true;
+        }, 440);
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Button.html">Button</a></li><li><a href="Character.html">Character</a></li><li><a href="CharakterImg.html">CharakterImg</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenImg.html">ChickenImg</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="EndScreen.html">EndScreen</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossImg.html">EndbossImg</a></li><li><a href="FixedObjects.html">FixedObjects</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="ScreenManager.html">ScreenManager</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="SoundManager.html">SoundManager</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="Statusbar.html">Statusbar</a></li><li><a href="StatusbarImages.html">StatusbarImages</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="UIController.html">UIController</a></li><li><a href="World.html">World</a></li><li><a href="WorldInteraction.html">WorldInteraction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeTouchActions">activeTouchActions</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#checkOriantation">checkOriantation</a></li><li><a href="global.html#chickenAssets">chickenAssets</a></li><li><a href="global.html#createLevel1">createLevel1</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#drawMenuLoop">drawMenuLoop</a></li><li><a href="global.html#endbossAssets">endbossAssets</a></li><li><a href="global.html#enterButton">enterButton</a></li><li><a href="global.html#gameState">gameState</a></li><li><a href="global.html#gameStateFinish">gameStateFinish</a></li><li><a href="global.html#gameStatePlaying">gameStatePlaying</a></li><li><a href="global.html#gameStateStart">gameStateStart</a></li><li><a href="global.html#getActiveButtons">getActiveButtons</a></li><li><a href="global.html#getCoordsExtendedScreen">getCoordsExtendedScreen</a></li><li><a href="global.html#getCoordsSmallScreen">getCoordsSmallScreen</a></li><li><a href="global.html#getLetterboxOffsets">getLetterboxOffsets</a></li><li><a href="global.html#getSideBar">getSideBar</a></li><li><a href="global.html#getTopBottomBar">getTopBottomBar</a></li><li><a href="global.html#handleButtonAction">handleButtonAction</a></li><li><a href="global.html#handleButtonClick">handleButtonClick</a></li><li><a href="global.html#handleInput">handleInput</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isInside">isInside</a></li><li><a href="global.html#isSmallScreen">isSmallScreen</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#pepeAssets">pepeAssets</a></li><li><a href="global.html#screenManager">screenManager</a></li><li><a href="global.html#showHelp">showHelp</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#stationaryObjects">stationaryObjects</a></li><li><a href="global.html#statusbarImages">statusbarImages</a></li><li><a href="global.html#uiController">uiController</a></li><li><a href="global.html#world">world</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Thu Oct 16 2025 11:31:35 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
