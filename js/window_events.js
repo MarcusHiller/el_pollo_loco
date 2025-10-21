@@ -86,3 +86,9 @@ window.addEventListener('resize', checkOriantation);
  * Listens to orientation change (rotation of device) and updates layout.
  */
 window.addEventListener('orientationchange', checkOriantation);
+
+
+function toggleOverlay() {
+        let idOverlay = document.getElementById('overlay-background');
+        let displayStatus = idOverlay.classList.toggle('d-none');
+}
