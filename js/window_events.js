@@ -88,6 +88,9 @@ window.addEventListener('resize', checkOriantation);
 window.addEventListener('orientationchange', checkOriantation);
 
 
+/**
+ * Toggles the visibility of the overlay element with the ID 'overlay-background'.
+ */
 function toggleOverlay() {
         let idOverlay = document.getElementById('overlay-background');
         let displayStatus = idOverlay.classList.toggle('d-none');

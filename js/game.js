@@ -101,6 +101,8 @@ function startGame() {
  */
 function handleInput(x, y, isClick = false) {
     const buttons = getActiveButtons();
+    console.log(buttons, isClick);
+    
     for (let btn of buttons) {
         if (isInside(x, y, btn)) {
             if (isClick) {
@@ -175,6 +177,7 @@ function gameStateStart(action, currentButtons) {
     else if (action === 'Info') showHelp = true;
     else if (action === 'Back') showHelp = false;
     else if (action === 'Screen') uiController.toggleScreen(currentButtons);
+    else if (action === 'Impress') toggleOverlay();
 }
 
 
