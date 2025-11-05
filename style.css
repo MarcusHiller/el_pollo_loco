@@ -82,6 +82,12 @@ h2 {
 }
 
 
+.close-icon:hover {
+    background-color: #66666649;
+    border-radius: 50%;
+}
+
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
