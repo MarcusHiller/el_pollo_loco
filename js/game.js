@@ -124,7 +124,6 @@ window.addEventListener('click', function (e) {
 });
 
 
-
 /**
  * Listens to touchstart events and triggers input handling on touch devices.
  */
@@ -133,7 +132,6 @@ window.addEventListener('touchstart', function (e) {
     const { x, y } = enterButton(e.touches[0]);
     handleInput(x, y);
 }, { passive: true }); // wichtig: kein preventDefault, damit click evt. trotzdem ausgelöst werden kann
-
 
 
 /**

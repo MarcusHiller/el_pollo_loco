@@ -11,7 +11,6 @@ class World {
     isBreak;
 
 
-    
     constructor(canvas, keyboard, uiController) {
         this.interactions = new WorldInteraction(this);
         this.ctx = canvas.getContext('2d');

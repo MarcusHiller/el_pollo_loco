@@ -92,7 +92,7 @@ window.addEventListener('orientationchange', checkOriantation);
  * Toggles the visibility of the overlay element with the ID 'overlay-background'.
  */
 function goToLegalNotice() {
-    window.location.href = "legal_notice.html";
+    window.location.href = "/html/legal_notice.html";
 }
 
 
@@ -103,10 +103,14 @@ function goToLegalNotice() {
  * @returns {void} - Does not perform a return, but loads the page ‘index.html’.
  */
 function startScreen() {
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
 }
 
 
+/**
+ * 
+ * @returns {boolean} Returns true if the website is being viewed on a mobile device, otherwise false.
+ */
 function isMobileDevice() {
     return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
