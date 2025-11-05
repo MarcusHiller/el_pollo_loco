@@ -170,6 +170,78 @@
 
         
             
+<h4 class="name" id="baseButtons"><span class="type-signature"></span>baseButtons<span class="type-signature"> :Array.&lt;<a href="Button.html">Button</a>></span></h4>
+
+
+
+
+<div class="description">
+    Base control buttons displayed on all devices (desktop and mobile).Each button represents a fixed UI action like pause, volume, or fullscreen.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="Button.html">Button</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_stationary_objects.js.html">js/stationary_objects.js</a>, <a href="js_stationary_objects.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
 <h4 class="name" id="canvas"><span class="type-signature"></span>canvas<span class="type-signature"> :HTMLCanvasElement</span></h4>
 
 
@@ -738,6 +810,78 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="mobileButtons"><span class="type-signature"></span>mobileButtons<span class="type-signature"> :Array.&lt;<a href="Button.html">Button</a>></span></h4>
+
+
+
+
+<div class="description">
+    Additional control buttons displayed only on mobile devices.Used for player movement and actions (e.g., left, right, jump, throw).
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="Button.html">Button</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_stationary_objects.js.html">js/stationary_objects.js</a>, <a href="js_stationary_objects.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -4568,7 +4712,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_window_events.js.html">js/window_events.js</a>, <a href="js_window_events.js.html#line98">line 98</a>
+        <a href="js_window_events.js.html">js/window_events.js</a>, <a href="js_window_events.js.html#line99">line 99</a>
     </li></ul></dd>
     
 
@@ -4634,7 +4778,7 @@
 
 
 <div class="description">
-    Creates all fixed objects of the UI (status bars and control buttons).
+    Creates and returns all stationary (fixed) game objects such asstatus bars and control buttons.Automatically detects if the current device is mobile and includesthe corresponding movement buttons if necessary.
 </div>
 
 
@@ -4678,7 +4822,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_stationary_objects.js.html">js/stationary_objects.js</a>, <a href="js_stationary_objects.js.html#line5">line 5</a>
+        <a href="js_stationary_objects.js.html">js/stationary_objects.js</a>, <a href="js_stationary_objects.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -4707,7 +4851,7 @@
 
         
 <div class="param-desc">
-    A FixedObjects container with UI components.
+    Returns a FixedObjects instance containingboth status bars and the appropriate set of buttons.
 </div>
 
 
@@ -4746,13 +4890,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Button.html">Button</a></li><li><a href="Character.html">Character</a></li><li><a href="CharakterImg.html">CharakterImg</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenImg.html">ChickenImg</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="EndScreen.html">EndScreen</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossImg.html">EndbossImg</a></li><li><a href="FixedObjects.html">FixedObjects</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="ScreenManager.html">ScreenManager</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="SoundManager.html">SoundManager</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="Statusbar.html">Statusbar</a></li><li><a href="StatusbarImages.html">StatusbarImages</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="UIController.html">UIController</a></li><li><a href="World.html">World</a></li><li><a href="WorldInteraction.html">WorldInteraction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeTouchActions">activeTouchActions</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#checkOriantation">checkOriantation</a></li><li><a href="global.html#chickenAssets">chickenAssets</a></li><li><a href="global.html#createLevel1">createLevel1</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#drawMenuLoop">drawMenuLoop</a></li><li><a href="global.html#endbossAssets">endbossAssets</a></li><li><a href="global.html#enterButton">enterButton</a></li><li><a href="global.html#gameState">gameState</a></li><li><a href="global.html#gameStateFinish">gameStateFinish</a></li><li><a href="global.html#gameStatePlaying">gameStatePlaying</a></li><li><a href="global.html#gameStateStart">gameStateStart</a></li><li><a href="global.html#getActiveButtons">getActiveButtons</a></li><li><a href="global.html#getCoordsExtendedScreen">getCoordsExtendedScreen</a></li><li><a href="global.html#getCoordsSmallScreen">getCoordsSmallScreen</a></li><li><a href="global.html#getLetterboxOffsets">getLetterboxOffsets</a></li><li><a href="global.html#getSideBar">getSideBar</a></li><li><a href="global.html#getTopBottomBar">getTopBottomBar</a></li><li><a href="global.html#goToLegalNotice">goToLegalNotice</a></li><li><a href="global.html#handleButtonAction">handleButtonAction</a></li><li><a href="global.html#handleButtonClick">handleButtonClick</a></li><li><a href="global.html#handleInput">handleInput</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isInside">isInside</a></li><li><a href="global.html#isSmallScreen">isSmallScreen</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#pepeAssets">pepeAssets</a></li><li><a href="global.html#screenManager">screenManager</a></li><li><a href="global.html#showHelp">showHelp</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startScreen">startScreen</a></li><li><a href="global.html#stationaryObjects">stationaryObjects</a></li><li><a href="global.html#statusbarImages">statusbarImages</a></li><li><a href="global.html#uiController">uiController</a></li><li><a href="global.html#world">world</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Button.html">Button</a></li><li><a href="Character.html">Character</a></li><li><a href="CharakterImg.html">CharakterImg</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenImg.html">ChickenImg</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="EndScreen.html">EndScreen</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossImg.html">EndbossImg</a></li><li><a href="FixedObjects.html">FixedObjects</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="ScreenManager.html">ScreenManager</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="SoundManager.html">SoundManager</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="Statusbar.html">Statusbar</a></li><li><a href="StatusbarImages.html">StatusbarImages</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="UIController.html">UIController</a></li><li><a href="World.html">World</a></li><li><a href="WorldInteraction.html">WorldInteraction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeTouchActions">activeTouchActions</a></li><li><a href="global.html#baseButtons">baseButtons</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#checkOriantation">checkOriantation</a></li><li><a href="global.html#chickenAssets">chickenAssets</a></li><li><a href="global.html#createLevel1">createLevel1</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#drawMenuLoop">drawMenuLoop</a></li><li><a href="global.html#endbossAssets">endbossAssets</a></li><li><a href="global.html#enterButton">enterButton</a></li><li><a href="global.html#gameState">gameState</a></li><li><a href="global.html#gameStateFinish">gameStateFinish</a></li><li><a href="global.html#gameStatePlaying">gameStatePlaying</a></li><li><a href="global.html#gameStateStart">gameStateStart</a></li><li><a href="global.html#getActiveButtons">getActiveButtons</a></li><li><a href="global.html#getCoordsExtendedScreen">getCoordsExtendedScreen</a></li><li><a href="global.html#getCoordsSmallScreen">getCoordsSmallScreen</a></li><li><a href="global.html#getLetterboxOffsets">getLetterboxOffsets</a></li><li><a href="global.html#getSideBar">getSideBar</a></li><li><a href="global.html#getTopBottomBar">getTopBottomBar</a></li><li><a href="global.html#goToLegalNotice">goToLegalNotice</a></li><li><a href="global.html#handleButtonAction">handleButtonAction</a></li><li><a href="global.html#handleButtonClick">handleButtonClick</a></li><li><a href="global.html#handleInput">handleInput</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isInside">isInside</a></li><li><a href="global.html#isSmallScreen">isSmallScreen</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#mobileButtons">mobileButtons</a></li><li><a href="global.html#pepeAssets">pepeAssets</a></li><li><a href="global.html#screenManager">screenManager</a></li><li><a href="global.html#showHelp">showHelp</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startScreen">startScreen</a></li><li><a href="global.html#stationaryObjects">stationaryObjects</a></li><li><a href="global.html#statusbarImages">statusbarImages</a></li><li><a href="global.html#uiController">uiController</a></li><li><a href="global.html#world">world</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Nov 05 2025 11:59:00 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Nov 05 2025 15:50:51 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
