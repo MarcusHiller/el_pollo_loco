@@ -95,7 +95,12 @@ function goToLegalNotice() {
     window.location.href = "legal_notice.html";
 }
 
-
+/**
+ * Redirects the user to the home page.
+ *
+ * @function startScreen
+ * @returns {void} - Does not perform a return, but loads the page ‘index.html’.
+ */
 function startScreen() {
     window.location.href = "index.html";
 }
