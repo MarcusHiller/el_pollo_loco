@@ -95,6 +95,7 @@ function goToLegalNotice() {
     window.location.href = "legal_notice.html";
 }
 
+
 /**
  * Redirects the user to the home page.
  *
@@ -103,4 +104,9 @@ function goToLegalNotice() {
  */
 function startScreen() {
     window.location.href = "index.html";
+}
+
+
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
