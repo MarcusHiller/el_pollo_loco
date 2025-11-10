@@ -9,10 +9,10 @@ class Coin extends DrawableObject {
      * @type {{top: number, left: number, right: number, bottom: number}}
      */
     offset = {
-            top: 5,
-            left: 5,
-            right: 5,
-            bottom: 5
+            top: 40,
+            left: 40,
+            right: 40,
+            bottom: 40
         };
 
 
