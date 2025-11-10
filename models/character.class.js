@@ -298,7 +298,7 @@ class Character extends MovableObject {
     idleShort() {
         let timepassed = new Date().getTime() - this.lastAction;
         timepassed = timepassed / 1000;
-        return timepassed > 5 && timepassed <= 10;
+        return timepassed > 0.5 && timepassed <= 10;
     }
 
 
