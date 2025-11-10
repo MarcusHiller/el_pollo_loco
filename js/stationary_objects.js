@@ -38,6 +38,7 @@ let mobileButtons = [
  * both status bars and the appropriate set of buttons.
  */
 function stationaryObjects() {
+    createBaseButtons();
     let allButtons = isMobileDevice() ? [...baseButtons, ...mobileButtons] : baseButtons;
     return new FixedObjects(
         [
@@ -48,4 +49,18 @@ function stationaryObjects() {
         ],
         allButtons
     );
+}
+
+
+function createBaseButtons() {
+    let muteState = localStorage.getItem('muteStatus'); 
+    let boolen = JSON.parse(muteState);
+    if (boolen) {
+        baseButtons = [
+            new Button({ x: 282, y: 10, width: 30, height: 30, text: 'Break', action: 'Break', imagePath: 'img/icons/pause-solid-hell-gray.svg' }),
+            new Button({ x: 324, y: 10, width: 30, height: 30, text: 'Volume', action: 'Volume', imagePath: 'img/icons/volume-xmark-solid-hell-gray.svg'}),
+            new Button({ x: 408, y: 10, width: 30, height: 30, text: 'End', action: 'End', imagePath: 'img/icons/arrow-right-to-bracket-solid-hell-gray.svg' }),
+            new Button({ x: 366, y: 10, width: 30, height: 30, text: 'Full', action: 'Screen', imagePath: 'img/icons/expand-solid-hell-gray.svg' }),
+        ];
+    }
 }

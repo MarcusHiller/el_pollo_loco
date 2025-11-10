@@ -18,6 +18,7 @@ class UIController {
         this.bgMusic.loop = true;
         this.bgMusic.volume = 0.4;
         this.bgMusic.muted = false;
+        this.getMuteStatus();
     }
 
 
@@ -61,6 +62,7 @@ class UIController {
     toggleSound(buttons) {
         this.toggleSoundIcon(buttons);
         this.toggleMute();
+        this.saveMuteStatus();
     }
 
 
@@ -102,6 +104,18 @@ class UIController {
      * Toggles the mute state of the background music.
      */
     toggleMute() {
-        this.bgMusic.muted = !this.bgMusic.muted; 
+        this.bgMusic.muted = !this.bgMusic.muted;  
+    }
+
+
+    saveMuteStatus() {
+        localStorage.setItem('muteStatus', this.bgMusic.muted);
+    }
+
+
+    getMuteStatus() {
+        let muteState = localStorage.getItem('muteStatus'); 
+        let boolen = JSON.parse(muteState);
+        this.bgMusic.muted = boolen;     
     }
 }
