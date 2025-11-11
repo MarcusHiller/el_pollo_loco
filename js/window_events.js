@@ -112,5 +112,7 @@ function startScreen() {
  * @returns {boolean} Returns true if the website is being viewed on a mobile device, otherwise false.
  */
 function isMobileDevice() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    let ua = navigator.userAgent;
+    let isTouchDevice = navigator.maxTouchPoints >= 1;
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(ua) || isTouchDevice;
 }
