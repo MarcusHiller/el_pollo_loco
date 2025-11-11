@@ -2,7 +2,7 @@
  * Manages UI-related controls such as full-screen toggle, sound control, and background music.
  */
 class UIController {
-    
+
     /**
      * Tracks whether the game is in full-screen mode.
      * @type {boolean}
@@ -90,7 +90,7 @@ class UIController {
         }
     }
 
-    
+
     /**
      * Stops and resets the background music.
      */
@@ -104,18 +104,36 @@ class UIController {
      * Toggles the mute state of the background music.
      */
     toggleMute() {
-        this.bgMusic.muted = !this.bgMusic.muted;  
+        this.bgMusic.muted = !this.bgMusic.muted;
     }
 
 
+    /**
+    * Saves the current mute status of the background music to localStorage.
+    * 
+    * Stores the boolean value of `this.bgMusic.muted` under the key `muteStatus`.
+    * This allows the mute setting to persist between sessions.
+    * 
+    * @function saveMuteStatus
+    * @returns {void} Does not return a value.
+    */
     saveMuteStatus() {
         localStorage.setItem('muteStatus', this.bgMusic.muted);
     }
 
 
+    /**
+    * Retrieves the saved mute status from localStorage and applies it to the background music.
+    * 
+    * Parses the stored `muteStatus` value from localStorage and updates 
+    * `this.bgMusic.muted` accordingly.
+    * 
+    * @function getMuteStatus
+    * @returns {void} Does not return a value.
+    */
     getMuteStatus() {
-        let muteState = localStorage.getItem('muteStatus'); 
+        let muteState = localStorage.getItem('muteStatus');
         let boolen = JSON.parse(muteState);
-        this.bgMusic.muted = boolen;     
+        this.bgMusic.muted = boolen;
     }
 }
