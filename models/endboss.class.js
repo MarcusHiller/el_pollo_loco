@@ -39,6 +39,9 @@ class Endboss extends MovableObject {
     damageTime = 1;
 
 
+    injuryProtection = 3.3;
+
+
     /** @type {boolean} Flag to ensure death animation only plays once */
     deadAnimationPlayed = false;
 
@@ -112,5 +115,23 @@ class Endboss extends MovableObject {
     walkAnimation() {
         this.playAnimation(this.IMAGES.IMAGES_WALKING);
         this.moveLeft();
+    }
+
+
+    /**
+    * Checks whether the character is currently under injury protection.
+    * 
+    * Calculates the time elapsed since the last hit and compares it to the defined 
+    * protection duration (`this.injuryProtection`). If the elapsed time is less 
+    * than the protection duration, the function returns `true`, indicating that 
+    * the character is still protected.
+    * 
+    * @function protection
+    * @returns {boolean} `true` if the protection period is active, otherwise `false`.
+    */
+    protection() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < this.injuryProtection;
     }
 }

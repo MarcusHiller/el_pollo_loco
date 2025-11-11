@@ -114,6 +114,7 @@ class WorldInteraction {
      */
     handleBottleCollisions(enemy, collidngBottle) {
         if (enemy.name === 'endboss' && enemy.energy > 0) {
+            if(enemy.protection()) return;
             enemy.injuryProcess();
         } else if (enemy instanceof SmallChicken) {
             enemy.hitEnemy(enemy);
