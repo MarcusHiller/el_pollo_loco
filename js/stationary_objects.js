@@ -52,6 +52,21 @@ function stationaryObjects() {
 }
 
 
+/**
+ * Creates the base button set for the user interface depending on the saved mute status.
+ * 
+ * Retrieves the `muteStatus` value from `localStorage`, parses it as a boolean, and if true,
+ * initializes the `baseButtons` array with predefined button configurations for 
+ * break, volume, end, and fullscreen actions.
+ * 
+ * @function createBaseButtons
+ * @returns {void} Does not return a value.
+ * 
+ * @example
+ * // Example usage:
+ * createBaseButtons();
+ * console.log(baseButtons); // Outputs an array of Button objects if muteStatus is true
+ */
 function createBaseButtons() {
     let muteState = localStorage.getItem('muteStatus'); 
     let boolen = JSON.parse(muteState);
