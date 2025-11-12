@@ -116,3 +116,13 @@ function isMobileDevice() {
     let isTouchDevice = navigator.maxTouchPoints >= 1;
     return /Mobi|Android|iPhone|iPad|iPod/i.test(ua) || isTouchDevice;
 }
+
+
+function hideLink() {
+    document.getElementById('link').classList.add('d-none');
+}
+
+
+function showLink() {
+    document.getElementById('link').classList.remove('d-none');
+}

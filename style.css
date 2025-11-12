@@ -18,6 +18,13 @@ canvas {
 }
 
 
+#link {
+    text-decoration: none;
+    font-size: 28px;
+    padding: 10px;
+}
+
+
 .d-none {
     display: none !important;
 }
@@ -102,6 +109,12 @@ h2 {
 
     h1 {
         display: none;
+    }
+
+
+    #link {
+        position: absolute;
+        bottom: 10px;
     }
 
     #overlay-content {

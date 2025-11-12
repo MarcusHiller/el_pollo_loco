@@ -79,6 +79,7 @@ function drawMenuLoop() {
  */
 function startGame() {
     world?.gameStop?.();
+    hideLink();
     gameState = 'playing';
     showHelp = false;
     world = new World(canvas, keyboard, uiController);
@@ -191,6 +192,7 @@ function gameStateFinish(action) {
         gameState = 'start';
         drawMenuLoop();
         world.gameStop();
+        showLink();
     }
     else if (action === 'Screen') uiController.toggleScreen(world.fixedObjects.button);
 }
@@ -211,6 +213,7 @@ function gameStatePlaying(action) {
         gameState = 'start';
         drawMenuLoop();
         world.gameStop();
+        showLink();
     }
 }
 
