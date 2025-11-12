@@ -118,11 +118,17 @@ function isMobileDevice() {
 }
 
 
+/**
+ * Hides the HTML element with the ID 'link' by adding the 'd-none' class.
+ */
 function hideLink() {
     document.getElementById('link').classList.add('d-none');
 }
 
 
+/**
+ * Shows the HTML element with the ID 'link' by removing the 'd-none' class.
+ */
 function showLink() {
     document.getElementById('link').classList.remove('d-none');
 }
