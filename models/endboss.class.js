@@ -39,7 +39,7 @@ class Endboss extends MovableObject {
     damageTime = 1;
 
 
-    injuryProtection = 3.3;
+    injuryProtection = 3.5;
 
 
     /** @type {boolean} Flag to ensure death animation only plays once */
