@@ -1619,6 +1619,121 @@
     
 
     
+    <h4 class="name" id="createBaseButtons"><span class="type-signature"></span>createBaseButtons<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates the base button set for the user interface depending on the saved mute status.Retrieves the `muteStatus` value from `localStorage`, parses it as a boolean, and if true,initializes the `baseButtons` array with predefined button configurations for break, volume, end, and fullscreen actions.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_stationary_objects.js.html">js/stationary_objects.js</a>, <a href="js_stationary_objects.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Does not return a value.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// Example usage:createBaseButtons();console.log(baseButtons); // Outputs an array of Button objects if muteStatus is true</code></pre>
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="createLevel1"><span class="type-signature"></span>createLevel1<span class="signature">(enemies, clouds, backgroundObjects, bottles, coins)</span><span class="type-signature"> &rarr; {<a href="Level.html">Level</a>}</span></h4>
     
 
@@ -2062,7 +2177,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line272">line 272</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line273">line 273</a>
     </li></ul></dd>
     
 
@@ -2221,7 +2336,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line187">line 187</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line186">line 186</a>
     </li></ul></dd>
     
 
@@ -2518,7 +2633,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line173">line 173</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line172">line 172</a>
     </li></ul></dd>
     
 
@@ -2606,7 +2721,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line383">line 383</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line384">line 384</a>
     </li></ul></dd>
     
 
@@ -2791,7 +2906,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line320">line 320</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line321">line 321</a>
     </li></ul></dd>
     
 
@@ -2976,7 +3091,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line304">line 304</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line305">line 305</a>
     </li></ul></dd>
     
 
@@ -3135,7 +3250,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line338">line 338</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line339">line 339</a>
     </li></ul></dd>
     
 
@@ -3176,6 +3291,116 @@
     <dd>
         
 <span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getMuteStatus"><span class="type-signature"></span>getMuteStatus<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Retrieves the saved mute status from localStorage and applies it to the background music.Parses the stored `muteStatus` value from localStorage and updates `this.bgMusic.muted` accordingly.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_ui_controller.class.js.html">models/ui_controller.class.js</a>, <a href="models_ui_controller.class.js.html#line125">line 125</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Does not return a value.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
 
 
     </dd>
@@ -3317,7 +3542,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line356">line 356</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line357">line 357</a>
     </li></ul></dd>
     
 
@@ -3499,7 +3724,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line370">line 370</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line371">line 371</a>
     </li></ul></dd>
     
 
@@ -3769,7 +3994,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line226">line 226</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line227">line 227</a>
     </li></ul></dd>
     
 
@@ -3906,7 +4131,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line155">line 155</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line154">line 154</a>
     </li></ul></dd>
     
 
@@ -4133,7 +4358,95 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line102">line 102</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line103">line 103</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hideLink"><span class="type-signature"></span>hideLink<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Hides the HTML element with the ID 'link' by adding the 'd-none' class.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_window_events.js.html">js/window_events.js</a>, <a href="js_window_events.js.html#line124">line 124</a>
     </li></ul></dd>
     
 
@@ -4404,7 +4717,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line242">line 242</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line243">line 243</a>
     </li></ul></dd>
     
 
@@ -4434,6 +4747,112 @@
         
 <div class="param-desc">
     True if the point is inside the button area.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="isMobileDevice"><span class="type-signature"></span>isMobileDevice<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_window_events.js.html">js/window_events.js</a>, <a href="js_window_events.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Returns true if the website is being viewed on a mobile device, otherwise false.
 </div>
 
 
@@ -4514,7 +4933,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line292">line 292</a>
+        <a href="js_game.js.html">js/game.js</a>, <a href="js_game.js.html#line293">line 293</a>
     </li></ul></dd>
     
 
@@ -4561,6 +4980,314 @@
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="protection"><span class="type-signature"></span>protection<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Checks whether the character is currently under injury protection.Calculates the time elapsed since the last hit and compares it to the defined protection duration (`this.injuryProtection`). If the elapsed time is less than the protection duration, the function returns `true`, indicating that the character is still protected.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_endboss.class.js.html">models/endboss.class.js</a>, <a href="models_endboss.class.js.html#line121">line 121</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    `true` if the protection period is active, otherwise `false`.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="saveMuteStatus"><span class="type-signature"></span>saveMuteStatus<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Saves the current mute status of the background music to localStorage.Stores the boolean value of `this.bgMusic.muted` under the key `muteStatus`.This allows the mute setting to persist between sessions.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="models_ui_controller.class.js.html">models/ui_controller.class.js</a>, <a href="models_ui_controller.class.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Does not return a value.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="showLink"><span class="type-signature"></span>showLink<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Shows the HTML element with the ID 'link' by removing the 'd-none' class.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="js_window_events.js.html">js/window_events.js</a>, <a href="js_window_events.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4890,13 +5617,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Button.html">Button</a></li><li><a href="Character.html">Character</a></li><li><a href="CharakterImg.html">CharakterImg</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenImg.html">ChickenImg</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="EndScreen.html">EndScreen</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossImg.html">EndbossImg</a></li><li><a href="FixedObjects.html">FixedObjects</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="ScreenManager.html">ScreenManager</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="SoundManager.html">SoundManager</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="Statusbar.html">Statusbar</a></li><li><a href="StatusbarImages.html">StatusbarImages</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="UIController.html">UIController</a></li><li><a href="World.html">World</a></li><li><a href="WorldInteraction.html">WorldInteraction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeTouchActions">activeTouchActions</a></li><li><a href="global.html#baseButtons">baseButtons</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#checkOriantation">checkOriantation</a></li><li><a href="global.html#chickenAssets">chickenAssets</a></li><li><a href="global.html#createLevel1">createLevel1</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#drawMenuLoop">drawMenuLoop</a></li><li><a href="global.html#endbossAssets">endbossAssets</a></li><li><a href="global.html#enterButton">enterButton</a></li><li><a href="global.html#gameState">gameState</a></li><li><a href="global.html#gameStateFinish">gameStateFinish</a></li><li><a href="global.html#gameStatePlaying">gameStatePlaying</a></li><li><a href="global.html#gameStateStart">gameStateStart</a></li><li><a href="global.html#getActiveButtons">getActiveButtons</a></li><li><a href="global.html#getCoordsExtendedScreen">getCoordsExtendedScreen</a></li><li><a href="global.html#getCoordsSmallScreen">getCoordsSmallScreen</a></li><li><a href="global.html#getLetterboxOffsets">getLetterboxOffsets</a></li><li><a href="global.html#getSideBar">getSideBar</a></li><li><a href="global.html#getTopBottomBar">getTopBottomBar</a></li><li><a href="global.html#goToLegalNotice">goToLegalNotice</a></li><li><a href="global.html#handleButtonAction">handleButtonAction</a></li><li><a href="global.html#handleButtonClick">handleButtonClick</a></li><li><a href="global.html#handleInput">handleInput</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isInside">isInside</a></li><li><a href="global.html#isSmallScreen">isSmallScreen</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#mobileButtons">mobileButtons</a></li><li><a href="global.html#pepeAssets">pepeAssets</a></li><li><a href="global.html#screenManager">screenManager</a></li><li><a href="global.html#showHelp">showHelp</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startScreen">startScreen</a></li><li><a href="global.html#stationaryObjects">stationaryObjects</a></li><li><a href="global.html#statusbarImages">statusbarImages</a></li><li><a href="global.html#uiController">uiController</a></li><li><a href="global.html#world">world</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="Button.html">Button</a></li><li><a href="Character.html">Character</a></li><li><a href="CharakterImg.html">CharakterImg</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="ChickenImg.html">ChickenImg</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="EndScreen.html">EndScreen</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossImg.html">EndbossImg</a></li><li><a href="FixedObjects.html">FixedObjects</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="ScreenManager.html">ScreenManager</a></li><li><a href="SmallChicken.html">SmallChicken</a></li><li><a href="SoundManager.html">SoundManager</a></li><li><a href="StartScreen.html">StartScreen</a></li><li><a href="Statusbar.html">Statusbar</a></li><li><a href="StatusbarImages.html">StatusbarImages</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="UIController.html">UIController</a></li><li><a href="World.html">World</a></li><li><a href="WorldInteraction.html">WorldInteraction</a></li></ul><h3>Global</h3><ul><li><a href="global.html#activeTouchActions">activeTouchActions</a></li><li><a href="global.html#baseButtons">baseButtons</a></li><li><a href="global.html#canvas">canvas</a></li><li><a href="global.html#checkOriantation">checkOriantation</a></li><li><a href="global.html#chickenAssets">chickenAssets</a></li><li><a href="global.html#createBaseButtons">createBaseButtons</a></li><li><a href="global.html#createLevel1">createLevel1</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#drawMenuLoop">drawMenuLoop</a></li><li><a href="global.html#endbossAssets">endbossAssets</a></li><li><a href="global.html#enterButton">enterButton</a></li><li><a href="global.html#gameState">gameState</a></li><li><a href="global.html#gameStateFinish">gameStateFinish</a></li><li><a href="global.html#gameStatePlaying">gameStatePlaying</a></li><li><a href="global.html#gameStateStart">gameStateStart</a></li><li><a href="global.html#getActiveButtons">getActiveButtons</a></li><li><a href="global.html#getCoordsExtendedScreen">getCoordsExtendedScreen</a></li><li><a href="global.html#getCoordsSmallScreen">getCoordsSmallScreen</a></li><li><a href="global.html#getLetterboxOffsets">getLetterboxOffsets</a></li><li><a href="global.html#getMuteStatus">getMuteStatus</a></li><li><a href="global.html#getSideBar">getSideBar</a></li><li><a href="global.html#getTopBottomBar">getTopBottomBar</a></li><li><a href="global.html#goToLegalNotice">goToLegalNotice</a></li><li><a href="global.html#handleButtonAction">handleButtonAction</a></li><li><a href="global.html#handleButtonClick">handleButtonClick</a></li><li><a href="global.html#handleInput">handleInput</a></li><li><a href="global.html#hideLink">hideLink</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#isInside">isInside</a></li><li><a href="global.html#isMobileDevice">isMobileDevice</a></li><li><a href="global.html#isSmallScreen">isSmallScreen</a></li><li><a href="global.html#keyboard">keyboard</a></li><li><a href="global.html#mobileButtons">mobileButtons</a></li><li><a href="global.html#pepeAssets">pepeAssets</a></li><li><a href="global.html#protection">protection</a></li><li><a href="global.html#saveMuteStatus">saveMuteStatus</a></li><li><a href="global.html#screenManager">screenManager</a></li><li><a href="global.html#showHelp">showHelp</a></li><li><a href="global.html#showLink">showLink</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#startScreen">startScreen</a></li><li><a href="global.html#stationaryObjects">stationaryObjects</a></li><li><a href="global.html#statusbarImages">statusbarImages</a></li><li><a href="global.html#uiController">uiController</a></li><li><a href="global.html#world">world</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Nov 05 2025 15:50:51 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Wed Nov 12 2025 19:45:24 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
