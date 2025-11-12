@@ -38,7 +38,12 @@ class Endboss extends MovableObject {
     /** @type {number} Duration (in seconds) for the hurt status */
     damageTime = 1;
 
-
+    
+    /**
+    * The duration of the player's injury protection period in seconds.
+    * During this time, the player cannot take additional damage.
+    * @type {number}
+    */
     injuryProtection = 3.5;
 
 
