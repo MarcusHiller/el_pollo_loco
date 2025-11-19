@@ -247,7 +247,8 @@ class World {
      * Draws the Endboss health bar if the character is close enough.
      */
     drawEndbossBar() {
-        if (this.distanceCharacterAndBoss()) {
+        let charBossGap = this.distanceCharacterAndBoss();
+        if (charBossGap < 600) {
             this.ctx.translate(-this.camera_x, 0);
             this.statusBarEndboss.x = canvas.width - this.statusBarEndboss.width - 10;
             this.addToMap(this.statusBarEndboss);
@@ -257,14 +258,14 @@ class World {
 
 
     /**
-     * Checks if the character is within a certain range of the Endboss.
-     * 
-     * @returns {boolean} True if the Endboss is nearby.
+     * Calculates the horizontal distance between the character and the endboss.
+     *
+     * @returns {number} The distance from the character to the endboss on the x-axis.
      */
     distanceCharacterAndBoss() {
         let endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
         let distanceToBoss = endboss.x - this.character.x;
-        return distanceToBoss < 600;
+        return distanceToBoss;
     }
 
 

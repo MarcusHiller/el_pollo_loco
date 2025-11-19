@@ -36,19 +36,31 @@ class Endboss extends MovableObject {
 
 
     /** @type {number} Duration (in seconds) for the hurt status */
-    damageTime = 1;
+    damageTime = 0.7;
 
-    
+
     /**
     * The duration of the player's injury protection period in seconds.
     * During this time, the player cannot take additional damage.
     * @type {number}
     */
-    injuryProtection = 3.5;
+    injuryProtection = 1.7;
 
 
     /** @type {boolean} Flag to ensure death animation only plays once */
     deadAnimationPlayed = false;
+
+
+    /** @type {number} Minimum distance required between the player and the enemy. */
+    enemyGap = 600;
+
+
+    /** @type {number} Timestamp marking the last moment the enemy changed direction. */
+    directionTimePoint = 0;
+
+
+    /** @type {number} Interval in milliseconds before the enemy can change direction again. */
+    directionTime = 500;
 
 
     /**
@@ -56,7 +68,7 @@ class Endboss extends MovableObject {
      * @type {{ top: number, left: number, right: number, bottom: number }}
      */
     offset = {
-        top: 200,
+        top: 100,
         left: 120,
         right: 95,
         bottom: 120
@@ -88,18 +100,35 @@ class Endboss extends MovableObject {
      */
     animate() {
         this.endbossAnimate = setInterval(() => {
-            if (!this.world.distanceCharacterAndBoss()) {
+            let charBossGap = this.world.distanceCharacterAndBoss();
+            if (charBossGap > this.enemyGap) {
                 this.playAnimation(this.IMAGES.IMAGES_ALERT);
             } else if (!this.isHurt() && this.isDead() && !this.deadAnimationPlayed) {
                 this.endbossDie();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES.IMAGES_HURT);
-            } else if (this.energy <= 75 && this.energy > 50) {
-                this.playAnimation(this.IMAGES.IMAGES_ATTACK);
             } else if (!this.isHurt()) {
-                this.walkAnimation();
+                this.playAnimation(this.IMAGES.IMAGES_WALKING);
+                this.walkDirection(charBossGap);
             }
         }, 110);
+    }
+
+
+    /**
+    * Controls the walking direction of the enemy based on the distance to the boss.
+    *
+    * @param {number} charBossGap - The current distance between the character and the boss.
+    */
+    walkDirection(charBossGap) {
+        if (charBossGap >= -150) {
+            this.moveLeft();
+            this.otherDirection = false;
+            this.setDirection();
+        } else if (this.directionTimer()) {
+            this.moveRight();
+            this.otherDirection = true;
+        }
     }
 
 
@@ -126,11 +155,6 @@ class Endboss extends MovableObject {
     /**
     * Checks whether the character is currently under injury protection.
     * 
-    * Calculates the time elapsed since the last hit and compares it to the defined 
-    * protection duration (`this.injuryProtection`). If the elapsed time is less 
-    * than the protection duration, the function returns `true`, indicating that 
-    * the character is still protected.
-    * 
     * @function protection
     * @returns {boolean} `true` if the protection period is active, otherwise `false`.
     */
@@ -138,5 +162,24 @@ class Endboss extends MovableObject {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < this.injuryProtection;
+    }
+
+
+    /**
+    * Sets the current timestamp as the last moment the enemy changed direction.
+    */
+    setDirection() {
+        this.directionTimePoint = new Date().getTime();
+    }
+
+
+    /**
+    * Checks whether enough time has passed to allow another direction change.
+    *
+    * @returns {boolean} True if the allowed time interval has passed, otherwise false.
+    */
+    directionTimer() {
+        let pastTime = new Date().getTime() - this.directionTimePoint;
+        return pastTime > this.directionTime;
     }
 }
