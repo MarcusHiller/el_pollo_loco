@@ -132,3 +132,13 @@ function hideLink() {
 function showLink() {
     document.getElementById('link').classList.remove('d-none');
 }
+
+
+/**
+ * Prevents the default context menu from appearing on right-click.
+ * 
+ * @param {MouseEvent} e - The contextmenu event object.
+ */
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
