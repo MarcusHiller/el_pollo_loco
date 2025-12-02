@@ -139,6 +139,10 @@ function showLink() {
  * 
  * @param {MouseEvent} e - The contextmenu event object.
  */
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-});
+
+let existsCanvas = document.getElementById('canvas')
+if (existsCanvas) {
+    canvas.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
+}
