@@ -116,7 +116,7 @@ class WorldInteraction {
         if (enemy.name === 'endboss' && enemy.energy > 0) {
             if(enemy.protection()) return;
             enemy.injuryProcess();
-            enemy.speed += 3;
+            enemy.speed += 5;
         } else if (enemy instanceof SmallChicken) {
             enemy.hitEnemy(enemy);
         } else if (enemy instanceof Chicken) {
