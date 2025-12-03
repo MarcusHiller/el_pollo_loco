@@ -81,7 +81,7 @@ class Character extends MovableObject {
 
 
     /** @type {number} Minimum seconds between throws */
-    throwDelay = 0.8;
+    throwDelay = 0.9;
 
 
     /** @type {boolean} Whether the character is currently allowed to throw */
@@ -142,7 +142,7 @@ class Character extends MovableObject {
                 this.moveJump();
             if (this.world.keyboard.d && this.isIdle())
                 this.setTimeLastAction();
-            this.world.camera_x = -this.x + 20;
+            this.world.camera_x = -this.x + 40;
         }, 1000 / 60);
     }
 
@@ -274,9 +274,11 @@ class Character extends MovableObject {
      * Triggers jump-up animation, sets jump state.
      */
     characterJumpsUp() {
-        this.playAnimationOnce(this.IMAGES.IMAGES_JUMPING, 30);
-        this.falls = false;
-        this.jump = true;
+        if (!this.jump) {
+            this.playAnimationOnce(this.IMAGES.IMAGES_JUMPING, 30);
+            this.falls = false;
+            this.jump = true;
+        }
     }
 
 
@@ -284,10 +286,12 @@ class Character extends MovableObject {
      * Triggers falling animation, sets fall state and updates last action time.
      */
     characterFallsDown() {
-        this.playAnimationOnce(this.IMAGES.IMAGES_FALLS, 150);
-        this.jump = false;
-        this.falls = true;
-        this.setTimeLastAction();
+        if (!this.falls) {
+            this.playAnimationOnce(this.IMAGES.IMAGES_FALLS, 150);
+            this.jump = false;
+            this.falls = true;
+            this.setTimeLastAction();
+        }
     }
 
 
@@ -298,7 +302,7 @@ class Character extends MovableObject {
     idleShort() {
         let timepassed = new Date().getTime() - this.lastAction;
         timepassed = timepassed / 1000;
-        return timepassed > 0.5 && timepassed <= 10;
+        return timepassed > 0.2 && timepassed <= 10;
     }
 
 

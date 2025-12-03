@@ -89,15 +89,16 @@ class MovableObject extends DrawableObject {
      * @param {number} count - Frame delay in ms.
      */
     playAnimationOnce(images, count) {
+        clearInterval(this.animationInterval);
         this.currentImage = 0;
         this.animationInterval = setInterval(() => {
-            if (this.currentImage < images.length) {
-                let path = images[this.currentImage];
-                this.img = this.imageCache[path];
-                this.currentImage++;
-            } else {
+            const path = images[this.currentImage++];
+            if (!path) {
                 clearInterval(this.animationInterval);
+                this.animationInterval = null;
+                return;
             }
+            this.img = this.imageCache[path];
         }, count);
     }
 
@@ -196,7 +197,7 @@ class MovableObject extends DrawableObject {
             this.energy -= this.damagePoints;
         }
         if (this.energy <= 0) {
-            this.energy = 0; 
+            this.energy = 0;
         }
     }
 
@@ -213,7 +214,7 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    
+
     /**
      * Updates the appropriate health bar based on the object name (e.g. pepe, endboss).
      */
@@ -235,7 +236,7 @@ class MovableObject extends DrawableObject {
      */
     animateChicken(walkImages, deadImage) {
         this.chickenIntervallX = setInterval(() => {
-            this.moveLeft(); 
+            this.moveLeft();
         }, 1000 / 60);
         this.chickenWalk = setInterval(() => {
             if (this.energy > 0) {
