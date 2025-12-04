@@ -18,6 +18,13 @@ canvas {
 }
 
 
+canvas {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+}
+
+
 #link {
     text-decoration: none;
     font-size: 28px;
