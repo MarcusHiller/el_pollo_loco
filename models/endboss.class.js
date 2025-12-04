@@ -32,11 +32,11 @@ class Endboss extends MovableObject {
 
 
     /** @type {number} Damage inflicted by the endboss */
-    damagePoints = 25;
+    damagePoints = 20;
 
 
     /** @type {number} Duration (in seconds) for the hurt status */
-    damageTime = 0.7;
+    damageTime = 1;
 
 
     /**
@@ -44,7 +44,7 @@ class Endboss extends MovableObject {
     * During this time, the player cannot take additional damage.
     * @type {number}
     */
-    injuryProtection = 1.7;
+    injuryProtection = 1.5;
 
 
     /** @type {boolean} Flag to ensure death animation only plays once */

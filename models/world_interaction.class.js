@@ -55,6 +55,8 @@ class WorldInteraction {
      * Initiates the throw if conditions are met.
      */
     checkThrowObjects() {
+        let endboss = this.world.level.enemies.find(e => e instanceof Endboss);
+        if (endboss.protection()) return;
         if (this.world.keyboard.d && this.world.character.canThrow) {
             if (this.world.character.bottle > 0 && !this.world.character.isThrowDelayActive()) {
                 this.objectIsThrown();

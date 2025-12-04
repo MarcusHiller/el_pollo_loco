@@ -81,7 +81,7 @@ class Character extends MovableObject {
 
 
     /** @type {number} Minimum seconds between throws */
-    throwDelay = 0.9;
+    throwDelay = 1;
 
 
     /** @type {boolean} Whether the character is currently allowed to throw */
